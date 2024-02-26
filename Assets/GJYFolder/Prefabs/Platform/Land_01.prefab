@@ -114,7 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8761080354159966469}
-  - component: {fileID: 5583294378386262772}
+  - component: {fileID: 7011130310129977875}
   m_Layer: 0
   m_Name: Land_01
   m_TagString: Untagged
@@ -138,7 +138,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5583294378386262772
+--- !u!114 &7011130310129977875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,7 +147,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7493075537866317926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2db7229b6e7c0104ba2b84e688180326, type: 3}
+  m_Script: {fileID: 11500000, guid: d3e0a0cf2cd0de84e826df8cd93813dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _platformSO: {fileID: 0}
+  <Tag>k__BackingField: Land_01
+  _platformSO: {fileID: 11400000, guid: 2db08f64f46e7e44ebac013d9aad940f, type: 2}
+  <Essential>k__BackingField: 0
+  <IsLast>k__BackingField: 0
+  <NextPair>k__BackingField: Land_02
