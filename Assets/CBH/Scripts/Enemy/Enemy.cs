@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.Image;
+using UnityEngine.TextCore.Text;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,6 +12,9 @@ public class Enemy : MonoBehaviour
     [field:Header("Movement")]
     [SerializeField] float jumpForce;
     [SerializeField] bool isGrounded = false;
+    [SerializeField] float pushForce;
+    [SerializeField] private Vector3 currentPosition;
+    [SerializeField] private Vector3 movedPosition;
 
     private Animator _animator;
     private Rigidbody _rigid;
@@ -22,13 +27,28 @@ public class Enemy : MonoBehaviour
         _rigid = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+
+    }
+
     private void Update()
     {
+        ///Test
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(PushEnemy());    
+            Debug.Log(PushedPosition().z);
+        }
+        ///
+
+
         if(isGrounded)
         {
             JumpAnimationStart();
         }
     }
+
 
     private void JumpAnimationStart()
     {
@@ -44,12 +64,8 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            Debug.Log(collision.GetContact(0).point);
-            Debug.Log(collision.GetContact(1).point);
-            Debug.Log(collision.GetContact(2).point);
-            Debug.Log(collision.GetContact(3).point);
-            Vector3 normal = collision.GetContact(0).normal; //충돌지점의 법선백터
-            if(normal == Vector3.up) //위에서 충돌
+            Vector3 groundNormal = collision.GetContact(0).normal; //충돌지점의 법선백터
+            if(groundNormal == Vector3.up) //위에서 충돌
             {
                 isGrounded = true;
             }
@@ -57,10 +73,18 @@ public class Enemy : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            Vector3 down = collision.GetContact(0).normal;
-            if(down == Vector3.up)
+            Vector3 playerNormal = collision.GetContact(0).normal;
+            if(playerNormal == Vector3.up)
             {
+                //플레이어 킬
                 Debug.Log("PlayerKill");
+            }
+            else if(playerNormal == Vector3.forward)
+            {
+                //플레이어 뒤로 밀림
+                Debug.Log("PlayerPush");
+                _rigid.AddForce(Vector3.forward * pushForce, ForceMode.Impulse);
+               
             }
         }
     }
@@ -72,4 +96,24 @@ public class Enemy : MonoBehaviour
             isGrounded = false;
         }
     }
+
+    private Vector3 PushedPosition()
+    {
+        return new Vector3(0, 0, 1);
+    }
+
+    IEnumerator PushEnemy()
+    {
+        float elaspedTime = 0f;
+        float duration = 0.5f;
+
+        while(elaspedTime < duration)
+        {
+            elaspedTime += Time.deltaTime;
+            transform.position = Vector3.Slerp(transform.position, PushedPosition(), elaspedTime / duration) ;
+            yield return null;
+        }
+
+    }
+
 }
