@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Platform/PairLoad", fileName = "PairLoadPlatform")]
-public class PairLoadPlatformSO : BasePlatformSO
+public class PairLoadPlatformSO : LoadPlatformSO
 {
     
 }

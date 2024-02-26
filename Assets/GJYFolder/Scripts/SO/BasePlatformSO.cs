@@ -4,14 +4,16 @@ using UnityEngine;
 
 public enum PlatformType
 {
-    Land,
-    Load,
+    Land = 0,
+    PairLoad = 2,
+    SingleLoad = 4,
     River,
-    Train,
+    Train,    
 }
 
 public class BasePlatformSO : ScriptableObject
 {
+    [Header("Info")]
     [Space(10)] public PlatformType type;
 
     public int maxContinuousIndex;
