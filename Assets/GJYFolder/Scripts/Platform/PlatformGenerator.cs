@@ -7,57 +7,49 @@ using Random = UnityEngine.Random;
 
 public class PlatformGenerator : MonoBehaviour
 {
-    public Action<int> OnGeneratePlatform; // 굳이 액션으로 할 필요가...? 있을거 같음 ㅇㅇ;; 플레이어가 앞으로 가는 Vector3 z값을 받아와야됨
+    public static PlatformGenerator Instance;
 
-    public List<GameObject> _prefabs = new List<GameObject>();
+    public Action<int> OnGeneratePlatform; // Player와 연동 시 사용.
 
-    private Queue<GameObject> _platformsQueue = new Queue<GameObject>();    
+    private Queue<PlatformBase> _platformsQueue = new Queue<PlatformBase>();
+    private PlatformBase _latestPlatform;
 
     [Header("# Init")]
     [Range(-10, 10)] public int _startPositionZ;
-
-    [Header("# Test")]
-    [Range(0, 20)]
-    public int _initPlatformsCount;
+    [Range(0, 20)] public int _initPlatformsCount;
     public int _autoDisableIndex = 20;
 
-    private Vector3 _lastPlatformPos;
-    private WaitForSeconds _waitTime = new WaitForSeconds(1);
-    
-    private int _currentStep = 0;
+    [Header("# Test")]
+    public GameObject testPlayer;
 
-    [Header("# CustomEditor")]
-    public bool _isGenerating = false;
+    private Vector3 _latestPlatformPos;
+    private int _currentStep = 0;
 
     private void Awake()
     {
-        _lastPlatformPos = Vector3.forward * _startPositionZ;
-
-        for (int i = 0; i < _initPlatformsCount; i++)
-        {
-            // To Do - 생성할 Type 넘겨주기
-            PlatformType type = PlatformType.Land;
-
-            GenerateRandomPlatform(type);
-        }
+        if (Instance == null)
+            Instance = this;
     }
 
-    // Temp
-    public GameObject testPlayer;
+    private void Start()
+    {
+        _latestPlatformPos = Vector3.forward * _startPositionZ;
+
+        for (int i = 0; i < _initPlatformsCount; i++)
+            GeneratePlatform();
+    }
 
     private void Update()
     {
-        // To Do - 앞으로 갈 때 인덱스가 추가, 인덱스가 추가 될 때마다 현재 생성된 개수와 검사해서 생성 혹은 무시
-
         if (Input.GetKeyDown(KeyCode.W))
         {
-            testPlayer.transform.position += Vector3.forward;            
+            testPlayer.transform.position += Vector3.forward;
 
             if (_currentStep > _autoDisableIndex)
             {
                 DisableOldestPlatform();
                 return;
-            }                
+            }
 
             _currentStep++;
         }
@@ -65,16 +57,33 @@ public class PlatformGenerator : MonoBehaviour
         {
             testPlayer.transform.position += Vector3.back;
             _currentStep--;
-            Debug.Log($"뒤로 : 스텝 {_currentStep}");
-            Debug.Log($"Queue Count{_platformsQueue.Count}");
         }
     }
-    
-    public void GenerateRandomPlatform(PlatformType platformType)
+
+    #region 플랫폼 생성 Generate Platform
+    private void GeneratePlatform()
     {
-        GameObject go = Instantiate(_prefabs[(int)platformType], transform);
-        go.transform.position = _lastPlatformPos;
-        _lastPlatformPos += Vector3.forward;
+        if (!IsEssentialPlatform())
+            GenerateRandomPlatform();
+    }
+
+    private void GenerateEssentialPlatform(string platformType)
+    {
+        DeployPlatform(platformType);
+    }
+
+    public void GenerateRandomPlatform()
+    {
+        string platformType = GetRandomTypeName();
+
+        DeployPlatform(platformType);
+    }
+
+    private void DeployPlatform(string platformType)
+    {
+        GameObject go = ObjectPool.GetObject(platformType);
+        go.transform.position = _latestPlatformPos;
+        _latestPlatformPos += Vector3.forward;
 
         if (go.TryGetComponent(out PlatformBase platform) == false)
         {
@@ -82,53 +91,95 @@ public class PlatformGenerator : MonoBehaviour
             return;
         }
 
-        _platformsQueue.Enqueue(go);
-        platform.Init();        
+        _latestPlatform = platform;
+        _platformsQueue.Enqueue(platform);
     }
 
+    private string GetRandomTypeName()
+    {
+        // Enum으로 각 플랫폼의 1번 태그를 불러와 랜덤하게 지정
+        string[] types = Enum.GetNames(typeof(PlatformType));
+        string randType = types[Random.Range(0, types.Length)];        
+
+        if (_latestPlatform != null)
+        {
+            ContinuousPlatform continuousPlatform = GetChildPlatform<ContinuousPlatform>();
+            if (continuousPlatform != null)
+            {
+                // 마지막 플랫폼이 1번 플랫폼이면, 연속 플랫폼인지 확인 후 마지막이 아니면 다음 플랫폼 태그를 뽑는다.
+                if (_latestPlatform.Tag == randType && continuousPlatform.IsLast == false)
+                    return continuousPlatform.NextPair;
+
+                // 마지막 플랫폼이 연속 끝번 플랫폼이고, 다음에 올 플랫폼이 마지막 플랫폼과 동일한 종류면 다시 뽑는다.
+                if (continuousPlatform.IsLast && continuousPlatform.platformType.ToString() == randType)
+                    return GetRandomTypeName();
+            }
+            
+            // 싱글, 연속 끝번에 상관없이 같은 종류의 플랫폼이면 다시 뽑는다.
+            if(_latestPlatform.platformType == CheckNextPlatformType(randType))
+                return GetRandomTypeName();
+        }
+        
+        // 그냥 다른거
+        return randType;
+    }
+
+    // 제일 뒤의 플랫폼을 지우고 새 플랫폼 생성
     private void DisableOldestPlatform()
     {
-        // To Do - 파괴를 풀링으로 교체
         if (_platformsQueue.Count == 0)
         {
             Debug.Log("플랫폼 Queue 개수 0 개... 그럴리가?");
             return;
         }
 
-        GameObject go = _platformsQueue.Dequeue().gameObject;
-        Destroy(go);
+        PlatformBase platform = _platformsQueue.Dequeue();
+        ObjectPool.ReturnObject(platform.Tag, platform.gameObject);
 
-        GenerateRandomPlatform(PlatformType.Land);
+        if (!IsEssentialPlatform())
+            GenerateRandomPlatform();
+    }
+    #endregion
+
+    #region Util
+    private PlatformType CheckNextPlatformType(string platformType)
+    {
+        PlatformBase platform = ObjectPool.PeekObject(platformType).GetComponent<PlatformBase>();
+
+        return platform.platformType;
     }
 
-    #region Editor - Inspector Custom Button Methods
-    private IEnumerator AutoGenerate_Test()
+    // 마지막 플랫폼이 반드시 자신의 페어가 와야하는 플랫폼인지 검사
+    private bool IsEssentialPlatform()
     {
-        _isGenerating = true;
+        ContinuousPlatform continuousPlatform = GetChildPlatform<ContinuousPlatform>();
 
-        while (true)
+        // 자신의 페어가 와야하면 생성 후 true 반환
+        if (continuousPlatform != null && continuousPlatform.IsEssential)
         {
-            yield return _waitTime;
-            
-            GenerateRandomPlatform(PlatformType.Land);
+            // 페어가 오긴 해야하는데 중간꺼라 중복이 가능하면 확률적
+            if (continuousPlatform.IsMid)
+            {
+                string random = Random.Range(0, 10) < 5 ? continuousPlatform.NextPair : continuousPlatform.Tag;
+                GenerateEssentialPlatform(random);
+                return true;
+            }
+
+            // 중간이 없는 1, 2 페어면 바로 다음 플랫폼
+            GenerateEssentialPlatform(continuousPlatform.NextPair);
+            return true;
         }
+
+        return false;
     }
 
-    public void StartGenerate()
+    // Continuous 또는 Single Platform을 제너릭을 활용해 반환
+    private T GetChildPlatform<T>() where T : PlatformBase
     {
-        if (_isGenerating)
-        {
-            Debug.Log("Already being Generated");
-            return;
-        }
+        if (_latestPlatform == null || _latestPlatform.TryGetComponent(out T continuous) == false)
+            return null;
 
-        StartCoroutine(AutoGenerate_Test());
-    }
-
-    public void StopGenerate()
-    {
-        StopAllCoroutines();
-        _isGenerating = false;
+        return continuous;
     }
     #endregion
 }

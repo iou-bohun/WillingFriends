@@ -45,9 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e0a0cf2cd0de84e826df8cd93813dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  platformType: 1
   <Tag>k__BackingField: LoadPair_02
   _platformSO: {fileID: 0}
-  <Essential>k__BackingField: 0
+  <IsEssential>k__BackingField: 0
+  <IsMid>k__BackingField: 0
   <IsLast>k__BackingField: 1
   <NextPair>k__BackingField: 
 --- !u!1 &6387920456587529857

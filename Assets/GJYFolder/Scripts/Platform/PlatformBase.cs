@@ -2,23 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlatformType
+{
+    Land_01,
+    LoadPair_01,
+    LoadSingle,
+}
+
 public class PlatformBase : MonoBehaviour
 {
-    protected BasePlatformSO _platformSO;    
+    public PlatformType platformType;
 
-    public void Init()
-    {
-        // To Do - PlatformSO 도 생성될 때 마다 갱신 해줘야 함...
+    [field: SerializeField] public string Tag { get; private set; }    
 
-    }
+    [SerializeField] protected BasePlatformSO _platformSO;    
 
-    private void OnDisable()
-    {
-        Clear();
-    }
-
-    protected virtual void Clear()
-    {
-        _platformSO = null;
-    }
+    public virtual void Init() { }
 }
