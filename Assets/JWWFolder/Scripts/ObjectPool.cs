@@ -26,6 +26,20 @@ public class ObjectPool : MonoBehaviour
 
         Initialize();
     }
+    private void Initialize() // 정해진 숫자 만큼 오브젝트 생성 초기화
+    {
+        foreach (var pool in pools)//리스트에서 꺼내서
+        {
+            Queue<GameObject> objectPool = new Queue<GameObject>();
+            for (int i = 0; i < pool.size; i++)
+            {
+                GameObject obj = Instantiate(pool.prefab);
+                obj.SetActive(false);
+                objectPool.Enqueue(obj);
+            }
+            poolDictionary.Add(pool.tag, objectPool);
+        }
+    }
     private GameObject CreateNewObject(string tag)// 오브젝트 생성 후 반환 //Get에서만 사용
     {
         if (!poolDictionary.ContainsKey(tag))//있는 종류만 생성하겠다!
@@ -44,20 +58,6 @@ public class ObjectPool : MonoBehaviour
 
         return obj;
     }
-    private void Initialize() // 정해진 숫자 만큼 오브젝트 생성 초기화
-    {
-        foreach (var pool in pools)//리스트에서 꺼내서
-        {
-            Queue<GameObject> objectPool = new Queue<GameObject>();
-            for (int i = 0; i < pool.size; i++)
-            {
-                GameObject obj = Instantiate(pool.prefab);
-                obj.SetActive(false);
-                objectPool.Enqueue(obj);
-            }
-            poolDictionary.Add(pool.tag, objectPool);
-        }
-    }
     public static GameObject GetObject(string tag)//오브젝트를 풀에서 꺼내서 반환
     {
         if (!Instance.poolDictionary.ContainsKey(tag))//딕셔너리에 없으면 널
@@ -74,7 +74,7 @@ public class ObjectPool : MonoBehaviour
         {
             GameObject newObj = Instance.CreateNewObject(tag);//만들고
             newObj.transform.SetParent(null);//독립
-            newObj.gameObject.SetActive(false);//활성화
+            newObj.gameObject.SetActive(true);//활성화
             return newObj;
         }
     }
