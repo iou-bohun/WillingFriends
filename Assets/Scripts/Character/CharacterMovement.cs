@@ -7,20 +7,16 @@ public class CharacterMovement : MonoBehaviour
     private TDCharacterController _controller;
 
     private Vector2 _movementDirection = Vector2.zero;
-    private Rigidbody _rigidbody;
 
     public float moveDistance = 1f;
     public float moveSpeed = 5f;
-    // public float jumpForce = 10f;
-    // public float groundCheckDistance = 0.1f;
-    // public LayerMask groundLayer;
+    public float raycastDistance = 0.5f;
 
-    private bool isMoving = false;
+    private bool _isMoving = false;
 
     private void Awake()
     {
         _controller = GetComponent<TDCharacterController>();
-        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -31,29 +27,15 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
-        if (!isMoving)
+        if (!_isMoving && _movementDirection != Vector2.zero)
         {
-            if (_movementDirection != Vector2.zero)
+            if (!IsObstacleInPath())
             {
-                isMoving = true;
+                _isMoving = true;
                 StartCoroutine(MoveCoroutine(_movementDirection));
             }
         }
     }
-    /*
-
-    private void FixedUpdate()
-    {
-        // Check if the character is grounded
-        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
-
-        if (isGrounded)
-        {
-            // Apply jump force only when grounded
-            _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
-    }
-    */
 
     private void Move(Vector2 direction)
     {
@@ -73,7 +55,6 @@ public class CharacterMovement : MonoBehaviour
             yield return null;
         }
 
-        // 이동 종료
         transform.position = endPosition;
         Invoke("MovingStateChange", 0.3f);
     }
@@ -84,7 +65,19 @@ public class CharacterMovement : MonoBehaviour
 
     public void MovingStateChange()
     {
-        isMoving = false;
+        _isMoving = false;
+    }
+
+    private bool IsObstacleInPath()
+    {
+        RaycastHit hit;
+        Vector3 dir = new Vector3(_movementDirection.x, 0f, _movementDirection.y);
+        if (Physics.Raycast(transform.position, dir, out hit, raycastDistance, 1 << LayerMask.NameToLayer("Tree")))
+        {
+            _isMoving = false;
+            return true;
+        }
+        return false;
     }
 }
 
