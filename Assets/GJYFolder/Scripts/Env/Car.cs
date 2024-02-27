@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
-    [Range(1, 2)][SerializeField] float _minSpeed;
-    [Range(2, 5)][SerializeField] float _maxSpeed;
-
     private Rigidbody _rigid;
     private LoadPlatform _loadPlatform;
     private Vector3 _dir;
@@ -19,12 +16,12 @@ public class Car : MonoBehaviour
         _rigid = GetComponent<Rigidbody>();
     }
 
-    public void Setup(Vector3 dir, LoadPlatform loadPlatform)
+    public void Setup(LoadPlatform loadPlatform, Vector3 dir, float speed)
     {
         _dir = dir;
         _loadPlatform = loadPlatform;
         _isSetup = true;
-        _speed = Random.Range(_minSpeed, _maxSpeed);
+        _speed = speed;
     }
 
     private void FixedUpdate()
@@ -45,6 +42,9 @@ public class Car : MonoBehaviour
     {
         _isSetup = false;
         _loadPlatform = null;
+
+        _speed = 0;
+        _rigid.velocity = Vector3.zero;
         transform.position = Vector3.down * 10;
         transform.rotation = Quaternion.identity;
     }

@@ -6,8 +6,6 @@ public class LoadPlatform : Platform
 {
     [SerializeField] LoadPlatformSO _loadSO;
 
-    private WaitForSeconds _delayTime;
-
     private readonly int START_POS_ABS = 10;
 
     private void OnEnable()
@@ -30,10 +28,9 @@ public class LoadPlatform : Platform
 
     private IEnumerator Co_SpawnCars()
     {
-        float randomDealy = Random.Range(_loadSO.minSpawnDelay, _loadSO.maxSpawnDelay);
-        _delayTime = new WaitForSeconds(randomDealy);
+        int randCar = Random.Range(0, _loadSO.carPrefabs.Length);        
+        float randSpeed = Random.Range(_loadSO.minSpeed, _loadSO.maxSpeed);
 
-        int randCar = Random.Range(0, _loadSO.carPrefabs.Length);
         int driveDir = Random.Range(0, 2) == 0 ? -1 : 1;
 
         while (true)
@@ -43,11 +40,12 @@ public class LoadPlatform : Platform
             go.transform.Rotate(Vector3.up * 90 * driveDir);
 
             Car car = go.GetComponent<Car>();
-            car.Setup(transform.right * driveDir, this);
+            car.Setup(this, transform.right * driveDir, randSpeed);
 
             _obstacleQueue.Enqueue(go);
 
-            yield return _delayTime;
+            float randomDealy = Random.Range(_loadSO.minSpawnDelay, _loadSO.maxSpawnDelay);
+            yield return new WaitForSeconds(randomDealy);
         }
     }
 

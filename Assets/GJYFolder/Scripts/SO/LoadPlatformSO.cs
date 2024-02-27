@@ -10,4 +10,8 @@ public class LoadPlatformSO : BasePlatformSO
     [Header("Spawn")]
     public float minSpawnDelay;
     public float maxSpawnDelay;
+
+    [Header("Spawn")]
+    public float minSpeed;
+    public float maxSpeed;
 }
