@@ -12,7 +12,6 @@ public class Enemy : MonoBehaviour
     [field:Header("Movement")]
     [SerializeField] float jumpForce;
     [SerializeField] bool isGrounded = false;
-    [SerializeField] float pushForce;
     [SerializeField] private Vector3 currentPosition;
     [SerializeField] private Vector3 movedPosition;
 
@@ -52,7 +51,7 @@ public class Enemy : MonoBehaviour
 
     private void JumpAnimationStart()
     {
-        _animator.SetBool(AnimationData.JumParameterName,true);
+        _animator.SetTrigger(AnimationData.JumParameterName);
     }
 
     public void BigJump()
