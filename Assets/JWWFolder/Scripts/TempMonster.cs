@@ -16,7 +16,7 @@ public class TempMonster : MonoBehaviour
     }
     private void DestoryBullet()
     {
-        ObjectPool.ReturnObject("TempMonster",this.gameObject);
+        ObjectPoolManager.ReturnObject("TempMonster",this.gameObject);
     }
     // Update is called once per frame
     void Update()

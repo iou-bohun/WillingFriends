@@ -20,20 +20,14 @@ public class Shooter : MonoBehaviour
             if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hitResult))
             {
                 Vector3 direction = new Vector3(hitResult.point.x, transform.position.y, hitResult.point.z) - transform.position;
-                TempMonster tempmonster = ObjectPool.GetObject("TempMonster").GetComponent<TempMonster>();
+                TempMonster tempmonster = ObjectPoolManager.GetObject("TempMonster").GetComponent<TempMonster>();
                 tempmonster.transform.position = transform.position + direction.normalized;
                 tempmonster.MoveForward(direction.normalized);
             }
         }
         else if (Input.GetMouseButtonDown(1))
         {
-            RaycastHit hitResult;
-            if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hitResult))
-            {
-                Vector3 direction = new Vector3(hitResult.point.x, transform.position.y, hitResult.point.z) - transform.position;
-                Car2 tempmonster = ObjectPool.GetObject("Car2").GetComponent<Car2>();
-                tempmonster.transform.position = transform.position + direction.normalized;
-            }
+            Managers.Instance.CallClearEvent();
         }
     }
 }
