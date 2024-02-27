@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-
+        movedPosition = transform.position; 
     }
 
     private void Update()
@@ -37,8 +37,8 @@ public class Enemy : MonoBehaviour
         ///Test
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(PushEnemy());    
-            Debug.Log(PushedPosition().z);
+            Debug.Log("Space");
+            StartCoroutine(PushEnemy());
         }
         ///
 
@@ -82,8 +82,8 @@ public class Enemy : MonoBehaviour
             else if(playerNormal == Vector3.forward)
             {
                 //플레이어 뒤로 밀림
+                StartCoroutine(PushEnemy());
                 Debug.Log("PlayerPush");
-                _rigid.AddForce(Vector3.forward * pushForce, ForceMode.Impulse);
                
             }
         }
@@ -99,18 +99,20 @@ public class Enemy : MonoBehaviour
 
     private Vector3 PushedPosition()
     {
-        return new Vector3(0, 0, 1);
+        movedPosition += Vector3.forward;
+        return movedPosition;
     }
 
     IEnumerator PushEnemy()
     {
         float elaspedTime = 0f;
         float duration = 0.5f;
+        Vector3 targetPosition = PushedPosition();
 
         while(elaspedTime < duration)
         {
             elaspedTime += Time.deltaTime;
-            transform.position = Vector3.Slerp(transform.position, PushedPosition(), elaspedTime / duration) ;
+            transform.position = Vector3.Slerp(transform.position, new Vector3(transform.position.x, transform.position.y, targetPosition.z), elaspedTime / duration) ;
             yield return null;
         }
 
