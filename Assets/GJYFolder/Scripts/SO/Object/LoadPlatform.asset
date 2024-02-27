@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6bf4357d9d832a4594a99b4e50c976a, type: 3}
-  m_Name: SingleLoadPlatform
+  m_Script: {fileID: 11500000, guid: 3bd0dc6c2a39bec489d4bb1411c49a5c, type: 3}
+  m_Name: LoadPlatform
   m_EditorClassIdentifier: 
-  type: 1
-  maxContinuousIndex: 0
   carPrefabs:
   - {fileID: 3936159167000851456, guid: 2bdb044bf322812428570dfa9d56fda3, type: 3}
   - {fileID: 4641004664832574987, guid: cf11af99d9c41e343942bc97e0cd2db4, type: 3}
-  minSpawnDelay: 1
-  maxSpawnDelay: 2
+  minSpawnDelay: 2
+  maxSpawnDelay: 4
+  minSpeed: 2
+  maxSpeed: 5

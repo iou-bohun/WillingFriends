@@ -34,6 +34,7 @@ public class ObjectPool : MonoBehaviour
             for (int i = 0; i < pool.size; i++)
             {
                 GameObject obj = Instantiate(pool.prefab);
+                obj.name = pool.tag;
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
@@ -54,11 +55,12 @@ public class ObjectPool : MonoBehaviour
             }
         }
         GameObject obj = Instantiate(poolingRef.prefab, transform);//오브젝트 생성
+        obj.name = tag;
         obj.gameObject.SetActive(false);
 
         return obj;
     }
-    public static GameObject GetObject(string tag)//오브젝트를 풀에서 꺼내서 반환
+    public static GameObject GetObject(string tag, Transform parent = null) //오브젝트를 풀에서 꺼내서 반환
     {
         if (!Instance.poolDictionary.ContainsKey(tag))//딕셔너리에 없으면 널
             return null;
@@ -66,18 +68,19 @@ public class ObjectPool : MonoBehaviour
         if (Instance.poolDictionary[tag].Count > 0)//큐에 남아있는 게 있을 때 
         {
             GameObject obj = Instance.poolDictionary[tag].Dequeue();//큐에서 꺼낸다.
-            obj.transform.SetParent(null);//독립적인 객체로 분리
-            obj.gameObject.SetActive(true);//활성화
+            obj.transform.SetParent(parent); // parent 자식으로 (없을수도?)
+            obj.gameObject.SetActive(true);//활성화            
             return obj;
         }
         else//큐에 남아있는 게 없을 때
         {
             GameObject newObj = Instance.CreateNewObject(tag);//만들고
-            newObj.transform.SetParent(null);//독립
+            newObj.transform.SetParent(parent); // parent 자식으로 (없을수도?)
             newObj.gameObject.SetActive(true);//활성화
             return newObj;
         }
     }
+
     public static void ReturnObject(string tag ,GameObject gameObject)//오브젝트를 tag에 해당하는 풀에 집어넣음
     {
         gameObject.gameObject.SetActive(false); //비활성화

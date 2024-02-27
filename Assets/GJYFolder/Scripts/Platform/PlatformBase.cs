@@ -13,9 +13,7 @@ public class PlatformBase : MonoBehaviour
 {
     public PlatformType platformType;
 
-    [field: SerializeField] public string Tag { get; private set; }    
-
-    [SerializeField] protected BasePlatformSO _platformSO;    
+    [field: SerializeField] public string Tag { get; private set; }
 
     public virtual void Init() { }
 }
