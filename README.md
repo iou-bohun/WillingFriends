@@ -7,10 +7,10 @@
 |정원우|팀원|[klik075](https://github.com/klik075)|
 |최보훈|팀장|[bohun](https://github.com/iou-bohun)|
 
-* 국지윤 - 맵 , 
-* 정원우 - 오브젝트 풀링 , 
-* 박소이 - 플레이어 , 
-* 최보훈 -  몬스터 ,
+* 국지윤 - 맵 생성로직(구조물 배치) , 에셋제작 
+* 정원우 - 오브젝트 풀링 , 사운드 Manager, ObjectPoolManager, GameManager
+* 박소이 - 플레이어 이동, 플레이어 사용 아이템 
+* 최보훈 - 몬스터 로직,UI
 
 ### <span style="color:orange"> 📝컨밴션 규칙 </span>
 Feat - 내용
