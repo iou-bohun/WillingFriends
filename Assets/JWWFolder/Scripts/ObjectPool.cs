@@ -84,4 +84,17 @@ public class ObjectPool : MonoBehaviour
         gameObject.transform.SetParent(Instance.transform); // 풀 하위에 넣음
         Instance.poolDictionary[tag].Enqueue(gameObject); //돌아갈 때만 사전에 넣음
     }
+
+    // 잠깐 꺼내서 보기만 할 친구
+    public static GameObject PeekObject(string tag)
+    {
+        if (!Instance.poolDictionary.ContainsKey(tag))//딕셔너리에 없으면 널
+            return null;
+
+        if (Instance.poolDictionary[tag].Count > 0)//큐에 남아있는 게 있을 때 
+            return Instance.poolDictionary[tag].Peek();
+
+        // 딕트에 없음
+        return null;
+    }
 }
