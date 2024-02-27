@@ -25,10 +25,12 @@ public class PlatformGenerator : MonoBehaviour
     private Vector3 _latestPlatformPos;
     private int _currentStep = 0;
 
+    private string[] _platformTypes = Enum.GetNames(typeof(PlatformType));
+
     private void Awake()
     {
         if (Instance == null)
-            Instance = this;
+            Instance = this;        
     }
 
     private void Start()
@@ -97,32 +99,27 @@ public class PlatformGenerator : MonoBehaviour
 
     private string GetRandomTypeName()
     {
-        // Enum으로 각 플랫폼의 1번 태그를 불러와 랜덤하게 지정
-        string[] types = Enum.GetNames(typeof(PlatformType));
-        string randType = types[Random.Range(0, types.Length)];        
-
-        if (_latestPlatform != null)
-        {
-            ContinuousPlatform continuousPlatform = GetChildPlatform<ContinuousPlatform>();
-            if (continuousPlatform != null)
-            {
-                // 마지막 플랫폼이 1번 플랫폼이면, 연속 플랫폼인지 확인 후 마지막이 아니면 다음 플랫폼 태그를 뽑는다.
-                if (_latestPlatform.Tag == randType && continuousPlatform.IsLast == false)
-                    return continuousPlatform.NextPair;
-
-                // 마지막 플랫폼이 연속 끝번 플랫폼이고, 다음에 올 플랫폼이 마지막 플랫폼과 동일한 종류면 다시 뽑는다.
-                if (continuousPlatform.IsLast && continuousPlatform.platformType.ToString() == randType)
-                    return GetRandomTypeName();
-            }
-            
-            // 싱글, 연속 끝번에 상관없이 같은 종류의 플랫폼이면 다시 뽑는다.
-            if(_latestPlatform.platformType == CheckNextPlatformType(randType))
-                return GetRandomTypeName();
-        }
+        // Enum으로 각 플랫폼의 1번 태그를 불러와 랜덤하게 지정        
+        string randType = _platformTypes[Random.Range(0, _platformTypes.Length)];
         
+        if (_latestPlatform == null)
+            return randType;
+
+        ContinuousPlatform continuousPlatform = GetChildPlatform<ContinuousPlatform>();
+        if (continuousPlatform != null)
+        {
+            // 마지막 플랫폼이 1번 플랫폼이면, 연속 플랫폼인지 확인 후 마지막이 아니면 다음 플랫폼 태그를 뽑는다.
+            if (_latestPlatform.Tag == randType && continuousPlatform.IsLast == false)
+                return continuousPlatform.NextPair;            
+        }
+
+        // 싱글, 연속 끝번에 상관없이 같은 종류의 플랫폼이면 다시 뽑는다.
+        if (_latestPlatform.platformType == CheckNextPlatformType(randType))
+            return GetRandomTypeName();
+
         // 그냥 다른거
         return randType;
-    }
+    }    
 
     // 제일 뒤의 플랫폼을 지우고 새 플랫폼 생성
     private void DisableOldestPlatform()

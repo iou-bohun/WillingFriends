@@ -552,22 +552,22 @@ MonoBehaviour:
   pools:
   - tag: Land_01
     prefab: {fileID: 7493075537866317926, guid: 7226cedd69c36424a8d30349c8e50a11, type: 3}
-    size: 5
+    size: 10
   - tag: Land_02
     prefab: {fileID: 2090730168958370487, guid: de9e3f78f4e01d44c973fd4439504ce8, type: 3}
-    size: 5
+    size: 10
   - tag: LoadPair_01
     prefab: {fileID: 6009643862966173004, guid: 188fa2a92dee31e4a8353cfd91551663, type: 3}
-    size: 5
+    size: 10
   - tag: LoadPair_02
     prefab: {fileID: 943270779229640429, guid: 8f5d4eded357f1b4da7930c7c9af4b67, type: 3}
-    size: 5
+    size: 10
   - tag: LoadSingle
     prefab: {fileID: 3160394240677522248, guid: 09218f3ac4b183340b2534d74b7bcc8c, type: 3}
-    size: 5
+    size: 10
   - tag: LoadPair_Mid
     prefab: {fileID: 7704573902191862363, guid: e3549bd8aec5a804590224a0be458714, type: 3}
-    size: 5
+    size: 10
 --- !u!4 &1517302650
 Transform:
   m_ObjectHideFlags: 0
