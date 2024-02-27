@@ -5,7 +5,7 @@ using UnityEngine;
 public class CharacterJump : MonoBehaviour
 {
     private Rigidbody _rigidbody;
-    private float jumpForce = 2f;
+    private float jumpForce = 3f;
 
     void Start()
     {
