@@ -4,7 +4,7 @@ using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ObjectPool : MonoBehaviour
+public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
 {
     [System.Serializable]
     public struct Pooling
@@ -16,15 +16,12 @@ public class ObjectPool : MonoBehaviour
     public List<Pooling> pools;//풀링 리스트
     private Pooling poolingRef = new Pooling();//풀링 참조
 
-    public static ObjectPool Instance;
-
     private Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
     private void Awake()
     {
-        Instance = this;
-
-        Initialize();
+        Managers.InitEvent += Initialize;
+        //Initialize();
     }
     private void Initialize() // 정해진 숫자 만큼 오브젝트 생성 초기화
     {

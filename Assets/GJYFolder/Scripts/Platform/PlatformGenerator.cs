@@ -81,7 +81,7 @@ public class PlatformGenerator : MonoBehaviour
 
     private void DeployPlatform(string platformType)
     {
-        GameObject go = ObjectPool.GetObject(platformType);
+        GameObject go = ObjectPoolManager.GetObject(platformType);
         go.transform.position = _latestPlatformPos;
         _latestPlatformPos += Vector3.forward;
 
@@ -134,7 +134,7 @@ public class PlatformGenerator : MonoBehaviour
         }
 
         PlatformBase platform = _platformsQueue.Dequeue();
-        ObjectPool.ReturnObject(platform.Tag, platform.gameObject);
+        ObjectPoolManager.ReturnObject(platform.Tag, platform.gameObject);
 
         if (!IsEssentialPlatform())
             GenerateRandomPlatform();
@@ -144,7 +144,7 @@ public class PlatformGenerator : MonoBehaviour
     #region Util
     private PlatformType CheckNextPlatformType(string platformType)
     {
-        PlatformBase platform = ObjectPool.PeekObject(platformType).GetComponent<PlatformBase>();
+        PlatformBase platform = ObjectPoolManager.PeekObject(platformType).GetComponent<PlatformBase>();
 
         return platform.platformType;
     }

@@ -23,7 +23,6 @@ public class SingletoneBase<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-
     void Awake()
     {
         Init();
