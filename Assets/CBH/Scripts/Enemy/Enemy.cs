@@ -33,13 +33,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        ///Test
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("Space");
-            StartCoroutine(PushEnemy());
-        }
-        ///
 
 
         if(isGrounded)
