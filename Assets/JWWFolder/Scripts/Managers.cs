@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class Managers : SingletoneBase<Managers>
 {
-    private GameManager gameManager = new GameManager();
-    public GameManager GameManager {  get { return gameManager; } }
-
     public static Action InitEvent;
     public static Action ClearEvent;
     // Start is called before the first frame update
@@ -15,17 +12,11 @@ public class Managers : SingletoneBase<Managers>
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    public static void CallInitEvent()
+    public void CallInitEvent()
     {
         InitEvent?.Invoke();
     }
-    public static void CallClearEvent()
+    public void CallClearEvent()
     {
         ClearEvent?.Invoke();
     }

@@ -1,11 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
+public class ObjectPoolManager : MonoBehaviour
 {
+    private static ObjectPoolManager _instance;
     [System.Serializable]
     public struct Pooling
     {
@@ -13,18 +15,40 @@ public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
         public GameObject prefab;
         public int size;
     }
+    public static ObjectPoolManager Instance { get { return _instance; } }
+
     public List<Pooling> pools;//풀링 리스트
     private Pooling poolingRef = new Pooling();//풀링 참조
 
-    private Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
+    private Dictionary<string, Queue<GameObject>> poolDictionary;
 
     private void Awake()
     {
+        if (_instance == null)
+            _instance = this;
         Managers.InitEvent += Initialize;
+        Managers.ClearEvent += Clear;
         //Initialize();
     }
+
+    private void Clear()
+    {
+        poolDictionary.Clear();//사전 초기화
+
+        int num = transform.childCount;//비활성화 되어있는 오브젝트 폴링의 수
+        for(int i = 0; i < num; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(true);
+            Destroy(transform.GetChild(i).gameObject);
+            Debug.Log("삭제 완료");
+        }
+
+        Initialize();
+    }
+
     private void Initialize() // 정해진 숫자 만큼 오브젝트 생성 초기화
     {
+        poolDictionary = new Dictionary<string, Queue<GameObject>>();
         foreach (var pool in pools)//리스트에서 꺼내서
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
@@ -32,6 +56,7 @@ public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
             {
                 GameObject obj = Instantiate(pool.prefab);
                 obj.SetActive(false);
+                obj.transform.SetParent(Instance.transform);
                 objectPool.Enqueue(obj);
             }
             poolDictionary.Add(pool.tag, objectPool);
