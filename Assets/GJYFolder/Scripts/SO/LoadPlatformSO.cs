@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "Platform/Load", fileName = "LoadPlatform")]
 public class LoadPlatformSO : BasePlatformSO
 {
     [Header("Object")]

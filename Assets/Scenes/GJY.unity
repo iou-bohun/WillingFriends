@@ -552,21 +552,33 @@ MonoBehaviour:
   pools:
   - tag: Land_01
     prefab: {fileID: 7493075537866317926, guid: 7226cedd69c36424a8d30349c8e50a11, type: 3}
-    size: 10
+    size: 15
   - tag: Land_02
     prefab: {fileID: 2090730168958370487, guid: de9e3f78f4e01d44c973fd4439504ce8, type: 3}
-    size: 10
+    size: 15
   - tag: LoadPair_01
     prefab: {fileID: 6009643862966173004, guid: 188fa2a92dee31e4a8353cfd91551663, type: 3}
-    size: 10
+    size: 15
   - tag: LoadPair_02
     prefab: {fileID: 943270779229640429, guid: 8f5d4eded357f1b4da7930c7c9af4b67, type: 3}
-    size: 10
+    size: 15
   - tag: LoadSingle
     prefab: {fileID: 3160394240677522248, guid: 09218f3ac4b183340b2534d74b7bcc8c, type: 3}
-    size: 10
+    size: 15
   - tag: LoadPair_Mid
     prefab: {fileID: 7704573902191862363, guid: e3549bd8aec5a804590224a0be458714, type: 3}
+    size: 15
+  - tag: Tree_01coll
+    prefab: {fileID: 1164951381697835813, guid: 1da0e9ab82659b24d9515378a60a75bf, type: 3}
+    size: 50
+  - tag: Tree_02coll
+    prefab: {fileID: 2497364200522587150, guid: 4563fa4d127b62d4f8777a33a88d52c7, type: 3}
+    size: 50
+  - tag: Car_01coll
+    prefab: {fileID: 3936159167000851456, guid: 2bdb044bf322812428570dfa9d56fda3, type: 3}
+    size: 10
+  - tag: Car_02coll
+    prefab: {fileID: 4641004664832574987, guid: cf11af99d9c41e343942bc97e0cd2db4, type: 3}
     size: 10
 --- !u!4 &1517302650
 Transform:
@@ -627,9 +639,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445d16fe4ebc8404fa360690cec64117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startPositionZ: -5
-  _initPlatformsCount: 15
-  _autoDisableIndex: 5
+  _startPositionZ: -10
+  _initPlatformsCount: 30
+  _autoDisableIndex: 2
   testPlayer: {fileID: 661485469}
 --- !u!1001 &1729453519605854909
 PrefabInstance:
