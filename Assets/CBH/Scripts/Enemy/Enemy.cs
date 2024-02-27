@@ -13,10 +13,11 @@ public class Enemy : MonoBehaviour
 
     [field:Header("Movement")]
     [SerializeField] float jumpForce;
-    [SerializeField] bool isGrounded = false;
+    [SerializeField] public bool isGrounded = false;
     [SerializeField] private Vector3 currentPosition;
     [SerializeField] private Vector3 movedPosition;
     [SerializeField] private LayerMask obstacleMask;
+    [SerializeField] private float detectRange;
 
     private Animator _animator;
     private Rigidbody _rigid;
@@ -33,24 +34,20 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Cor());
-        movedPosition = transform.position; 
+       StartCoroutine(Move());
+       movedPosition = transform.position; 
     }
 
     private void Update()
     {
-        if (isGrounded)
+        if (Vector3.Distance(transform.position, player.position) < detectRange)
         {
-            if(Vector3.Distance(transform.position, player.position)<2f)
-            {
-                JumpAnimationStart();
-            }
+            _animator.SetBool(AnimationData.JumParameterName, true);
         }
-    }
-
-    private void FixedUpdate()
-    {
-       
+        else
+        {
+            _animator.SetBool(AnimationData.JumParameterName,false);
+        }
     }
 
 
@@ -60,16 +57,6 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public void BigJump()
-    {
-        _rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-    }
-
-    public void SmallJump()
-    {
-        _rigid.AddForce(Vector3.up * (jumpForce/2), ForceMode.Impulse);
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -78,6 +65,7 @@ public class Enemy : MonoBehaviour
             if(groundNormal == Vector3.up) //위에서 충돌
             {
                 isGrounded = true;
+                _animator.SetBool(AnimationData.GroundParameterName, isGrounded);
             }
         }
 
@@ -104,6 +92,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = false;
+            _animator.SetBool(AnimationData.GroundParameterName, isGrounded);
         }
     }
 
@@ -127,16 +116,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Move()
+    IEnumerator Move()
     {
-        StartCoroutine(MovePosition());
-    }
-
-    IEnumerator Cor()
-    {
-        while(true)
+        while (true)
         {
-            StartCoroutine(MovePosition());
+            if(Vector3.Distance(transform.position, player.position) > detectRange)
+            {
+                StartCoroutine(MovePosition());
+            }
             yield return new WaitForSeconds(1);
         }
     }
@@ -150,7 +137,7 @@ public class Enemy : MonoBehaviour
         while (elaspedTime < duration)
         {
             elaspedTime += Time.deltaTime;
-            transform.position = Vector3.Slerp(transform.position, movedirection, elaspedTime / duration);
+            transform.position = Vector3.Lerp(transform.position, movedirection, elaspedTime / duration);
            yield return null;
         }
     }
@@ -166,6 +153,10 @@ public class Enemy : MonoBehaviour
     }
 
     #region 주변 물체 탐지
+    /// <summary>
+    /// 전후좌우 장애물 체크
+    /// </summary>
+    /// <returns>장애물이 없는 방향들 </returns>
     private Vector3[] ObstacleSearch()
     {
         List<Vector3> safeDirections = new List<Vector3>();
@@ -204,4 +195,15 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawRay(transform.position, Vector3.left);
     }
     #endregion
+
+    public void BigJump()
+    {
+        _rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    public void SmallJump()
+    {
+        _rigid.AddForce(Vector3.up * (jumpForce / 2), ForceMode.Impulse);
+    }
+
 }
