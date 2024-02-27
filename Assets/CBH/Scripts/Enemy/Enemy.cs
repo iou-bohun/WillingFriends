@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
     private Animator _animator;
     private Rigidbody _rigid;
 
+    [SerializeField] private Transform player;
+
     private void Awake()
     {
         AnimationData.Initialize();
@@ -31,17 +33,15 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("Move", 1f, 1f);
+        StartCoroutine(Cor());
         movedPosition = transform.position; 
     }
 
     private void Update()
     {
-        ObstacleSearch();
-        Debug.Log(ObstacleSearch());
         if (isGrounded)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if(Vector3.Distance(transform.position, player.position)<2f)
             {
                 JumpAnimationStart();
             }
@@ -131,6 +131,16 @@ public class Enemy : MonoBehaviour
     {
         StartCoroutine(MovePosition());
     }
+
+    IEnumerator Cor()
+    {
+        while(true)
+        {
+            StartCoroutine(MovePosition());
+            yield return new WaitForSeconds(1);
+        }
+    }
+
     IEnumerator MovePosition()
     {
         float elaspedTime = 0f;
@@ -141,9 +151,8 @@ public class Enemy : MonoBehaviour
         {
             elaspedTime += Time.deltaTime;
             transform.position = Vector3.Slerp(transform.position, movedirection, elaspedTime / duration);
-            yield return null;
+           yield return null;
         }
-        
     }
 
     private Vector3 GetDirection()
