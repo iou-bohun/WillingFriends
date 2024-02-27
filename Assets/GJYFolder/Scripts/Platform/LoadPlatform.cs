@@ -35,7 +35,7 @@ public class LoadPlatform : Platform
 
         while (true)
         {
-            GameObject go = ObjectPool.GetObject(_loadSO.carPrefabs[randCar].name, transform);
+            GameObject go = ObjectPoolManager.GetObject(_loadSO.carPrefabs[randCar].name, transform);
             go.transform.position = transform.position + (Vector3.left * driveDir * START_POS_ABS);
             go.transform.Rotate(Vector3.up * 90 * driveDir);
 
@@ -55,7 +55,7 @@ public class LoadPlatform : Platform
             return;
 
         GameObject firstCar = _obstacleQueue.Dequeue();
-        ObjectPool.ReturnObject(firstCar.name, firstCar);
+        ObjectPoolManager.ReturnObject(firstCar.name, firstCar);
     }
 
     public override void Clear()

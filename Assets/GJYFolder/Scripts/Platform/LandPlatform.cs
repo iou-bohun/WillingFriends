@@ -40,7 +40,7 @@ public class LandPlatform : Platform
                 continue;
             }
 
-            GameObject tree = ObjectPool.GetObject(_landSO.treePrefabs[randTree].name, transform);
+            GameObject tree = ObjectPoolManager.GetObject(_landSO.treePrefabs[randTree].name, transform);
             tree.transform.position = spawnPos;
             spawnPos += Vector3.right;
             stack++;
