@@ -93,3 +93,6 @@ MonoBehaviour:
   - tag: River_Lotus
     prefab: {fileID: 8468208750007497352, guid: d8d05229cba1cf54c9c4b574cde8e9fe, type: 3}
     size: 5
+  - tag: Enemy
+    prefab: {fileID: 807353379891092179, guid: edf8ec4114a9957448386254ea145e38, type: 3}
+    size: 5

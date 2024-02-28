@@ -42,6 +42,7 @@ public class PlatformGenerator : MonoBehaviour
             GeneratePlatform();
     }
 
+    // Test
     private void Update()
     {
         if (testPlayer == null)

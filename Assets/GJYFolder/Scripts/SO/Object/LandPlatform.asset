@@ -15,3 +15,4 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 1164951381697835813, guid: 1da0e9ab82659b24d9515378a60a75bf, type: 3}
   - {fileID: 2497364200522587150, guid: 4563fa4d127b62d4f8777a33a88d52c7, type: 3}
+  monsterPrefabs: {fileID: 807353379891092179, guid: edf8ec4114a9957448386254ea145e38, type: 3}
