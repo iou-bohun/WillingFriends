@@ -28,14 +28,14 @@ public class LoadPlatform : Platform
 
     private IEnumerator Co_SpawnCars()
     {
-        int randCar = Random.Range(0, _loadSO.spawnPrefabs.Length);        
+        int randCar = Random.Range(0, _loadSO.spawnDefaultPrefabs.Length);        
         float randSpeed = Random.Range(_loadSO.minSpeed, _loadSO.maxSpeed);
 
         int driveDir = Random.Range(0, 2) == 0 ? -1 : 1;
 
         while (true)
         {
-            GameObject go = ObjectPoolManager.GetObject(_loadSO.spawnPrefabs[randCar].name, transform);
+            GameObject go = ObjectPoolManager.GetObject(_loadSO.spawnDefaultPrefabs[randCar].name, transform);
             go.transform.position = transform.position + (Vector3.left * driveDir * START_POS_ABS);
             go.transform.Rotate(Vector3.up * 90 * driveDir);
 

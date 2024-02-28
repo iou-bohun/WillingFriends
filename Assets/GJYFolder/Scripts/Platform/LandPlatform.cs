@@ -23,24 +23,48 @@ public class LandPlatform : Platform
 
     private readonly int PERCENTAGE = 1;
 
-    private void Awake()
-    {
-        isInit = true;
-        _monsters = new Enemy[MAX_SPAWN_MONSTER];
-        _monsterSpawnPos = _monsterSpawnStart.position;
-    }
-
     private void OnEnable()
     {
-        Spawn();
+        // 풀에서 생성된 첫 1회는 발동 X
+        if (!isInit)
+        {
+            isInit = true;
+            _monsters = new Enemy[MAX_SPAWN_MONSTER];
+            _monsterSpawnPos = _monsterSpawnStart.position;
+            return;
+        }
+
+        if (PlatformGenerator.Instance.IsInit)
+            Spawn();
+        else
+            InitSpawn();
+    }
+
+    private void InitSpawn()
+    {
+        Vector3 treeSpawnPos = _treeSpawnPoint.position;
+
+        for (int i = 0; i < SPAWN_COUNT; i++)
+        {
+            // 플레이어 이동가능 공간은 스폰금지
+            if (treeSpawnPos.x >= _monsterSpawnStart.position.x && treeSpawnPos.x <= _monsterSpawnEnd.position.x)
+            {
+                treeSpawnPos += Vector3.right;
+                continue;
+            }
+
+            int randTree = Random.Range(0, _landSO.spawnDefaultPrefabs.Length);
+
+            GameObject tree = ObjectPoolManager.GetObject(_landSO.spawnDefaultPrefabs[randTree].name, transform);
+            tree.transform.position = treeSpawnPos;
+            treeSpawnPos += Vector3.right;            
+
+            _obstacleQueue.Enqueue(tree);
+        }
     }
 
     private void Spawn()
     {
-        // 풀에서 생성된 첫 1회는 발동 X
-        if (!isInit)
-            return;
-
         Clear();
 
         Vector3 treeSpawnPos = _treeSpawnPoint.position;
@@ -48,7 +72,7 @@ public class LandPlatform : Platform
 
         for (int i = 0; i < SPAWN_COUNT; i++)
         {
-            int randTree = Random.Range(0, _landSO.spawnPrefabs.Length);
+            int randTree = Random.Range(0, _landSO.spawnDefaultPrefabs.Length);
             int randPercentage = Random.Range(0, 10);
 
             // 생성X, 생성좌표 한 칸 옮기기
@@ -62,7 +86,7 @@ public class LandPlatform : Platform
             }
 
             // 나무 생성
-            GameObject tree = ObjectPoolManager.GetObject(_landSO.spawnPrefabs[randTree].name, transform);
+            GameObject tree = ObjectPoolManager.GetObject(_landSO.spawnDefaultPrefabs[randTree].name, transform);
             tree.transform.position = treeSpawnPos;
             treeSpawnPos += Vector3.right;
             stack++;

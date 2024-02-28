@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class BasePlatformSO : ScriptableObject
 {
-    [Header("Object")]
-    public GameObject[] spawnPrefabs;
+    [Header("Default Object")]
+    public GameObject[] spawnDefaultPrefabs;
 }

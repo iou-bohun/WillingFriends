@@ -17,7 +17,8 @@ public class PlatformGenerator : MonoBehaviour
     [Header("# Init")]
     [SerializeField] Transform _root;
     [Range(-10, 10)] public int _startPositionZ;
-    [Range(0, 30)] public int _initPlatformsCount;
+    [Range(0, 30)] public int _initRandPlatformsCount;
+    [Range(0, 30)] public int _initLandPlatformsCount;
     public int _autoDisableIndex = 20;
 
     [Header("# Test")]
@@ -25,6 +26,8 @@ public class PlatformGenerator : MonoBehaviour
 
     private Vector3 _latestPlatformPos;
     private int _currentStep = 0;
+
+    public bool IsInit { get; private set; } = false;
 
     private string[] _platformTypes = Enum.GetNames(typeof(PlatformType));    
 
@@ -38,8 +41,14 @@ public class PlatformGenerator : MonoBehaviour
     {
         _latestPlatformPos = Vector3.forward * _startPositionZ;
 
-        for (int i = 0; i < _initPlatformsCount; i++)
-            GeneratePlatform();
+        for (int i = 0; i < _initLandPlatformsCount; i++)
+            InitialPlatformGenerate();
+
+        IsInit = true;
+
+        for (int i = 0; i < _initRandPlatformsCount; i++)
+            if (!IsEssentialPlatform())
+                GeneratePlatform();
     }
 
     // Test
@@ -65,6 +74,28 @@ public class PlatformGenerator : MonoBehaviour
             testPlayer.transform.position += Vector3.back;
             _currentStep--;
         }
+    }
+
+    private void InitialPlatformGenerate()
+    {
+        string platformType = _platformTypes[0];
+
+        if (_latestPlatform == null)
+        {
+            DeployPlatform(platformType);
+            return;
+        }            
+
+        if (_latestPlatform.Tag != platformType)
+        {
+            DeployPlatform(platformType);
+            return;
+        }            
+
+        if (_latestPlatform.TryGetComponent(out ContinuousPlatform continuous) == false)
+            Debug.Log($"ContinuousPlatform 이 없습니다. 잘못 설정한듯? : {platformType}");        
+
+        DeployPlatform(continuous.NextPair);
     }
 
     #region 플랫폼 생성 Generate Platform
@@ -105,10 +136,7 @@ public class PlatformGenerator : MonoBehaviour
     private string GetRandomTypeName()
     {
         // Enum으로 각 플랫폼의 1번 태그를 불러와 랜덤하게 지정        
-        string randType = _platformTypes[Random.Range(0, _platformTypes.Length)];        
-
-        if (_latestPlatform == null)
-            return randType;
+        string randType = _platformTypes[Random.Range(0, _platformTypes.Length)];
 
         ContinuousPlatform continuousPlatform = GetChildPlatform<ContinuousPlatform>();
         if (continuousPlatform != null)
