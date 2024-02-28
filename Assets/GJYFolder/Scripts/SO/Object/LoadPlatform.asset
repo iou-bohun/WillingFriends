@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bd0dc6c2a39bec489d4bb1411c49a5c, type: 3}
   m_Name: LoadPlatform
   m_EditorClassIdentifier: 
-  carPrefabs:
+  spawnPrefabs:
   - {fileID: 3936159167000851456, guid: 2bdb044bf322812428570dfa9d56fda3, type: 3}
   - {fileID: 4641004664832574987, guid: cf11af99d9c41e343942bc97e0cd2db4, type: 3}
+  - {fileID: 9180880292064948651, guid: 614df210ced426c4c980daeb18f5b306, type: 3}
   minSpawnDelay: 2
   maxSpawnDelay: 4
   minSpeed: 2

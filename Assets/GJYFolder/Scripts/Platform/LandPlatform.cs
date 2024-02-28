@@ -30,7 +30,7 @@ public class LandPlatform : Platform
 
         for (int i = 0; i < SPAWN_COUNT; i++)
         {
-            int randTree = Random.Range(0, _landSO.treePrefabs.Length);
+            int randTree = Random.Range(0, _landSO.spawnPrefabs.Length);
             int randPercentage = Random.Range(0, 10);
 
             if (randPercentage > 1 || stack == LIMIT_STACK)
@@ -40,7 +40,7 @@ public class LandPlatform : Platform
                 continue;
             }
 
-            GameObject tree = ObjectPoolManager.GetObject(_landSO.treePrefabs[randTree].name, transform);
+            GameObject tree = ObjectPoolManager.GetObject(_landSO.spawnPrefabs[randTree].name, transform);
             tree.transform.position = spawnPos;
             spawnPos += Vector3.right;
             stack++;
@@ -52,7 +52,5 @@ public class LandPlatform : Platform
     public override void Clear()
     {
         base.Clear();
-
-
     }
 }

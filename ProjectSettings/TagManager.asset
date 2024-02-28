@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - EndPoint
+  - Torrent
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - 
   - Tree_Temp
   - Car
-  - 
+  - Log
   - 
   - 
   - 

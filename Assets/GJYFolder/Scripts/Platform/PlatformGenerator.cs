@@ -104,8 +104,8 @@ public class PlatformGenerator : MonoBehaviour
     private string GetRandomTypeName()
     {
         // Enum으로 각 플랫폼의 1번 태그를 불러와 랜덤하게 지정        
-        string randType = _platformTypes[Random.Range(0, _platformTypes.Length)];
-        
+        string randType = _platformTypes[Random.Range(0, _platformTypes.Length)];        
+
         if (_latestPlatform == null)
             return randType;
 
@@ -114,10 +114,14 @@ public class PlatformGenerator : MonoBehaviour
         {
             // 마지막 플랫폼이 1번 플랫폼이면, 연속 플랫폼인지 확인 후 마지막이 아니면 다음 플랫폼 태그를 뽑는다.
             if (_latestPlatform.Tag == randType && continuousPlatform.IsLast == false)
-                return continuousPlatform.NextPair;            
+                return continuousPlatform.NextPair;
+
+            // 마지막 플랫폼의 타입이 생성될 타입과 같고, 순환이 가능하면 바로 생성한다.
+            if (_latestPlatform.platformType.ToString() == randType && continuousPlatform.IsCyclable)
+                return randType;
         }
 
-        // 싱글, 연속 끝번에 상관없이 같은 종류의 플랫폼이면 다시 뽑는다.
+        // 순환이 안 되거나, 같은 종류의 플랫폼이면 다시 뽑는다.
         if (_latestPlatform.platformType == CheckNextPlatformType(randType))
             return GetRandomTypeName();
 

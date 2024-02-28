@@ -17,8 +17,8 @@ public class ObjectPoolManager : MonoBehaviour
     }
     public static ObjectPoolManager Instance { get { return _instance; } }
 
-    public List<Pooling> pools;//Ç®¸µ ¸®½ºÆ®
-    private Pooling poolingRef = new Pooling();//Ç®¸µ ÂüÁ¶
+    public List<Pooling> pools;//Ç®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+    private Pooling poolingRef = new Pooling();//Ç®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     private Dictionary<string, Queue<GameObject>> poolDictionary;
 
@@ -30,6 +30,9 @@ public class ObjectPoolManager : MonoBehaviour
         }
         Debug.Log("ObjectPoolmanager awake");
         //Initialize();
+        Managers.InitEvent += Initialize;
+        Managers.ClearEvent += Clear;
+        Initialize();
     }
     private void Start()
     {
@@ -37,23 +40,23 @@ public class ObjectPoolManager : MonoBehaviour
     }
     private void ClearDictionary()
     {
-        poolDictionary.Clear();//»çÀü ÃÊ±âÈ­
+        poolDictionary.Clear();//ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 
-        int num = transform.childCount;//ºñÈ°¼ºÈ­ µÇ¾îÀÖ´Â ¿ÀºêÁ§Æ® Æú¸µÀÇ ¼ö
+        int num = transform.childCount;//ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½Ç¾ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         for(int i = 0; i < num; i++)
         {
             transform.GetChild(i).gameObject.SetActive(true);
             Destroy(transform.GetChild(i).gameObject);
-            Debug.Log("»èÁ¦ ¿Ï·á");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½");
         }
 
-        Initialize();//Àç »ý¼º
+        Initialize();//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
-    public void Initialize() // Á¤ÇØÁø ¼ýÀÚ ¸¸Å­ ¿ÀºêÁ§Æ® »ý¼º ÃÊ±âÈ­
+    public void Initialize() // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
-        foreach (var pool in pools)//¸®½ºÆ®¿¡¼­ ²¨³»¼­
+        foreach (var pool in pools)//ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
             for (int i = 0; i < pool.size; i++)
@@ -66,65 +69,66 @@ public class ObjectPoolManager : MonoBehaviour
             }
             poolDictionary.Add(pool.tag, objectPool);
         }
-        Debug.Log("ObjectPoolManager »ý¼º");
+        Debug.Log("ObjectPoolManager ï¿½ï¿½ï¿½ï¿½");
     }
-    private GameObject CreateNewObject(string tag)// ¿ÀºêÁ§Æ® »ý¼º ÈÄ ¹ÝÈ¯ //Get¿¡¼­¸¸ »ç¿ë
+    private GameObject CreateNewObject(string tag)// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯ //Getï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
     {
-        if (!poolDictionary.ContainsKey(tag))//ÀÖ´Â Á¾·ù¸¸ »ý¼ºÇÏ°Ú´Ù!
+        if (!poolDictionary.ContainsKey(tag))//ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°Ú´ï¿½!
             return null;
 
         foreach (var pool in pools) 
         {
-            if (pool.tag == tag)//ÅÂ±×°¡ ÀÏÄ¡ÇÏ¸é
+            if (pool.tag == tag)//ï¿½Â±×°ï¿½ ï¿½ï¿½Ä¡ï¿½Ï¸ï¿½
             {
                 poolingRef = pool;
                 break;
             }
         }
-        GameObject obj = Instantiate(poolingRef.prefab, transform);//¿ÀºêÁ§Æ® »ý¼º
+        GameObject obj = Instantiate(poolingRef.prefab, transform);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
         obj.name = tag;
         obj.gameObject.SetActive(false);
 
         return obj;
     }
-    public static GameObject GetObject(string tag, Transform parent = null) //¿ÀºêÁ§Æ®¸¦ Ç®¿¡¼­ ²¨³»¼­ ¹ÝÈ¯
+    public static GameObject GetObject(string tag, Transform parent = null) //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ Ç®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
     {
-        if (!Instance.poolDictionary.ContainsKey(tag))//µñ¼Å³Ê¸®¿¡ ¾øÀ¸¸é ³Î
+        if (!Instance.poolDictionary.ContainsKey(tag))//ï¿½ï¿½Å³Ê¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
             return null;
 
-        if (Instance.poolDictionary[tag].Count > 0)//Å¥¿¡ ³²¾ÆÀÖ´Â °Ô ÀÖÀ» ¶§ 
+        if (Instance.poolDictionary[tag].Count > 0)//Å¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 
         {
-            GameObject obj = Instance.poolDictionary[tag].Dequeue();//Å¥¿¡¼­ ²¨³½´Ù.
-            obj.transform.SetParent(parent); // parent ÀÚ½ÄÀ¸·Î (¾øÀ»¼öµµ?)
-            obj.gameObject.SetActive(true);//È°¼ºÈ­            
+            GameObject obj = Instance.poolDictionary[tag].Dequeue();//Å¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+            obj.transform.SetParent(parent); // parent ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?)
+            obj.gameObject.SetActive(true);//È°ï¿½ï¿½È­            
             return obj;
         }
-        else//Å¥¿¡ ³²¾ÆÀÖ´Â °Ô ¾øÀ» ¶§
+        else//Å¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         {
-            GameObject newObj = Instance.CreateNewObject(tag);//¸¸µé°í
-            newObj.transform.SetParent(parent); // parent ÀÚ½ÄÀ¸·Î (¾øÀ»¼öµµ?)
-            newObj.gameObject.SetActive(true);//È°¼ºÈ­
+            GameObject newObj = Instance.CreateNewObject(tag);//ï¿½ï¿½ï¿½ï¿½ï¿½
+            newObj.transform.SetParent(parent); // parent ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?)
+            newObj.gameObject.SetActive(true);//È°ï¿½ï¿½È­
             return newObj;
         }
     }
 
-    public static void ReturnObject(string tag ,GameObject gameObject)//¿ÀºêÁ§Æ®¸¦ tag¿¡ ÇØ´çÇÏ´Â Ç®¿¡ Áý¾î³ÖÀ½
+    public static void ReturnObject(string tag ,GameObject gameObject)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ tagï¿½ï¿½ ï¿½Ø´ï¿½ï¿½Ï´ï¿½ Ç®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
-        gameObject.gameObject.SetActive(false); //ºñÈ°¼ºÈ­
-        gameObject.transform.SetParent(Instance.transform); // Ç® ÇÏÀ§¿¡ ³ÖÀ½
-        Instance.poolDictionary[tag].Enqueue(gameObject); //µ¹¾Æ°¥ ¶§¸¸ »çÀü¿¡ ³ÖÀ½
+        gameObject.gameObject.SetActive(false); //ï¿½ï¿½È°ï¿½ï¿½È­
+        gameObject.transform.SetParent(Instance.transform); // Ç® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        Instance.poolDictionary[tag].Enqueue(gameObject); //ï¿½ï¿½ï¿½Æ°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     }
 
-    // Àá±ñ ²¨³»¼­ º¸±â¸¸ ÇÒ Ä£±¸
+    // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¸¸ ï¿½ï¿½ Ä£ï¿½ï¿½
     public static GameObject PeekObject(string tag)
     {
-        if (!Instance.poolDictionary.ContainsKey(tag))//µñ¼Å³Ê¸®¿¡ ¾øÀ¸¸é ³Î
+        if (!Instance.poolDictionary.ContainsKey(tag))//ï¿½ï¿½Å³Ê¸ï¿½ï¿½ï¿½ ï¿½ï¿½ÏµÈ°ï¿½ ï¿½Æ´Ï¸ï¿½ null
             return null;
 
-        if (Instance.poolDictionary[tag].Count > 0)//Å¥¿¡ ³²¾ÆÀÖ´Â °Ô ÀÖÀ» ¶§ 
+        if (Instance.poolDictionary[tag].Count > 0)//Å¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 
             return Instance.poolDictionary[tag].Peek();
 
-        // µñÆ®¿¡ ¾øÀ½
-        return null;
+        // ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â¸ï¿½ Peek
+        Instance.poolDictionary[tag].Enqueue(Instance.CreateNewObject(tag));
+        return Instance.poolDictionary[tag].Peek();
     }
 }
