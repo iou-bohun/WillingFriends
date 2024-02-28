@@ -22,7 +22,6 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         _controller.OnMoveEvent += Move;
-        _controller.OnAttackEvent += Attack;
     }
 
     void Update()
@@ -45,7 +44,7 @@ public class CharacterMovement : MonoBehaviour
     IEnumerator MoveCoroutine(Vector2 direction)
     {
         Vector3 startPosition = transform.position;
-        Vector3 endPosition = startPosition + new Vector3(direction.x, 0f, direction.y) * moveDistance;
+        Vector3 endPosition = startPosition + new Vector3(direction.x, 0.01f, direction.y) * moveDistance;
 
         float t = 0f;
         while (t < 1f)
@@ -58,14 +57,15 @@ public class CharacterMovement : MonoBehaviour
         transform.position = endPosition;
         Invoke("MovingStateChange", 0.3f);
     }
-    private void Attack(Vector3 position)
-    {
-
-    }
 
     public void MovingStateChange()
     {
         _isMoving = false;
+    }
+
+    public void NowMoving()
+    {
+        _isMoving = true;
     }
 
     private bool IsObstacleInPath()
