@@ -5,13 +5,19 @@ using UnityEngine;
 
 public class GameManager : SingletoneBase<GameManager>
 {
-    private void Awake()
+    protected override void Awake()
     {
-        Managers.InitEvent += Initialize;
+        base.Awake();
+        Debug.Log("GameManager awake");
+        //Managers.InitEvent += Initialize;
+    }
+    public void Start()
+    {
+        Debug.Log("gameManager start");
     }
 
     public void Initialize()
     {
-        Debug.Log("gameManger »ý¼º");
+        Debug.Log("gameManger ");
     }
 }

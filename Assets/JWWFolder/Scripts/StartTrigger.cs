@@ -8,7 +8,7 @@ public class StartTrigger : MonoBehaviour
     void Start()
     {
         Managers.Instance.CallInitEvent();
-        GameManager.Instance.Initialize();
+        //GameManager.Instance.Initialize();
     }
 
     // Update is called once per frame
