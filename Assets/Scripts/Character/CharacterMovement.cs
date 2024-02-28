@@ -44,7 +44,7 @@ public class CharacterMovement : MonoBehaviour
     IEnumerator MoveCoroutine(Vector2 direction)
     {
         Vector3 startPosition = transform.position;
-        Vector3 endPosition = startPosition + new Vector3(direction.x, 0f, direction.y) * moveDistance;
+        Vector3 endPosition = startPosition + new Vector3(direction.x, 0.01f, direction.y) * moveDistance;
 
         float t = 0f;
         while (t < 1f)
@@ -61,6 +61,11 @@ public class CharacterMovement : MonoBehaviour
     public void MovingStateChange()
     {
         _isMoving = false;
+    }
+
+    public void NowMoving()
+    {
+        _isMoving = true;
     }
 
     private bool IsObstacleInPath()
