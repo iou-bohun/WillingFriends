@@ -11,7 +11,6 @@ public class GameManager : SingletoneBase<GameManager>
         base.Awake();
         player = GameObject.FindWithTag("Player").transform; // 태그로 플레이어 위치 가져옴.
         Debug.Log("GameManager awake");
-        //Managers.InitEvent += Initialize;
     }
     public void Start()
     {
