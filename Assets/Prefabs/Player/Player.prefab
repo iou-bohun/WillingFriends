@@ -18,6 +18,8 @@ GameObject:
   - component: {fileID: 2086253242578294105}
   - component: {fileID: 7494328591684802021}
   - component: {fileID: 3099238465438401369}
+  - component: {fileID: 591010226697027527}
+  - component: {fileID: 4955536879942726937}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -323,6 +325,40 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.2398534, y: 2.5328033, z: 2.3}
   m_Center: {x: 0, y: 0.26640213, z: 0.05}
+--- !u!95 &591010226697027527
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3350394641977825183}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c46dde7f886c4134caf61421f0603cc7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4955536879942726937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3350394641977825183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbaa443fb27cf034c808e95a89125e57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponFac: {fileID: 0}
 --- !u!1 &4916961217520754547
 GameObject:
   m_ObjectHideFlags: 0
