@@ -4,14 +4,11 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Platform/Load", fileName = "LoadPlatform")]
 public class LoadPlatformSO : BasePlatformSO
 {
-    [Header("Object")]
-    public GameObject[] carPrefabs;
-
-    [Header("Spawn")]
+    [Header("Delay")]
     public float minSpawnDelay;
     public float maxSpawnDelay;
 
-    [Header("Spawn")]
+    [Header("Speed")]
     public float minSpeed;
     public float maxSpeed;
 }

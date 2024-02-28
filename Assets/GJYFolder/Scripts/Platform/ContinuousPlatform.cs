@@ -5,6 +5,7 @@ using UnityEngine;
 public class ContinuousPlatform : PlatformBase
 {
     [field: SerializeField] public bool IsEssential { get; private set; }
+    [field: SerializeField] public bool IsCyclable { get; private set; }
     [field: SerializeField] public bool IsMid { get; private set; }
     [field: SerializeField] public bool IsLast { get; private set; }    
 

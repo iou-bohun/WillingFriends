@@ -50,6 +50,7 @@ MonoBehaviour:
   platformType: 0
   <Tag>k__BackingField: Land_02
   <IsEssential>k__BackingField: 0
+  <IsCyclable>k__BackingField: 1
   <IsMid>k__BackingField: 0
   <IsLast>k__BackingField: 1
   <NextPair>k__BackingField: 

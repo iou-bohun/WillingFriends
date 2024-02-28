@@ -7,6 +7,7 @@ public enum PlatformType
     Land_01,
     LoadPair_01,
     LoadSingle,
+    River,
 }
 
 public class PlatformBase : MonoBehaviour

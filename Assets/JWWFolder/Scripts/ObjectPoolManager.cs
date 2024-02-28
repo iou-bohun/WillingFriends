@@ -28,7 +28,7 @@ public class ObjectPoolManager : MonoBehaviour
             _instance = this;
         Managers.InitEvent += Initialize;
         Managers.ClearEvent += Clear;
-        //Initialize();
+        Initialize();
     }
 
     private void Clear()
@@ -113,13 +113,14 @@ public class ObjectPoolManager : MonoBehaviour
     // 잠깐 꺼내서 보기만 할 친구
     public static GameObject PeekObject(string tag)
     {
-        if (!Instance.poolDictionary.ContainsKey(tag))//딕셔너리에 없으면 널
+        if (!Instance.poolDictionary.ContainsKey(tag))//딕셔너리에 등록된게 아니면 null
             return null;
 
         if (Instance.poolDictionary[tag].Count > 0)//큐에 남아있는 게 있을 때 
             return Instance.poolDictionary[tag].Peek();
 
-        // 딕트에 없음
-        return null;
+        // 딕트에 없으면 생성후 걔를 Peek
+        Instance.poolDictionary[tag].Enqueue(Instance.CreateNewObject(tag));
+        return Instance.poolDictionary[tag].Peek();
     }
 }
