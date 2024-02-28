@@ -39,6 +39,7 @@ public class PlatformGenerator : MonoBehaviour
 
     private void Start()
     {
+        Managers.Instance.CallInitEvent();
         _latestPlatformPos = Vector3.forward * _startPositionZ;
 
         for (int i = 0; i < _initLandPlatformsCount; i++)
