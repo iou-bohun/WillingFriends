@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Knife : MonoBehaviour
 {
     private Vector3 distanse;
 
@@ -23,16 +23,16 @@ public class Weapon : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(gameObject);
+            ObjectPoolManager.ReturnObject("Knife", gameObject);
         }
         else if (collision.gameObject.tag == "Weapon")
         {
-            Destroy(gameObject);
+            ObjectPoolManager.ReturnObject("Knife", gameObject);
         }
     }
 
     public void DestroyWP()
     {
-        Destroy(gameObject);
+        ObjectPoolManager.ReturnObject("Knife", gameObject);
     }
 }
