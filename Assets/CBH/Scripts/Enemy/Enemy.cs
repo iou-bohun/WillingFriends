@@ -9,6 +9,8 @@ using UnityEngine.EventSystems;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] GameObject _broken;
+
     [field:Header("Animations")]
     [field:SerializeField] public EnemyAnimationData AnimationData { get;private set; }
 
@@ -91,7 +93,7 @@ public class Enemy : MonoBehaviour
                 StartCoroutine(PushEnemy());
                 Debug.Log("EnemyPush");
             }
-        }
+        }        
     }
 
     private void OnCollisionExit(Collision collision)
@@ -202,4 +204,11 @@ public class Enemy : MonoBehaviour
         _rigid.AddForce(Vector3.up * (jumpForce / 2), ForceMode.Impulse);
     }
 
+    public void Die()
+    {
+        GameObject broken = ObjectPoolManager.GetObject(_broken.name);
+        broken.transform.position = transform.position;        
+
+        ObjectPoolManager.ReturnObject(gameObject.name, gameObject);
+    }
 }

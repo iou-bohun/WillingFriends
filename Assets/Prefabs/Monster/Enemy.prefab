@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 6260020010609014954}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &7813413137236454543
 Rigidbody:
@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b87f609f92625a4da84107f02a57997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _broken: {fileID: 7915593836312143886, guid: 41bc437cba6eec54d9a4cdc62058a4a6, type: 3}
   <AnimationData>k__BackingField:
     jumpParameterName: Jump
     idleParameterName: Idle

@@ -38,6 +38,12 @@ public class Car : MonoBehaviour
             _loadPlatform.DisableCar();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.TryGetComponent(out Enemy enemy) == true)
+            enemy.Die();
+    }
+
     private void OnDisable()
     {
         _isSetup = false;
