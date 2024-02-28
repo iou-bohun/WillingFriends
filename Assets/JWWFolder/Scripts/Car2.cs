@@ -13,6 +13,9 @@ public class Car2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            SoundManager.Instance.PlayAudioClip("player_die",gameObject.transform);//음악 재생
+        }
     }
 }

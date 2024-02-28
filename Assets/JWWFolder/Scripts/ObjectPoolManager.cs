@@ -29,7 +29,7 @@ public class ObjectPoolManager : MonoBehaviour
             _instance = this;
         }
         Debug.Log("ObjectPoolmanager awake");
-        Initialize();
+        //Initialize(); 
     }
     private void Start()
     {
