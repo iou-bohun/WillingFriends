@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class GameManager : SingletoneBase<GameManager>
 {
-    private void Awake()
+    protected override void Awake()
     {
-        Managers.InitEvent += Initialize;
+        base.Awake();
+        //Managers.InitEvent += Initialize;
     }
 
     public void Initialize()

@@ -25,13 +25,17 @@ public class ObjectPoolManager : MonoBehaviour
     private void Awake()
     {
         if (_instance == null)
+        {
             _instance = this;
-        Managers.InitEvent += Initialize;
-        Managers.ClearEvent += Clear;
+        }
+        Debug.Log("오브젝트 풀 생성");
         //Initialize();
     }
-
-    private void Clear()
+    private void Start()
+    {
+        Managers.ClearEvent += ClearDictionary;
+    }
+    private void ClearDictionary()
     {
         poolDictionary.Clear();//사전 초기화
 
@@ -43,10 +47,10 @@ public class ObjectPoolManager : MonoBehaviour
             Debug.Log("삭제 완료");
         }
 
-        Initialize();
+        Initialize();//재 생성
     }
 
-    private void Initialize() // 정해진 숫자 만큼 오브젝트 생성 초기화
+    public void Initialize() // 정해진 숫자 만큼 오브젝트 생성 초기화
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
         foreach (var pool in pools)//리스트에서 꺼내서
@@ -62,6 +66,7 @@ public class ObjectPoolManager : MonoBehaviour
             }
             poolDictionary.Add(pool.tag, objectPool);
         }
+        Debug.Log("ObjectPoolManager 생성");
     }
     private GameObject CreateNewObject(string tag)// 오브젝트 생성 후 반환 //Get에서만 사용
     {
