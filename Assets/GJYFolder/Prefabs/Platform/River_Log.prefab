@@ -5175,7 +5175,7 @@ GameObject:
   - component: {fileID: 6394104959069719834}
   - component: {fileID: 3307567602101053637}
   m_Layer: 0
-  m_Name: River
+  m_Name: River_Log
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5217,12 +5217,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformType: 3
-  <Tag>k__BackingField: River
+  <Tag>k__BackingField: River_Log
   <IsEssential>k__BackingField: 0
   <IsCyclable>k__BackingField: 1
   <IsMid>k__BackingField: 0
   <IsLast>k__BackingField: 1
-  <NextPair>k__BackingField: River
+  <NextPair>k__BackingField: River_Log
 --- !u!114 &3307567602101053637
 MonoBehaviour:
   m_ObjectHideFlags: 0

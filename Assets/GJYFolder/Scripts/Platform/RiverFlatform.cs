@@ -7,6 +7,8 @@ public class RiverFlatform : Platform
     [SerializeField] RiverPlatformSO _riverSO;
     [SerializeField] Transform _startTransform;
 
+    private ContinuousPlatform _platform;
+
     private readonly int START_POS_ABS = 12;
     private readonly int SPAWN_COUNT = 8;
     private readonly int LIMIT_STACK = 2;
@@ -16,13 +18,14 @@ public class RiverFlatform : Platform
         if (!isInit)
         {
             isInit = true;
+            _platform = GetComponent<ContinuousPlatform>();
             return;
         }
 
         Clear();
 
-        int rand = Random.Range(0, 2);
-        if (rand == 0)
+        
+        if (!_platform.IsCyclable)
             SpawnLotus();
         else
             StartCoroutine(Co_SpawnLogs());
