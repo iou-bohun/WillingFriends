@@ -41,7 +41,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(Vector3.Distance(transform.position, player.position));
         if (Vector3.Distance(transform.position, player.position) < detectRange)
         {
 
@@ -91,7 +90,6 @@ public class Enemy : MonoBehaviour
                 //적 뒤로 밀림
                 StartCoroutine(PushEnemy());
                 Debug.Log("EnemyPush");
-               
             }
         }
     }
@@ -109,7 +107,7 @@ public class Enemy : MonoBehaviour
     {
         float elaspedTime = 0f;
         float duration = 0.3f;
-        Vector3 targetPosition = transform.position + Vector3.forward;
+        Vector3 targetPosition = transform.position + Vector3.forward + (Vector3.up*0.1f);
 
         while(elaspedTime < duration)
         {
@@ -117,6 +115,8 @@ public class Enemy : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, targetPosition, elaspedTime / duration);
             yield return null;
         }
+        Debug.Log(targetPosition.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y, targetPosition.z);
     }
 
     public void MoveE()
