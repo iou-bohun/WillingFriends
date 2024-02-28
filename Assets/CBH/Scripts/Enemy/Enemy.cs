@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, player.position) < detectRange)
         {
+
             _animator.SetBool(AnimationData.JumParameterName, true);
         }
         else
@@ -68,8 +69,8 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            Vector3 groundNormal = collision.GetContact(0).normal; //Ãæµ¹ÁöÁ¡ÀÇ ¹ı¼±¹éÅÍ
-            if(groundNormal == Vector3.up) //À§¿¡¼­ Ãæµ¹
+            Vector3 groundNormal = collision.GetContact(0).normal; //ì¶©ëŒì§€ì ì˜ ë²•ì„ ë°±í„°
+            if(groundNormal == Vector3.up) //ìœ„ì—ì„œ ì¶©ëŒ
             {
                 isGrounded = true;
                 _animator.SetBool(AnimationData.GroundParameterName, isGrounded);
@@ -81,15 +82,14 @@ public class Enemy : MonoBehaviour
             Vector3 playerNormal = collision.GetContact(0).normal;
             if(playerNormal == Vector3.up)
             {
-                //ÇÃ·¹ÀÌ¾î Å³
+                //í”Œë ˆì´ì–´ í‚¬
                 Debug.Log("PlayerKill");
             }
             else if(playerNormal == Vector3.forward)
             {
-                //Àû µÚ·Î ¹Ğ¸²
+                //ì  ë’¤ë¡œ ë°€ë¦¼
                 StartCoroutine(PushEnemy());
                 Debug.Log("EnemyPush");
-               
             }
         }
     }
@@ -107,7 +107,7 @@ public class Enemy : MonoBehaviour
     {
         float elaspedTime = 0f;
         float duration = 0.3f;
-        Vector3 targetPosition = transform.position + Vector3.forward;
+        Vector3 targetPosition = transform.position + Vector3.forward + (Vector3.up*0.1f);
 
         while(elaspedTime < duration)
         {
@@ -115,18 +115,8 @@ public class Enemy : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, targetPosition, elaspedTime / duration);
             yield return null;
         }
-    }
-
-    IEnumerator Move()
-    {
-        while (true)
-        {
-            if(Vector3.Distance(transform.position, player.position) > detectRange && isGrounded)
-            {
-                StartCoroutine(MovePosition());
-            }
-            yield return new WaitForSeconds(1);
-        }
+        Debug.Log(targetPosition.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y, targetPosition.z);
     }
 
     public void MoveE()
@@ -158,11 +148,11 @@ public class Enemy : MonoBehaviour
         return direction;
     }
 
-    #region ÁÖº¯ ¹°Ã¼ Å½Áö
+    #region ì£¼ë³€ ë¬¼ì²´ íƒì§€
     /// <summary>
-    /// ÀüÈÄÁÂ¿ì Àå¾Ö¹° Ã¼Å©
+    /// ì „í›„ì¢Œìš° ì¥ì• ë¬¼ ì²´í¬
     /// </summary>
-    /// <returns>Àå¾Ö¹°ÀÌ ¾ø´Â ¹æÇâµé </returns>
+    /// <returns>ì¥ì• ë¬¼ì´ ì—†ëŠ” ë°©í–¥ë“¤ </returns>
     private Vector3[] ObstacleSearch()
     {
         List<Vector3> safeDirections = new List<Vector3>();
@@ -177,7 +167,7 @@ public class Enemy : MonoBehaviour
         };
         foreach (Ray ray in rays)
         {
-            if (!Physics.Raycast(ray, 1f, obstacleMask)) // ±× ¹æÇâ¿¡ Àå¾Ö¹°ÀÌ ¾÷´Ù¸é 
+            if (!Physics.Raycast(ray, 1f, obstacleMask)) // ê·¸ ë°©í–¥ì— ì¥ì• ë¬¼ì´ ì—…ë‹¤ë©´ 
             {
                 if (ray.direction == Vector3.forward)
                     safeDirections.Add(Vector3.forward);
