@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 2684553288893296702}
   m_Layer: 14
   m_Name: Mesh
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -186,6 +186,7 @@ MonoBehaviour:
   platformType: 0
   <Tag>k__BackingField: Land_01
   <IsEssential>k__BackingField: 0
+  <IsCyclable>k__BackingField: 0
   <IsMid>k__BackingField: 0
   <IsLast>k__BackingField: 0
   <NextPair>k__BackingField: Land_02

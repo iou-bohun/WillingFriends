@@ -43,26 +43,26 @@ public class PlatformGenerator : MonoBehaviour
             GeneratePlatform();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            testPlayer.transform.position += Vector3.forward;
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.W))
+    //    {
+    //        testPlayer.transform.position += Vector3.forward;
 
-            if (_currentStep > _autoDisableIndex)
-            {
-                DisableOldestPlatform();
-                return;
-            }
+    //        if (_currentStep > _autoDisableIndex)
+    //        {
+    //            DisableOldestPlatform();
+    //            return;
+    //        }
 
-            _currentStep++;
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            testPlayer.transform.position += Vector3.back;
-            _currentStep--;
-        }
-    }
+    //        _currentStep++;
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.S))
+    //    {
+    //        testPlayer.transform.position += Vector3.back;
+    //        _currentStep--;
+    //    }
+    //}
 
     #region ÇÃ·§Æû »ý¼º Generate Platform
     private void GeneratePlatform()

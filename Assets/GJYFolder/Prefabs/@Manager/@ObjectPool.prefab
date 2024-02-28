@@ -78,3 +78,15 @@ MonoBehaviour:
   - tag: Car_03coll
     prefab: {fileID: 9180880292064948651, guid: 614df210ced426c4c980daeb18f5b306, type: 3}
     size: 5
+  - tag: Lotus_coll
+    prefab: {fileID: 8008332897868599594, guid: f934f88c7efb90748af3a704f1450373, type: 3}
+    size: 5
+  - tag: Log_01coll
+    prefab: {fileID: 1916023524242361819, guid: 078db4558cc09cd48a13c8d0a855abcf, type: 3}
+    size: 5
+  - tag: Log_02coll
+    prefab: {fileID: 4182935402334092718, guid: 53c4604687d55bc4f8574665fad68a25, type: 3}
+    size: 5
+  - tag: River
+    prefab: {fileID: 8468208750007497352, guid: 6ca16ec9a07976f45b0b6420377f5fd3, type: 3}
+    size: 5
