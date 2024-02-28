@@ -5,6 +5,7 @@ using static UnityEngine.UI.Image;
 using UnityEngine.TextCore.Text;
 using TMPro;
 using System.Security.Cryptography;
+using UnityEngine.EventSystems;
 
 public class Enemy : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-       StartCoroutine(Move());
+       //StartCoroutine(Move());
        movedPosition = transform.position; 
     }
 
@@ -47,6 +48,12 @@ public class Enemy : MonoBehaviour
         else
         {
             _animator.SetBool(AnimationData.JumParameterName,false);
+        }
+
+        ///Test
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(PushEnemy());
         }
     }
 
@@ -79,9 +86,9 @@ public class Enemy : MonoBehaviour
             }
             else if(playerNormal == Vector3.forward)
             {
-                //플레이어 뒤로 밀림
+                //적 뒤로 밀림
                 StartCoroutine(PushEnemy());
-                Debug.Log("PlayerPush");
+                Debug.Log("EnemyPush");
                
             }
         }
@@ -96,22 +103,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private Vector3 PushedPosition()
-    {
-        movedPosition += Vector3.forward;
-        return movedPosition;
-    }
-
     IEnumerator PushEnemy()
     {
         float elaspedTime = 0f;
-        float duration = 0.5f;
-        Vector3 targetPosition = PushedPosition();
+        float duration = 0.3f;
+        Vector3 targetPosition = transform.position + Vector3.forward;
 
         while(elaspedTime < duration)
         {
             elaspedTime += Time.deltaTime;
-            transform.position = Vector3.Slerp(transform.position, new Vector3(transform.position.x, transform.position.y, targetPosition.z), elaspedTime / duration) ;
+            transform.position = Vector3.Lerp(transform.position, targetPosition, elaspedTime / duration);
             yield return null;
         }
     }
@@ -120,12 +121,17 @@ public class Enemy : MonoBehaviour
     {
         while (true)
         {
-            if(Vector3.Distance(transform.position, player.position) > detectRange)
+            if(Vector3.Distance(transform.position, player.position) > detectRange && isGrounded)
             {
                 StartCoroutine(MovePosition());
             }
             yield return new WaitForSeconds(1);
         }
+    }
+
+    public void MoveE()
+    {
+        StartCoroutine (MovePosition());
     }
 
     IEnumerator MovePosition()

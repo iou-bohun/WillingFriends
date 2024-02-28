@@ -18,4 +18,9 @@ public class EnemyAnimationTrigger : MonoBehaviour
     {
         enemy.SmallJump();
     }
+
+    public void Move()
+    {
+        enemy.MoveE();
+    }
 }
