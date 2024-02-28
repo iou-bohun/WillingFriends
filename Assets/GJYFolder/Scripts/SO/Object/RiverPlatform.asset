@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 497c93333f733294da39631697c681c9, type: 3}
   m_Name: RiverPlatform
   m_EditorClassIdentifier: 
-  spawnPrefabs:
+  spawnDefaultPrefabs:
   - {fileID: 1916023524242361819, guid: 078db4558cc09cd48a13c8d0a855abcf, type: 3}
   - {fileID: 4182935402334092718, guid: 53c4604687d55bc4f8574665fad68a25, type: 3}
   lotusPrefab: {fileID: 8008332897868599594, guid: f934f88c7efb90748af3a704f1450373, type: 3}
-  minSpawnDelay: 3
-  maxSpawnDelay: 5
-  minSpeed: 3
+  minSpawnDelay: 2
+  maxSpawnDelay: 3
+  minSpeed: 2
   maxSpeed: 4

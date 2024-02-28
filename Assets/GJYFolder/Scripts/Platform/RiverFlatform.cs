@@ -65,14 +65,14 @@ public class RiverFlatform : Platform
 
     private IEnumerator Co_SpawnLogs()
     {
-        int randLog = Random.Range(0, _riverSO.spawnPrefabs.Length);
+        int randLog = Random.Range(0, _riverSO.spawnDefaultPrefabs.Length);
         float randSpeed = Random.Range(_riverSO.minSpeed, _riverSO.maxSpeed);
 
         int flowDir = Random.Range(0, 2) == 0 ? -1 : 1;
 
         while (true)
         {
-            GameObject go = ObjectPoolManager.GetObject(_riverSO.spawnPrefabs[randLog].name, transform);
+            GameObject go = ObjectPoolManager.GetObject(_riverSO.spawnDefaultPrefabs[randLog].name, transform);
             go.transform.position = transform.position + (Vector3.left * flowDir * START_POS_ABS);            
 
             Log log = go.GetComponent<Log>();
