@@ -9,7 +9,7 @@ public class PlatformGenerator : MonoBehaviour
 {
     public static PlatformGenerator Instance;
 
-    public Action<int> OnGeneratePlatform; // Player¿Í ¿¬µ¿ ½Ã »ç¿ë.
+    public Action<int> OnGeneratePlatform; // Playerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½.
 
     private Queue<PlatformBase> _platformsQueue = new Queue<PlatformBase>();
     private PlatformBase _latestPlatform;
@@ -64,7 +64,7 @@ public class PlatformGenerator : MonoBehaviour
     //    }
     //}
 
-    #region ÇÃ·§Æû »ý¼º Generate Platform
+    #region ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Generate Platform
     private void GeneratePlatform()
     {
         if (!IsEssentialPlatform())
@@ -91,11 +91,11 @@ public class PlatformGenerator : MonoBehaviour
 
         if (go.TryGetComponent(out PlatformBase platform) == false)
         {
-            Debug.Log("PlatformBase ÄÄÆ÷³ÍÆ®°¡ ¾ø½À´Ï´Ù.");
+            Debug.Log("PlatformBase ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
             return;
         }
 
-        // To Do - ÇØ´ç ÇÃ·§ÆûÀÇ Init ÇÔ¼ö È£Ãâ½ÃÅ°±â. ÇÏÁö¸¸ ÄÄÆ÷³ÍÆ® ²¨³¾ ¹æ¹ýÀº??
+        // To Do - ï¿½Ø´ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ Init ï¿½Ô¼ï¿½ È£ï¿½ï¿½ï¿½Å°ï¿½ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½??
 
         _latestPlatform = platform;
         _platformsQueue.Enqueue(platform);
@@ -103,7 +103,7 @@ public class PlatformGenerator : MonoBehaviour
 
     private string GetRandomTypeName()
     {
-        // EnumÀ¸·Î °¢ ÇÃ·§ÆûÀÇ 1¹ø ÅÂ±×¸¦ ºÒ·¯¿Í ·£´ýÇÏ°Ô ÁöÁ¤        
+        // Enumï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½Â±×¸ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½        
         string randType = _platformTypes[Random.Range(0, _platformTypes.Length)];        
 
         if (_latestPlatform == null)
@@ -112,29 +112,29 @@ public class PlatformGenerator : MonoBehaviour
         ContinuousPlatform continuousPlatform = GetChildPlatform<ContinuousPlatform>();
         if (continuousPlatform != null)
         {
-            // ¸¶Áö¸· ÇÃ·§ÆûÀÌ 1¹ø ÇÃ·§ÆûÀÌ¸é, ¿¬¼Ó ÇÃ·§ÆûÀÎÁö È®ÀÎ ÈÄ ¸¶Áö¸·ÀÌ ¾Æ´Ï¸é ´ÙÀ½ ÇÃ·§Æû ÅÂ±×¸¦ »Ì´Â´Ù.
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Â±×¸ï¿½ ï¿½Ì´Â´ï¿½.
             if (_latestPlatform.Tag == randType && continuousPlatform.IsLast == false)
                 return continuousPlatform.NextPair;
 
-            // ¸¶Áö¸· ÇÃ·§ÆûÀÇ Å¸ÀÔÀÌ »ý¼ºµÉ Å¸ÀÔ°ú °°°í, ¼øÈ¯ÀÌ °¡´ÉÇÏ¸é ¹Ù·Î »ý¼ºÇÑ´Ù.
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ô°ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
             if (_latestPlatform.platformType.ToString() == randType && continuousPlatform.IsCyclable)
                 return randType;
         }
 
-        // ¼øÈ¯ÀÌ ¾È µÇ°Å³ª, °°Àº Á¾·ùÀÇ ÇÃ·§ÆûÀÌ¸é ´Ù½Ã »Ì´Â´Ù.
+        // ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ ï¿½Ç°Å³ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½Ù½ï¿½ ï¿½Ì´Â´ï¿½.
         if (_latestPlatform.platformType == CheckNextPlatformType(randType))
             return GetRandomTypeName();
 
-        // ±×³É ´Ù¸¥°Å
+        // ï¿½×³ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½
         return randType;
     }    
 
-    // Á¦ÀÏ µÚÀÇ ÇÃ·§ÆûÀ» Áö¿ì°í »õ ÇÃ·§Æû »ý¼º
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void DisableOldestPlatform()
     {
         if (_platformsQueue.Count == 0)
         {
-            Debug.Log("ÇÃ·§Æû Queue °³¼ö 0 °³... ±×·²¸®°¡?");
+            Debug.Log("ï¿½Ã·ï¿½ï¿½ï¿½ Queue ï¿½ï¿½ï¿½ï¿½ 0 ï¿½ï¿½... ï¿½×·ï¿½ï¿½ï¿½ï¿½ï¿½?");
             return;
         }
 
@@ -154,15 +154,15 @@ public class PlatformGenerator : MonoBehaviour
         return platform.platformType;
     }
 
-    // ¸¶Áö¸· ÇÃ·§ÆûÀÌ ¹Ýµå½Ã ÀÚ½ÅÀÇ Æä¾î°¡ ¿Í¾ßÇÏ´Â ÇÃ·§ÆûÀÎÁö °Ë»ç
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýµï¿½ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¡ ï¿½Í¾ï¿½ï¿½Ï´ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
     private bool IsEssentialPlatform()
     {
         ContinuousPlatform continuousPlatform = GetChildPlatform<ContinuousPlatform>();
 
-        // ÀÚ½ÅÀÇ Æä¾î°¡ ¿Í¾ßÇÏ¸é »ý¼º ÈÄ true ¹ÝÈ¯
+        // ï¿½Ú½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¡ ï¿½Í¾ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ true ï¿½ï¿½È¯
         if (continuousPlatform != null && continuousPlatform.IsEssential)
         {
-            // Æä¾î°¡ ¿À±ä ÇØ¾ßÇÏ´Âµ¥ Áß°£²¨¶ó Áßº¹ÀÌ °¡´ÉÇÏ¸é È®·üÀû
+            // ï¿½ï¿½î°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½Ï´Âµï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ßºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ È®ï¿½ï¿½ï¿½ï¿½
             if (continuousPlatform.IsMid)
             {
                 string random = Random.Range(0, 10) < 5 ? continuousPlatform.NextPair : continuousPlatform.Tag;
@@ -170,7 +170,7 @@ public class PlatformGenerator : MonoBehaviour
                 return true;
             }
 
-            // Áß°£ÀÌ ¾ø´Â 1, 2 Æä¾î¸é ¹Ù·Î ´ÙÀ½ ÇÃ·§Æû
+            // ï¿½ß°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 1, 2 ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½
             GenerateEssentialPlatform(continuousPlatform.NextPair);
             return true;
         }
@@ -178,7 +178,7 @@ public class PlatformGenerator : MonoBehaviour
         return false;
     }
 
-    // Continuous ¶Ç´Â Single PlatformÀ» Á¦³Ê¸¯À» È°¿ëÇØ ¹ÝÈ¯
+    // Continuous ï¿½Ç´ï¿½ Single Platformï¿½ï¿½ ï¿½ï¿½ï¿½Ê¸ï¿½ï¿½ï¿½ È°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
     private T GetChildPlatform<T>() where T : PlatformBase
     {
         if (_latestPlatform == null || _latestPlatform.TryGetComponent(out T continuous) == false)
