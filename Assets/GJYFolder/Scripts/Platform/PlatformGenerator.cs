@@ -15,6 +15,7 @@ public class PlatformGenerator : MonoBehaviour
     private PlatformBase _latestPlatform;
 
     [Header("# Init")]
+    [SerializeField] Transform _root;
     [Range(-10, 10)] public int _startPositionZ;
     [Range(0, 30)] public int _initPlatformsCount;
     public int _autoDisableIndex = 20;
@@ -86,7 +87,7 @@ public class PlatformGenerator : MonoBehaviour
 
     private void DeployPlatform(string platformType)
     {
-        GameObject go = ObjectPoolManager.GetObject(platformType);
+        GameObject go = ObjectPoolManager.GetObject(platformType, _root);
         go.transform.position = _latestPlatformPos;
         _latestPlatformPos += Vector3.forward;
 
@@ -94,9 +95,7 @@ public class PlatformGenerator : MonoBehaviour
         {
             Debug.Log("PlatformBase 컴포넌트가 없습니다.");
             return;
-        }
-
-        // To Do - 해당 플랫폼의 Init 함수 호출시키기. 하지만 컴포넌트 꺼낼 방법은??
+        }        
 
         _latestPlatform = platform;
         _platformsQueue.Enqueue(platform);
