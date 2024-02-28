@@ -32,7 +32,7 @@ public class SoundManager : MonoBehaviour
             _instance = this;
 
         backgroundAudioSource = GetComponent<AudioSource>();
-        Debug.Log("사운드 매니저 생성");
+        Debug.Log("사운드 매니저 awake");
     }
     public void Initialize()
     {
@@ -44,11 +44,12 @@ public class SoundManager : MonoBehaviour
             AudioSource source =  obj.AddComponent<AudioSource>();
             obj.SetActive(false);
             audioQueue.Enqueue(source);
-            Debug.Log("오디오 생성");
+            Debug.Log("오디오 initilaize");
         }
     }
     void Start()
     {
+        Debug.Log("오디오 start");
         backgroundAudioSource.clip = backgroundClip;
     }
 

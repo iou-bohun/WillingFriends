@@ -28,7 +28,7 @@ public class ObjectPoolManager : MonoBehaviour
         {
             _instance = this;
         }
-        Debug.Log("오브젝트 풀 생성");
+        Debug.Log("ObjectPoolmanager awake");
         //Initialize();
     }
     private void Start()
