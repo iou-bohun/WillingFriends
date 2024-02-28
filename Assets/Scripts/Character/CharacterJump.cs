@@ -14,7 +14,6 @@ public class CharacterJump : MonoBehaviour
         _anim = GetComponent<Animator>();
     }
 
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "Ground")
