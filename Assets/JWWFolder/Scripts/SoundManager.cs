@@ -5,8 +5,8 @@ using UnityEngine;
 
 public enum sound
 {
-    Start,//°³ÀÓ ½ÃÀÛ
-    Shop, //»óÁ¡
+    Start,//ê°œì„ ì‹œì‘
+    Shop, //ìƒì 
     MaxCount
 }
 
@@ -16,11 +16,11 @@ public class SoundManager : MonoBehaviour
 
     [Header("Background")]
     [SerializeField]
-    private AudioClip backgroundClip;//¹è°æ À½¾Ç
-    private AudioSource backgroundAudioSource;//¹è°æ À½¾Ç ¿Àµğ¿À ¼Ò½º
+    private AudioClip backgroundClip;//ë°°ê²½ ìŒì•…
+    private AudioSource backgroundAudioSource;//ë°°ê²½ ìŒì•… ì˜¤ë””ì˜¤ ì†ŒìŠ¤
     
 
-    private Queue<AudioSource> audioQueue;//¿Àµğ¿À Å¥
+    private Queue<AudioSource> audioQueue;//ì˜¤ë””ì˜¤ í
     [SerializeField]
     private float maxQueueCount = 10f;
     
@@ -32,7 +32,7 @@ public class SoundManager : MonoBehaviour
             _instance = this;
 
         backgroundAudioSource = GetComponent<AudioSource>();
-        Debug.Log("»ç¿îµå ¸Å´ÏÀú awake");
+        Debug.Log("ì‚¬ìš´ë“œ ë§¤ë‹ˆì € awake");
     }
     public void Initialize()
     {
@@ -44,12 +44,12 @@ public class SoundManager : MonoBehaviour
             AudioSource source =  obj.AddComponent<AudioSource>();
             obj.SetActive(false);
             audioQueue.Enqueue(source);
-            Debug.Log("¿Àµğ¿À initilaize");
+            Debug.Log("ì˜¤ë””ì˜¤ initilaize");
         }
     }
     void Start()
     {
-        Debug.Log("¿Àµğ¿À start");
+        Debug.Log("ì˜¤ë””ì˜¤ start");
         backgroundAudioSource.clip = backgroundClip;
     }
 

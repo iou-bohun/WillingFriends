@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class SingletoneBase<T> : MonoBehaviour where T : MonoBehaviour
 {
-    // ÇÁ·ÎÆÛÆ¼
+    // í”„ë¡œí¼í‹°
     private static T _instance;
 
     public static T Instance
     {
         get
         {
-            if (_instance == null)//°´Ã¼°¡ ¾øÀ» ¶§¸¸ »ı¼º
+            if (_instance == null)//ê°ì²´ê°€ ì—†ì„ ë•Œë§Œ ìƒì„±
             {
                 string typeName = typeof(T).FullName;
                 GameObject go = new GameObject(typeName);
