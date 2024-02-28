@@ -9,6 +9,5 @@ public class StartTrigger : MonoBehaviour
     {
         Managers.Instance.CallInitEvent();
         //GameManager.Instance.Initialize();
-        Destroy(gameObject);
     }
 }
