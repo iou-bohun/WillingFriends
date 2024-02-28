@@ -1043,26 +1043,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
-      propertyPath: pools.Array.size
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
-      propertyPath: pools.Array.data[14].tag
-      value: River_Log
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
-      propertyPath: pools.Array.data[15].tag
-      value: River_Lotus
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
-      propertyPath: pools.Array.data[15].size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
-      propertyPath: pools.Array.data[15].prefab
-      value: 
-      objectReference: {fileID: 8468208750007497352, guid: d8d05229cba1cf54c9c4b574cde8e9fe, type: 3}
     - target: {fileID: 5175335165274956590, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
       propertyPath: m_Name
       value: '@ObjectPool'

@@ -87,6 +87,9 @@ MonoBehaviour:
   - tag: Log_02coll
     prefab: {fileID: 4182935402334092718, guid: 53c4604687d55bc4f8574665fad68a25, type: 3}
     size: 5
-  - tag: River
+  - tag: River_Log
     prefab: {fileID: 8468208750007497352, guid: 6ca16ec9a07976f45b0b6420377f5fd3, type: 3}
+    size: 5
+  - tag: River_Lotus
+    prefab: {fileID: 8468208750007497352, guid: d8d05229cba1cf54c9c4b574cde8e9fe, type: 3}
     size: 5
