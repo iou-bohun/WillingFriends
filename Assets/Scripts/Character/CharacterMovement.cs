@@ -22,7 +22,6 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         _controller.OnMoveEvent += Move;
-        _controller.OnAttackEvent += Attack;
     }
 
     void Update()
@@ -57,10 +56,6 @@ public class CharacterMovement : MonoBehaviour
 
         transform.position = endPosition;
         Invoke("MovingStateChange", 0.3f);
-    }
-    private void Attack(Vector3 position)
-    {
-
     }
 
     public void MovingStateChange()
