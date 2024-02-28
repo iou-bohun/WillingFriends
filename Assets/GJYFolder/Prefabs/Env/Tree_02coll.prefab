@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3350419320699363343}
   - component: {fileID: 1024682556826052961}
   - component: {fileID: 4118520305002287283}
-  m_Layer: 12
+  m_Layer: 8
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,5 +135,5 @@ Transform:
   m_Children:
   - {fileID: 5765422909765371202}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

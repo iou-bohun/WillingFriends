@@ -30,7 +30,7 @@ Transform:
   m_Children:
   - {fileID: 8600954692657040199}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8724069825308060858
 GameObject:
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2881696448593430591}
   - component: {fileID: 8242933952882237033}
   - component: {fileID: 8470860739756948699}
-  m_Layer: 12
+  m_Layer: 8
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
