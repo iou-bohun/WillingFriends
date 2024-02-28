@@ -15,7 +15,7 @@ public class Car2 : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            SoundManager.Instance.PlayAudioClip("player_die",gameObject.transform);//음악 재생
+            SoundManager.Instance.PlayAudioClip("car_run",gameObject.transform);//음악 재생
         }
     }
 }

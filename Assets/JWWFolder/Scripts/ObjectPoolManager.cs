@@ -5,16 +5,17 @@ using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[System.Serializable]
+public struct Pooling
+{
+    public string tag;
+    public GameObject prefab;
+    public int size;
+}
 public class ObjectPoolManager : MonoBehaviour
 {
     private static ObjectPoolManager _instance;
-    [System.Serializable]
-    public struct Pooling
-    {
-        public string tag;
-        public GameObject prefab;
-        public int size;
-    }
+    
     public static ObjectPoolManager Instance { get { return _instance; } }
 
     public List<Pooling> pools;//인스펙터 창에서 설정할 풀 정보

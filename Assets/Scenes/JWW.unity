@@ -154,54 +154,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundClip: {fileID: 0}
-  bgmVolume: 100
+  bgmVolumePercent: 100
   isPlayingBgm: 1
-  soundList:
+  soundEffectList:
   - tag: player_die
     clip: {fileID: 8300000, guid: 932b3973f99dbcb428baff5de7f51225, type: 3}
-    volume: 0
+    volumePercent: 50
+  - tag: car_run
+    clip: {fileID: 8300000, guid: c7080a034b9f3e3439bfa786012fc356, type: 3}
+    volumePercent: 50
   - tag: 
     clip: {fileID: 0}
-    volume: 0
+    volumePercent: 0
   - tag: 
     clip: {fileID: 0}
-    volume: 0
+    volumePercent: 0
   - tag: 
     clip: {fileID: 0}
-    volume: 0
+    volumePercent: 0
   - tag: 
     clip: {fileID: 0}
-    volume: 0
+    volumePercent: 0
   - tag: 
     clip: {fileID: 0}
-    volume: 0
+    volumePercent: 0
   - tag: 
     clip: {fileID: 0}
-    volume: 0
+    volumePercent: 0
   - tag: 
     clip: {fileID: 0}
-    volume: 0
+    volumePercent: 0
   - tag: 
     clip: {fileID: 0}
-    volume: 0
-  - tag: 
-    clip: {fileID: 0}
-    volume: 0
-  - tag: 
-    clip: {fileID: 0}
-    volume: 0
-  - tag: 
-    clip: {fileID: 0}
-    volume: 0
-  - tag: 
-    clip: {fileID: 0}
-    volume: 0
-  - tag: 
-    clip: {fileID: 0}
-    volume: 0
-  - tag: 
-    clip: {fileID: 0}
-    volume: 0
+    volumePercent: 0
   AudioSoundPrefab: {fileID: 3498700834078232135, guid: 57a7704cacdf3f84692d7880c836746d, type: 3}
   maxQueueCount: 10
 --- !u!4 &361644997

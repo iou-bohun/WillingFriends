@@ -9,7 +9,7 @@ public struct SoundInfo
 {
     public string tag;
     public AudioClip clip;
-    public float volume;
+    [Range(0,100)]public float volumePercent;
 }
 public class SoundManager : MonoBehaviour
 {
@@ -21,15 +21,15 @@ public class SoundManager : MonoBehaviour
     private AudioSource backgroundAudioSource;//배경 음악 오디오 소스
 
     [SerializeField]
-    [Range(0, 100f)] private float bgmVolume; //브금 0 ~ 100 조절
-    private float maxBgmVolume = 0.5f; //최대 브금 크기
+    [Range(0, 100f)] private float bgmVolumePercent; //브금 0 ~ 100 조절
+    [Range(0.0f,1.0f)]private float maxBgmVolume = 0.5f; //최대 브금 크기
     [SerializeField]
     private bool isPlayingBgm = true;
 
     [Header("SoundInfo")]
-    public List<SoundInfo> soundList; //할당할 효과음 리스트
+    public List<SoundInfo> soundEffectList; //할당할 효과음 리스트
 
-    private Dictionary<string, AudioClip> audioDictionary = new Dictionary<string, AudioClip>();//해당하는 효과음들을 내부적으로 저장.
+    private Dictionary<string, SoundInfo> audioDictionary = new Dictionary<string, SoundInfo>();//해당하는 효과음들을 내부적으로 저장.
     private Queue<GameObject> audioQueue;//오디오 큐
 
     [SerializeField]
@@ -76,13 +76,18 @@ public class SoundManager : MonoBehaviour
     }
     public void InitializeDictionary()
     {
-        audioDictionary = new Dictionary<string, AudioClip>();
+        audioDictionary = new Dictionary<string, SoundInfo>();
 
-        foreach (var soundInfo in soundList)
+        foreach (var soundInfo in soundEffectList)
         {
             if (soundInfo.tag != "")
             {
-                audioDictionary[soundInfo.tag] = soundInfo.clip; //사운드 정보로 사전에 tag값에 clip을 저장.
+                SoundInfo newSoundInfo = new SoundInfo();
+                newSoundInfo.tag = soundInfo.tag;
+                newSoundInfo.volumePercent = soundInfo.volumePercent;
+                newSoundInfo.clip = soundInfo.clip;
+
+                audioDictionary[soundInfo.tag] = newSoundInfo; //사운드 정보로 사전에 tag값에 clip을 저장.
                 Debug.Log($"{soundInfo.tag} 저장 성공");
             }
         }
@@ -104,7 +109,8 @@ public class SoundManager : MonoBehaviour
         {
             GameObject obj = audioQueue.Dequeue();//큐에서 꺼낸다.
             AudioSourceObject objAudioSource = obj.GetComponent<AudioSourceObject>();
-            objAudioSource.clip = audioDictionary[tag];
+            objAudioSource.clip = audioDictionary[tag].clip;
+            objAudioSource.voulme = PercentToDegree(audioDictionary[tag].volumePercent);
             obj.transform.SetParent(parent);//부모한테서 소리가 나게 지정.
             obj.gameObject.SetActive(true);//
         }
@@ -112,13 +118,13 @@ public class SoundManager : MonoBehaviour
         {
             GameObject newObj = CreateSoundObject();//새로 생성한다.
             AudioSourceObject objAudioSource = newObj.GetComponent<AudioSourceObject>();
-            objAudioSource.clip = audioDictionary[tag];
+            objAudioSource.clip = audioDictionary[tag].clip;
+            objAudioSource.voulme = PercentToDegree(audioDictionary[tag].volumePercent);
             newObj.transform.SetParent(parent); //부모 지정.
             newObj.gameObject.SetActive(true);//활성화
-            objAudioSource.clip = audioDictionary[tag];
         }
     }
-    public void ReturnAudioSource(GameObject AudioObject)
+    public void ReturnAudioSource(GameObject AudioObject)//떠났던 사운드 오브젝트를 반환 받는다.
     {
         AudioObject.SetActive(false);
         AudioObject.transform.SetParent(Instance.transform);
@@ -133,12 +139,16 @@ public class SoundManager : MonoBehaviour
     public void SetBgmVolume() //브금 볼륨 bgmVolume 값에 따른 설정
     {
         if (isPlayingBgm)
-            backgroundAudioSource.volume = (bgmVolume * maxBgmVolume) / 100f;
+            backgroundAudioSource.volume = PercentToDegree(bgmVolumePercent) * maxBgmVolume;
         else
             backgroundAudioSource.volume = 0.0f;
     }
     public void MuteBgmButtun() //브금 껐다 켰다
     {
         isPlayingBgm = !isPlayingBgm;
+    }
+    public float PercentToDegree(float percent)
+    {
+        return percent / 100f;
     }
 }

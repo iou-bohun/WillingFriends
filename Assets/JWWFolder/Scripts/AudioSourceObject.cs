@@ -7,6 +7,7 @@ public class AudioSourceObject : MonoBehaviour
 {
     private AudioSource audioSource;
     public AudioClip clip;
+    public float voulme;
 
     private bool isActiveTrigger = false;
     // Start is called before the first frame update
@@ -28,6 +29,7 @@ public class AudioSourceObject : MonoBehaviour
         //audioSource = null;
         clip = null;
         isActiveTrigger = false;
+        voulme = 0;
     }
     // Update is called once per frame
     void Update()
@@ -35,6 +37,7 @@ public class AudioSourceObject : MonoBehaviour
         if (isActiveTrigger)
         {
             audioSource.clip = clip;
+            audioSource.volume = voulme;
             audioSource.Play();
             isActiveTrigger = false;
             
