@@ -438,7 +438,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2086253242578294105, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4394994648332785242, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
       propertyPath: m_RootOrder
@@ -510,6 +510,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
+      propertyPath: pools.Array.size
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
+      propertyPath: pools.Array.data[18].tag
+      value: FallingEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
+      propertyPath: pools.Array.data[18].size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
+      propertyPath: pools.Array.data[18].prefab
+      value: 
+      objectReference: {fileID: 8185083356607638951, guid: d014bc3f250891b4d9902347fe3be0b0, type: 3}
     - target: {fileID: 5175335165274956590, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
       propertyPath: m_Name
       value: '@ObjectPool'
