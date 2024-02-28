@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class Managers : SingletoneBase<Managers>
 {
-    public static Action InitEvent; //¸Å´ÏÀúµéÀÇ Ã¹ ÃÊ±âÈ­¸¦
-    public static Action ClearEvent; //¸Å´ÏÀúµéÀÇ ±â·Ï »èÁ¦ ÈÄ ÃÊ±âÈ­
+    public static Action InitEvent; //ë§¤ë‹ˆì €ë“¤ì˜ ì²« ì´ˆê¸°í™”ë¥¼
+    public static Action ClearEvent; //ë§¤ë‹ˆì €ë“¤ì˜ ê¸°ë¡ ì‚­ì œ í›„ ì´ˆê¸°í™”
     // Start is called before the first frame update
     protected override void Awake()
     {
         base.Awake();
         AddAllInitialize();
     }
-    public void AddAllInitialize() //°­Á¦ ±¸µ¶
+    public void AddAllInitialize() //ê°•ì œ êµ¬ë…
     {
-        Debug.Log("Managers ±¸µ¶");
+        Debug.Log("Managers êµ¬ë…");
         InitEvent += GameManager.Instance.Initialize;
         InitEvent += ObjectPoolManager.Instance.Initialize;
         InitEvent += SoundManager.Instance.Initialize;
