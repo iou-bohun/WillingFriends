@@ -29,10 +29,6 @@ public class ObjectPoolManager : MonoBehaviour
             _instance = this;
         }
         Debug.Log("ObjectPoolmanager awake");
-        //Initialize();
-        Managers.InitEvent += Initialize;
-        Managers.ClearEvent += Clear;
-        Initialize();
     }
     private void Start()
     {
