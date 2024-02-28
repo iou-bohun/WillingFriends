@@ -5,7 +5,7 @@ using UnityEngine;
 public class StartTrigger : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         Managers.Instance.CallInitEvent();
         //GameManager.Instance.Initialize();
