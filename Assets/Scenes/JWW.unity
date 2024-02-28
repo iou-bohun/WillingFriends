@@ -155,14 +155,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundClip: {fileID: 0}
   bgmVolumePercent: 100
+  maxBgmVolume: 1
   isPlayingBgm: 1
   soundEffectList:
   - tag: player_die
     clip: {fileID: 8300000, guid: 932b3973f99dbcb428baff5de7f51225, type: 3}
-    volumePercent: 50
+    volumePercent: 52.1
   - tag: car_run
     clip: {fileID: 8300000, guid: c7080a034b9f3e3439bfa786012fc356, type: 3}
-    volumePercent: 50
+    volumePercent: 22
   - tag: 
     clip: {fileID: 0}
     volumePercent: 0

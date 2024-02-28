@@ -22,7 +22,8 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField]
     [Range(0, 100f)] private float bgmVolumePercent; //브금 0 ~ 100 조절
-    [Range(0.0f,1.0f)]private float maxBgmVolume = 0.5f; //최대 브금 크기
+    [SerializeField]
+    [Range(0.0f,1.0f)]private float maxBgmVolume = 0.5f; //최대 브금 0 ~ 1크기
     [SerializeField]
     private bool isPlayingBgm = true;
 
