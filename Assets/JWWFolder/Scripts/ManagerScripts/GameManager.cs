@@ -6,7 +6,12 @@ using UnityEngine;
 public class GameManager : SingletoneBase<GameManager>
 {
     public Transform player; //플레이어 transform
-    public int gameSocre = 0;
+
+    private int coin = 0;
+    private int score = 0;
+    public int Coin { get { return coin; } set { coin = value; } }  
+    public int Score { get { return score; } set { score = value; } }   
+    
     protected override void Awake()
     {
         base.Awake();

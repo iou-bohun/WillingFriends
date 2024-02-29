@@ -44,8 +44,8 @@ public class Car : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out Enemy enemy) == true)
-            enemy.Die();
+        //if (collision.gameObject.TryGetComponent(out Enemy enemy) == true)
+        //    enemy.Die();
     }
 
     private void OnDisable()
