@@ -16,6 +16,8 @@ public class UIManager : SingletoneBase<GameManager>
     private GameObject hudUI;
     private Vector3 playerPosition;
 
+    [SerializeField] private GameObject[] UIPrefabs;
+
     private void Start()
     {
         playerPosition = GameManager.Instance.player.position;
@@ -34,13 +36,13 @@ public class UIManager : SingletoneBase<GameManager>
 
     private void Init_StartUI()
     {
-        GameObject go = ObjectPoolManager.Instance.GetObject("StartUI", _root);
+        GameObject go = Instantiate(UIPrefabs[0], _root);
         go.transform.position = playerPosition + Vector3.up * 3.2f;
     }
 
     private void Init_Hud()
     {
-        hudUI = ObjectPoolManager.Instance.GetObject("HUD", _root);
+        hudUI = Instantiate(UIPrefabs[1], _root);
         hudUI.transform.position = Vector3.zero;
         hudTexts = hudUI.GetComponentsInChildren<TextMeshProUGUI>();
         hudTexts[0].text = GameManager.Instance.Score.ToString();

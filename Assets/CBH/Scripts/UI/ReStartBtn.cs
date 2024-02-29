@@ -16,6 +16,6 @@ public class ReStartBtn : UIAnimations
     void Restart()
     {
         Debug.Log("restart");
-        //게임 재시작
+        //
     }
 }
