@@ -9,6 +9,8 @@ TagManager:
   - Torrent
   - Weapon
   - Falling
+  - Enemy
+  - Tree
   layers:
   - Default
   - TransparentFX
