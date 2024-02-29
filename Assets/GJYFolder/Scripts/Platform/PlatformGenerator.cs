@@ -9,7 +9,7 @@ public class PlatformGenerator : MonoBehaviour
 {
     public static PlatformGenerator Instance;
 
-    public Action<int> OnGeneratePlatform; // Player와 연동 시 사용.
+    public Action<int> OnPlayerMove; // Player와 연동 시 사용.
 
     private Queue<PlatformBase> _platformsQueue = new Queue<PlatformBase>();
     private PlatformBase _latestPlatform;
@@ -29,12 +29,12 @@ public class PlatformGenerator : MonoBehaviour
 
     public bool IsInit { get; private set; } = false;
 
-    private string[] _platformTypes = Enum.GetNames(typeof(PlatformType));    
+    private string[] _platformTypes = Enum.GetNames(typeof(PlatformType));
 
     private void Awake()
     {
         if (Instance == null)
-            Instance = this;        
+            Instance = this;
     }
 
     private void Start()
@@ -58,10 +58,8 @@ public class PlatformGenerator : MonoBehaviour
         if (testPlayer == null)
             return;
 
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            testPlayer.transform.position += Vector3.forward;
-
             if (_currentStep > _autoDisableIndex)
             {
                 DisableOldestPlatform();
@@ -70,13 +68,13 @@ public class PlatformGenerator : MonoBehaviour
 
             _currentStep++;
         }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            testPlayer.transform.position += Vector3.back;
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {            
             _currentStep--;
         }
     }
 
+    // 게임 시작 시 페어 LandPlatform 안전구역 만들기
     private void InitialPlatformGenerate()
     {
         string platformType = _platformTypes[0];
@@ -85,16 +83,16 @@ public class PlatformGenerator : MonoBehaviour
         {
             DeployPlatform(platformType);
             return;
-        }            
+        }
 
         if (_latestPlatform.Tag != platformType)
         {
             DeployPlatform(platformType);
             return;
-        }            
+        }
 
         if (_latestPlatform.TryGetComponent(out ContinuousPlatform continuous) == false)
-            Debug.Log($"ContinuousPlatform 이 없습니다. 잘못 설정한듯? : {platformType}");        
+            Debug.Log($"ContinuousPlatform 이 없습니다. 잘못 설정한듯? : {platformType}");
 
         DeployPlatform(continuous.NextPair);
     }
@@ -128,7 +126,7 @@ public class PlatformGenerator : MonoBehaviour
         {
             Debug.Log("PlatformBase 컴포넌트가 없습니다.");
             return;
-        }        
+        }
 
         _latestPlatform = platform;
         _platformsQueue.Enqueue(platform);
@@ -157,7 +155,7 @@ public class PlatformGenerator : MonoBehaviour
 
         // 그냥 다른거
         return randType;
-    }    
+    }
 
     // 제일 뒤의 플랫폼을 지우고 새 플랫폼 생성
     private void DisableOldestPlatform()

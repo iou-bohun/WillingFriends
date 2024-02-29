@@ -8,6 +8,7 @@ TagManager:
   - EndPoint
   - Torrent
   - Weapon
+  - Falling
   layers:
   - Default
   - TransparentFX
