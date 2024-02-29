@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8002544971370915222}
   - component: {fileID: 8723752362132112441}
+  - component: {fileID: 7610838355680714162}
   m_Layer: 0
   m_Name: '@MapGenerator'
   m_TagString: Untagged
@@ -44,9 +45,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445d16fe4ebc8404fa360690cec64117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _root: {fileID: 0}
   _startPositionZ: -5
   _initRandPlatformsCount: 13
   _initLandPlatformsCount: 7
   _autoDisableIndex: 2
   testPlayer: {fileID: 0}
+--- !u!114 &7610838355680714162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7048597253028091774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb69ad2f66f2ba4baab390902754e63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _initCreatePrefabs:
+  - {fileID: 4721439949440534608, guid: 05d216ad165e39942ac375e1aca99ac0, type: 3}
+  - {fileID: 4106969860149984137, guid: f65b16bdcf6a77b4f8a0c1b6a57606c1, type: 3}

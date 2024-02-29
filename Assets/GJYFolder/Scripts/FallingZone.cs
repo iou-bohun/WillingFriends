@@ -12,7 +12,7 @@ public class FallingZone : MonoBehaviour
     {        
         if (other.CompareTag("Player"))
         {            
-            SoundManager.Instance.PlayAudioClip(_soundTag);
+            SoundManager.Instance.PlayAudioClip(_soundTag, transform);
             GameObject effect = Instantiate(_waterEffect.gameObject);
             effect.transform.position = other.transform.position;
 

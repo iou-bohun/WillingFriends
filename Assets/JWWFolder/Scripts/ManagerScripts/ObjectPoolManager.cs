@@ -23,28 +23,14 @@ public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
     {
         base.Awake();
 
-        ClearDictionary();
+        Initialize();
     }
 
     private void Start()
     {
         
-    }
+    }    
     
-    private void ClearDictionary()
-    {        
-        Instance.poolDictionary.Clear();//사전 초기화        
-        while (Instance.transform.childCount > 0)
-        {            
-            GameObject child = Instance.transform.GetChild(0).gameObject;
-            child.transform.SetParent(null);
-            
-            Destroy(child);            
-        }
-
-        Initialize();//사전 재 생성
-    }
-
     public void Initialize() //사전 초기화
     {
         foreach (var pool in pools)//풀 리스트에서 꺼내옴
@@ -61,6 +47,7 @@ public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
             Instance.poolDictionary.Add(pool.tag, objectPool);
         }        
     }
+
     private GameObject CreateNewObject(string tag)// 태그에 해당하는 새로운 오브젝트 생성
     {
         if (!Instance.poolDictionary.ContainsKey(tag))//사전에 태그가 존재하는지 비교

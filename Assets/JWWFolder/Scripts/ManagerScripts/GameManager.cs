@@ -17,6 +17,7 @@ public class GameManager : SingletoneBase<GameManager>
     protected override void Awake()
     {
         base.Awake();
+        DontDestroyOnLoad(gameObject);
 
         player = GameObject.FindWithTag("Player").transform; // 태그로 플레이어 위치 가져옴.                
     }
@@ -26,8 +27,7 @@ public class GameManager : SingletoneBase<GameManager>
         // To Do - GameOver UI 띄우기
         OnPlayerDie?.Invoke();
 
-        // Temp - SceneLoad 즉발
-        Managers.Instance.CallClearEvent();
+        // Temp - SceneLoad 즉발        
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }

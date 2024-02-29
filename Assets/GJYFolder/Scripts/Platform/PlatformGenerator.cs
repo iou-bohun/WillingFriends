@@ -14,8 +14,7 @@ public class PlatformGenerator : MonoBehaviour
     private Queue<PlatformBase> _platformsQueue = new Queue<PlatformBase>();
     private PlatformBase _latestPlatform;
 
-    [Header("# Init")]
-    [SerializeField] Transform _root;
+    [Header("# Init")]    
     [Range(-10, 10)] public int _startPositionZ;
     [Range(0, 30)] public int _initRandPlatformsCount;
     [Range(0, 30)] public int _initLandPlatformsCount;
@@ -26,6 +25,17 @@ public class PlatformGenerator : MonoBehaviour
 
     private Vector3 _latestPlatformPos;
     private int _currentStep = 0;
+
+    public Transform Root
+    {
+        get
+        {
+            GameObject root = GameObject.Find("# Root_Platform");
+            if(root == null)
+                root = new GameObject("# Root_Platform");
+            return root.transform;
+        }
+    }
 
     public bool IsInit { get; private set; } = false;
 
@@ -117,7 +127,7 @@ public class PlatformGenerator : MonoBehaviour
 
     private void DeployPlatform(string platformType)
     {
-        GameObject go = ObjectPoolManager.Instance.GetObject(platformType, _root);
+        GameObject go = ObjectPoolManager.Instance.GetObject(platformType, Root);
         go.transform.position = _latestPlatformPos;
         _latestPlatformPos += Vector3.forward;
 

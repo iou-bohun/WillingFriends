@@ -19,9 +19,7 @@ public class SingletoneBase<T> : MonoBehaviour where T : MonoBehaviour
                 if (type == null)
                     type = new GameObject(typeName).AddComponent<T>();
 
-                _instance = type;
-
-                DontDestroyOnLoad(type.gameObject);
+                _instance = type;                
             }            
 
             return _instance;

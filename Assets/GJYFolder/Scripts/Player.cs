@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     public void CarCrash()
     {
         Debug.Log("크래쉬!");
-        SoundManager.Instance.PlayAudioClip(_soundTag);
+        SoundManager.Instance.PlayAudioClip(_soundTag, transform);
         _broken.SetActive(true);
 
         _broken.transform.position = transform.position;

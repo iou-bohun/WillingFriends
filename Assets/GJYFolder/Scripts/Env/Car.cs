@@ -39,7 +39,7 @@ public class Car : MonoBehaviour
         if (other.CompareTag("EndPoint"))
             _loadPlatform.DisableCar();
         if (other.CompareTag("Player"))
-            SoundManager.Instance.PlayAudioClip(_soundTag);
+            SoundManager.Instance.PlayAudioClip(_soundTag, transform);
     }
 
     //private void OnCollisionEnter(Collision collision)
