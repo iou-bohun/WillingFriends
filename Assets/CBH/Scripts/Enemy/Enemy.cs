@@ -37,8 +37,9 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-       //StartCoroutine(Move());
-       movedPosition = transform.position; 
+        //StartCoroutine(Move());
+        player = GameManager.Instance.player;
+        movedPosition = transform.position; 
     }
 
     private void Update()
@@ -206,9 +207,9 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
-        GameObject broken = ObjectPoolManager.GetObject(_broken.name);
+        GameObject broken = ObjectPoolManager.Instance.GetObject(_broken.name);
         broken.transform.position = transform.position;        
 
-        ObjectPoolManager.ReturnObject(gameObject.name, gameObject);
+        ObjectPoolManager.Instance.ReturnObject(gameObject.name, gameObject);
     }
 }

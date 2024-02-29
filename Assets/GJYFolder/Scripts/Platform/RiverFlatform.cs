@@ -46,7 +46,7 @@ public class RiverFlatform : Platform
                 stack = 0;
                 if (i == SPAWN_COUNT - 1 && _obstacleQueue.Count == 0)
                 {
-                    GameObject essentiallotus = ObjectPoolManager.GetObject(_riverSO.lotusPrefab.name, transform);
+                    GameObject essentiallotus = ObjectPoolManager.Instance.GetObject(_riverSO.lotusPrefab.name, transform);
                     Vector3 randPos = _startTransform.position + Vector3.right * Random.Range(1, LIMIT_STACK - 1);
                     essentiallotus.transform.position = randPos;
                     _obstacleQueue.Enqueue(essentiallotus);
@@ -54,7 +54,7 @@ public class RiverFlatform : Platform
                 continue;
             }            
 
-            GameObject lotus = ObjectPoolManager.GetObject(_riverSO.lotusPrefab.name, transform);
+            GameObject lotus = ObjectPoolManager.Instance.GetObject(_riverSO.lotusPrefab.name, transform);
             lotus.transform.position = spawnPos;
             spawnPos += Vector3.right;
             stack++;
@@ -72,7 +72,7 @@ public class RiverFlatform : Platform
 
         while (true)
         {
-            GameObject go = ObjectPoolManager.GetObject(_riverSO.spawnDefaultPrefabs[randLog].name, transform);
+            GameObject go = ObjectPoolManager.Instance.GetObject(_riverSO.spawnDefaultPrefabs[randLog].name, transform);
             go.transform.position = transform.position + (Vector3.left * flowDir * START_POS_ABS);            
 
             Log log = go.GetComponent<Log>();
@@ -91,7 +91,7 @@ public class RiverFlatform : Platform
             return;
 
         GameObject firstLog = _obstacleQueue.Dequeue();
-        ObjectPoolManager.ReturnObject(firstLog.name, firstLog);
+        ObjectPoolManager.Instance.ReturnObject(firstLog.name, firstLog);
     }
 
     public override void Clear()

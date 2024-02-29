@@ -55,7 +55,7 @@ public class LandPlatform : Platform
 
             int randTree = Random.Range(0, _landSO.spawnDefaultPrefabs.Length);
 
-            GameObject tree = ObjectPoolManager.GetObject(_landSO.spawnDefaultPrefabs[randTree].name, transform);
+            GameObject tree = ObjectPoolManager.Instance.GetObject(_landSO.spawnDefaultPrefabs[randTree].name, transform);
             tree.transform.position = treeSpawnPos;
             treeSpawnPos += Vector3.right;            
 
@@ -86,7 +86,7 @@ public class LandPlatform : Platform
             }
 
             // 나무 생성
-            GameObject tree = ObjectPoolManager.GetObject(_landSO.spawnDefaultPrefabs[randTree].name, transform);
+            GameObject tree = ObjectPoolManager.Instance.GetObject(_landSO.spawnDefaultPrefabs[randTree].name, transform);
             tree.transform.position = treeSpawnPos;
             treeSpawnPos += Vector3.right;
             stack++;
@@ -114,7 +114,7 @@ public class LandPlatform : Platform
             if (_monsters[i] != null)
                 continue;
 
-            GameObject monster = ObjectPoolManager.GetObject(_landSO.monsterPrefabs.name, transform);
+            GameObject monster = ObjectPoolManager.Instance.GetObject(_landSO.monsterPrefabs.name, transform);
             monster.transform.position = _monsterSpawnPos;
             _monsters[i] = monster.GetComponent<Enemy>();
             break;
@@ -130,7 +130,7 @@ public class LandPlatform : Platform
 
             // 몬스터가 활성화면 풀에 반납이 안 된 것으로 판단.
             if (_monsters[i].gameObject.activeSelf)
-                ObjectPoolManager.ReturnObject(_monsters[i].gameObject.name, _monsters[i].gameObject);
+                ObjectPoolManager.Instance.ReturnObject(_monsters[i].gameObject.name, _monsters[i].gameObject);
 
             // 풀에 반납이 되어도 배열에서 참조중이므로 다음 생성을 위해 null.
             _monsters[i] = null;

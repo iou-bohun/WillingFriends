@@ -9,6 +9,9 @@ public class TimeOverTrigger : MonoBehaviour
         //To Do - 게임오버
 
         if (other.CompareTag("Player"))
+        {
             Debug.Log("게임 오버!");
+            GameManager.Instance.GameOver();
+        }            
     }
 }

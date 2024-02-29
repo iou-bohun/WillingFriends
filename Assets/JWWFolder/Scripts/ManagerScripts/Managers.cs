@@ -28,4 +28,6 @@ public class Managers : SingletoneBase<Managers>
     {
         ClearEvent?.Invoke();
     }
+
+    public bool _reset = false;
 }

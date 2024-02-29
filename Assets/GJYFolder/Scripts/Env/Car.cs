@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
+    [SerializeField] string _soundTag;
+
     private Rigidbody _rigid;
     private LoadPlatform _loadPlatform;
     private Vector3 _dir;
     private float _speed;
 
-    private bool _isSetup = false;    
+    private bool _isSetup = false;
 
     private void Awake()
     {
@@ -36,12 +38,16 @@ public class Car : MonoBehaviour
     {
         if (other.CompareTag("EndPoint"))
             _loadPlatform.DisableCar();
+        if (other.CompareTag("Player"))
+            SoundManager.Instance.PlayAudioClip(_soundTag);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.TryGetComponent(out Enemy enemy) == true)
             enemy.Die();
+        if (collision.gameObject.TryGetComponent(out Player player) == true)
+            player.Die();
     }
 
     private void OnDisable()

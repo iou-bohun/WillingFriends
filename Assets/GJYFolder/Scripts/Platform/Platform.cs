@@ -13,6 +13,6 @@ public class Platform : MonoBehaviour
     public virtual void Clear()
     {
         while(_obstacleQueue.Count > 0)
-            ObjectPoolManager.ReturnObject(_obstacleQueue.Peek().name, _obstacleQueue.Dequeue());
+            ObjectPoolManager.Instance.ReturnObject(_obstacleQueue.Peek().name, _obstacleQueue.Dequeue());
     }
 }

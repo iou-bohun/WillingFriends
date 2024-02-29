@@ -5146,6 +5146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca160004d6fb57843ad508aa1b7d2aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _soundTag: player_diving
   _waterEffect: {fileID: 122015206596897668, guid: d014bc3f250891b4d9902347fe3be0b0, type: 3}
 --- !u!1 &5914052546607665684
 GameObject:

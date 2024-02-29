@@ -29,6 +29,6 @@ public class BrokenMonster : MonoBehaviour
 
     private void ReturnPool()
     {
-        ObjectPoolManager.ReturnObject(gameObject.name, gameObject);
+        ObjectPoolManager.Instance.ReturnObject(gameObject.name, gameObject);
     }
 }
