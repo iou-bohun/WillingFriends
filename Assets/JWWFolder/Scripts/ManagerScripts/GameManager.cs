@@ -16,6 +16,7 @@ public class GameManager : SingletoneBase<GameManager>
     {
         base.Awake();
         player = GameObject.FindWithTag("Player").transform; // 태그로 플레이어 위치 가져옴.
+        DontDestroyOnLoad(gameObject);
         Debug.Log("GameManager awake");
     }
     public void Start()
@@ -33,7 +34,7 @@ public class GameManager : SingletoneBase<GameManager>
         // To Do - GameOver UI 띄우기
 
         // Temp - SceneLoad 즉발
-        //Managers.Instance.Clear();        
+        Managers.Instance.CallClearEvent();     
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
         //Managers.Instance.AddAllInitialize();
     }

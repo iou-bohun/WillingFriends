@@ -41,7 +41,13 @@ public class SoundManager : SingletoneBase<SoundManager>
     protected override void Awake()
     {
         backgroundAudioSource = GetComponent<AudioSource>();
+        Managers.ClearEvent += Clear;
         Debug.Log("사운드 매니저 awake");
+    }
+    public override void Clear()
+    {
+        base.Clear();
+        _instance = null;
     }
     public void Initialize()
     {

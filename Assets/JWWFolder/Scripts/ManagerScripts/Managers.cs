@@ -12,6 +12,7 @@ public class Managers : SingletoneBase<Managers>
     {
         base.Awake();
         AddAllInitialize();
+        DontDestroyOnLoad(gameObject);
     }
     public void AddAllInitialize() //강제 구독
     {
