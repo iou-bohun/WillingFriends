@@ -41,6 +41,12 @@ public class AttackManager : MonoBehaviour
     {
         if (attackData.attackSO != null)
         {
+            if (attackData.count == 0)
+            {
+                attackData.attackSO = null;
+            }
+            attackData.count--;
+
             if (attackData.attackSO.weaponType == WeaponType.Knife) KnifeAttack();
             else if (attackData.attackSO.weaponType == WeaponType.Bomb) BombAttack();
             else if (attackData.attackSO.weaponType == WeaponType.Boomerang) BoomerangAttack();
@@ -49,11 +55,6 @@ public class AttackManager : MonoBehaviour
 
     public void KnifeAttack()
     {
-        attackData.count--;
-        if (attackData.count == 0)
-        {
-            attackData.attackSO = null;
-        }
         GameObject weapon = ObjectPoolManager.GetObject("Knife", weaponRoot);
         weapon.transform.position = transform.position + new Vector3(0, 0, 0.5f);
         Rigidbody rb = weapon.GetComponent<Rigidbody>();
@@ -61,7 +62,10 @@ public class AttackManager : MonoBehaviour
     }
     public void BombAttack()
     {
-
+        GameObject weapon = ObjectPoolManager.GetObject("Bomb", weaponRoot);
+        weapon.transform.position = transform.position + new Vector3(0, 0.5f, 0.5f);
+        Rigidbody rb = weapon.GetComponent<Rigidbody>();
+        rb.AddForce(new Vector3(0f, 1f, 1f) * 5f, ForceMode.Impulse);
     }
     public void BoomerangAttack()
     {

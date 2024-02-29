@@ -19,7 +19,7 @@ public class Knife : MonoBehaviour
     {
         if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Tree")))
         {
-            Invoke("DestroyWP", 1f);
+            Invoke("DestroyKnife", 1f);
         }
         else if (collision.gameObject.tag == "Enemy")
         {
@@ -31,7 +31,7 @@ public class Knife : MonoBehaviour
         }
     }
 
-    public void DestroyWP()
+    public void DestroyKnife()
     {
         ObjectPoolManager.ReturnObject("Knife", gameObject);
     }
