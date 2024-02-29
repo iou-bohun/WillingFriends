@@ -31,13 +31,13 @@ public class UIManager : SingletoneBase<GameManager>
 
     private void Init_StartUI()
     {
-        GameObject go = ObjectPoolManager.GetObject("StartUI", _root);
+        GameObject go = ObjectPoolManager.Instance.GetObject("StartUI", _root);
         go.transform.position = GameManager.Instance.player.position + Vector3.up * 3.2f;
     }
 
     private void Init_Hud()
     {
-        hudUI = ObjectPoolManager.GetObject("HUD", _root);
+        hudUI = ObjectPoolManager.Instance.GetObject("HUD", _root);
         hudUI.transform.position = Vector3.zero;
         hudTexts = hudUI.GetComponentsInChildren<TextMeshProUGUI>();
         hudTexts[0].text = GameManager.Instance.Score.ToString();

@@ -90,7 +90,7 @@ public class SoundManager : SingletoneBase<SoundManager>
     void Start()
     {
         Debug.Log("오디오 start");
-        backgroundAudioSource.clip = backgroundClip;
+        //backgroundAudioSource.clip = backgroundClip;
     }
     public void PlayAudioClip(string tag, Transform parent = null)
     {
@@ -128,7 +128,7 @@ public class SoundManager : SingletoneBase<SoundManager>
     // Update is called once per frame
     void Update()
     {
-        SetBgmVolume();
+        //SetBgmVolume();
     }
 
     public void SetBgmVolume() //브금 볼륨 bgmVolume 값에 따른 설정
