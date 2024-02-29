@@ -19,7 +19,7 @@ public class PlatformGenerator : MonoBehaviour
     [Range(-10, 10)] public int _startPositionZ;
     [Range(0, 30)] public int _initRandPlatformsCount;
     [Range(0, 30)] public int _initLandPlatformsCount;
-    public int _autoDisableIndex = 20;
+    public int _autoDisableIndex = 20;    
 
     [Header("# Test")]
     public GameObject testPlayer;
@@ -38,8 +38,7 @@ public class PlatformGenerator : MonoBehaviour
     }
 
     private void Start()
-    {
-        Managers.Instance.CallInitEvent();
+    {        
         _latestPlatformPos = Vector3.forward * _startPositionZ;
 
         for (int i = 0; i < _initLandPlatformsCount; i++)

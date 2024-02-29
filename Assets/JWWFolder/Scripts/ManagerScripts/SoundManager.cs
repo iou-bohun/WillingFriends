@@ -40,15 +40,12 @@ public class SoundManager : SingletoneBase<SoundManager>
     // Start is called before the first frame update
     protected override void Awake()
     {
+        base.Awake();
+
         backgroundAudioSource = GetComponent<AudioSource>();
-        Managers.ClearEvent += Clear;
-        Debug.Log("사운드 매니저 awake");
+        Initialize();
     }
-    public override void Clear()
-    {
-        base.Clear();
-        _instance = null;
-    }
+
     public void Initialize()
     {
         InitializeQueue();

@@ -47,7 +47,7 @@ public class Car : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out Enemy enemy) == true)
             enemy.Die();
         if (collision.gameObject.TryGetComponent(out Player player) == true)
-            player.Die();
+            player.CarCrash();
     }
 
     private void OnDisable()

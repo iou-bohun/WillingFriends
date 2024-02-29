@@ -15,13 +15,14 @@ public class SingletoneBase<T> : MonoBehaviour where T : MonoBehaviour
             {
                 string typeName = typeof(T).FullName;
 
-                GameObject go = GameObject.Find(typeName);
-                if(go == null)
-                    go = new GameObject(typeName);
-                _instance = go.GetOrAddComponent<T>();
+                T type = FindObjectOfType<T>();
+                if (type == null)
+                    type = new GameObject(typeName).AddComponent<T>();
 
-                //DontDestroyOnLoad(go);
-            }
+                _instance = type;
+
+                DontDestroyOnLoad(type.gameObject);
+            }            
 
             return _instance;
         }
@@ -29,14 +30,16 @@ public class SingletoneBase<T> : MonoBehaviour where T : MonoBehaviour
 
     protected virtual void Awake()
     {
-        Init();
+        if (Instance != this)
+            Destroy(gameObject);
     }
+
     public virtual void Clear()
     {
         
     }
     public virtual void Init()
     {
-        Debug.Log(transform.name + " is Init");
+        
     }
 }

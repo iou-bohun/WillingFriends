@@ -17,33 +17,29 @@ public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
     public List<Pooling> pools;//인스펙터 창에서 설정할 풀 정보
     private Pooling poolingRef = new Pooling();//현재 참조하는 풀링
 
-    private Dictionary<string, Queue<GameObject>> poolDictionary; 
+    private Dictionary<string, Queue<GameObject>> poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
     protected override void Awake()
     {
-        Debug.Log("ObjectPoolmanager awake");
-        //Initialize(); 
-        Managers.ClearEvent += Clear;
+        base.Awake();
+
+        ClearDictionary();
     }
+
     private void Start()
     {
-        //Managers.ClearEvent += ClearDictionary;
+        
     }
-    public override void Clear()
-    {
-        base.Clear();
-        _instance = null;
-    }
+    
     private void ClearDictionary()
-    {
-        poolDictionary.Clear();//사전 초기화
-
-        int num = transform.childCount;//자식의 수
-        for(int i = 0; i < num; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(true);
-            Destroy(transform.GetChild(i).gameObject);
-            Debug.Log("제거 완료");
+    {        
+        Instance.poolDictionary.Clear();//사전 초기화        
+        while (Instance.transform.childCount > 0)
+        {            
+            GameObject child = Instance.transform.GetChild(0).gameObject;
+            child.transform.SetParent(null);
+            
+            Destroy(child);            
         }
 
         Initialize();//사전 재 생성
@@ -51,7 +47,6 @@ public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
 
     public void Initialize() //사전 초기화
     {
-        poolDictionary = new Dictionary<string, Queue<GameObject>>();
         foreach (var pool in pools)//풀 리스트에서 꺼내옴
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
@@ -63,13 +58,12 @@ public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
                 obj.transform.SetParent(Instance.transform);
                 objectPool.Enqueue(obj);
             }
-            poolDictionary.Add(pool.tag, objectPool);
-        }
-        Debug.Log("ObjectPoolManager 생성");
+            Instance.poolDictionary.Add(pool.tag, objectPool);
+        }        
     }
     private GameObject CreateNewObject(string tag)// 태그에 해당하는 새로운 오브젝트 생성
     {
-        if (!poolDictionary.ContainsKey(tag))//사전에 태그가 존재하는지 비교
+        if (!Instance.poolDictionary.ContainsKey(tag))//사전에 태그가 존재하는지 비교
             return null;
 
         foreach (var pool in pools)//풀 리스트에서
@@ -80,7 +74,7 @@ public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
                 break;
             }
         }
-        GameObject obj = Instantiate(poolingRef.prefab, transform);//객체를 생성
+        GameObject obj = Instantiate(Instance.poolingRef.prefab, transform);//객체를 생성
         obj.name = tag;
         obj.gameObject.SetActive(false);
 
@@ -109,8 +103,8 @@ public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
 
     public void ReturnObject(string tag ,GameObject gameObject)//태그에 해당하는 게임 오브젝트를 사전에 넣는다.
     {
-        gameObject.gameObject.SetActive(false); //비활성화
-        gameObject.transform.SetParent(Instance.transform); //오브젝트 매니저 하위로 넣는다.
+        Instance.gameObject.gameObject.SetActive(false); //비활성화
+        Instance.gameObject.transform.SetParent(Instance.transform); //오브젝트 매니저 하위로 넣는다.
         Instance.poolDictionary[tag].Enqueue(gameObject); //큐에 집어 넣는다.
     }
 
