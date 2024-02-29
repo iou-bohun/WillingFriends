@@ -38,11 +38,13 @@ public class CharacterMovement : MonoBehaviour
 
     private void Move(Vector2 direction)
     {
-        _movementDirection = direction;
+        _movementDirection = direction;        
     }
 
     IEnumerator MoveCoroutine(Vector2 direction)
     {
+        GameManager.Instance.OnPlayerMove((int)direction.y);
+
         Vector3 startPosition = transform.position;
         Vector3 endPosition = startPosition + new Vector3(direction.x, 0.01f, direction.y) * moveDistance;
 

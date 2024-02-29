@@ -85,14 +85,12 @@ public class SoundManager : SingletoneBase<SoundManager>
                 newSoundInfo.volumePercent = soundInfo.volumePercent;
                 newSoundInfo.clip = soundInfo.clip;
 
-                audioDictionary[soundInfo.tag] = newSoundInfo; //사운드 정보로 사전에 tag값에 clip을 저장.
-                Debug.Log($"{soundInfo.tag} 저장 성공");
+                audioDictionary[soundInfo.tag] = newSoundInfo; //사운드 정보로 사전에 tag값에 clip을 저장.                
             }
         }
     }
     void Start()
-    {
-        Debug.Log("오디오 start");
+    {        
         //backgroundAudioSource.clip = backgroundClip;
     }
     public void PlayAudioClip(string tag, Transform parent = null)

@@ -18,11 +18,12 @@ public class CameraController : MonoBehaviour
     private bool _playerDie = false;
 
     private readonly float CORRECTION_OFFSET = 1f;
+    private readonly float FOLLOW_OFFSET = 2f;
 
     private void Start()
     {
         GameManager.Instance.OnPlayerDie += () => _playerDie = true;
-        _followDistance = _target.position.z - transform.position.z;
+        _followDistance = _target.position.z - transform.position.z + FOLLOW_OFFSET;
     }
 
     private void FixedUpdate()
@@ -50,7 +51,10 @@ public class CameraController : MonoBehaviour
         if (transform.position.x != _target.position.x)
         {
             // To Do - X 좌표도 제한걸기
-            Vector3 destPos = new Vector3(_target.position.x + _offsetX, transform.position.y, transform.position.z);
+            float minX = -_limitX + _offsetX;
+            float maxX = _limitX + _offsetX;
+
+            Vector3 destPos = new Vector3(Mathf.Clamp(_target.position.x + _offsetX, minX, maxX) , transform.position.y, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, destPos, Time.fixedDeltaTime);
         }
     }

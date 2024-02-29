@@ -15,13 +15,10 @@ public class PlatformGenerator : MonoBehaviour
     private PlatformBase _latestPlatform;
 
     [Header("# Init")]    
-    [Range(-10, 10)] public int _startPositionZ;
-    [Range(0, 30)] public int _initRandPlatformsCount;
-    [Range(0, 30)] public int _initLandPlatformsCount;
-    public int _autoDisableIndex = 20;    
-
-    [Header("# Test")]
-    public GameObject testPlayer;
+    [Range(-10, 10)][SerializeField] int _startPositionZ;
+    [Range(0, 30)][SerializeField] int _initRandPlatformsCount;
+    [Range(0, 30)][SerializeField] int _initLandPlatformsCount;
+    [SerializeField] int _autoDisableIndex = 20;
 
     private Vector3 _latestPlatformPos;
     private int _currentStep = 0;
@@ -48,7 +45,9 @@ public class PlatformGenerator : MonoBehaviour
     }
 
     private void Start()
-    {        
+    {
+        GameManager.Instance.OnPlayerMove += CalcStepAndCheckDeployPlatform;
+
         _latestPlatformPos = Vector3.forward * _startPositionZ;
 
         for (int i = 0; i < _initLandPlatformsCount; i++)
@@ -61,27 +60,17 @@ public class PlatformGenerator : MonoBehaviour
                 GeneratePlatform();
     }
 
-    // Test
-    private void Update()
+    private void CalcStepAndCheckDeployPlatform(int value)
     {
-        if (testPlayer == null)
-            return;
+        _currentStep += value;
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (_currentStep > _autoDisableIndex)
         {
-            if (_currentStep > _autoDisableIndex)
-            {
-                DisableOldestPlatform();
-                return;
-            }
-
-            _currentStep++;
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {            
-            _currentStep--;
-        }
+            _autoDisableIndex++;
+            DisableOldestPlatform();
+        }            
     }
+
 
     // 게임 시작 시 페어 LandPlatform 안전구역 만들기
     private void InitialPlatformGenerate()

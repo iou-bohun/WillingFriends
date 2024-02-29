@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1661888072330582067}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: EnemyStart
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4264264200640580425}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: StartPosition
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 1644765094767504953}
   - component: {fileID: 6627184744574606850}
   - component: {fileID: 2684553288893296702}
-  m_Layer: 14
+  m_Layer: 7
   m_Name: Mesh
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 8761080354159966469}
   - component: {fileID: 7011130310129977875}
   - component: {fileID: -4092796142744633297}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Land_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3586531569587354751}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: EnemyEnd
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}

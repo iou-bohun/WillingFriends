@@ -107,6 +107,9 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 256
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 128
   detectRange: 3
   player: {fileID: 0}
 --- !u!1001 &5525403376039744764

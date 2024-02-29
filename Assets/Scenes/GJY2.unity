@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1442308017}
-  _moveSpeed: 0.25
+  _moveSpeed: 0.3
   _offsetX: 2
   _limitX: 1
   _shakeMagnitude: 0.5
@@ -499,6 +499,10 @@ PrefabInstance:
       propertyPath: weaponRoot
       value: 
       objectReference: {fileID: 1151622978}
+    - target: {fileID: 9103564606173651241, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 3252224991405807402, guid: 943a9b6cbd7b9754881762f248e04b2d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

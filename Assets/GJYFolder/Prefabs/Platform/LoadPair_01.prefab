@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 1336726383766784306}
   - component: {fileID: 7883306085359358352}
   - component: {fileID: 8109012416489351874}
-  m_Layer: 14
+  m_Layer: 7
   m_Name: Mesh
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 5722085455693508110}
   - component: {fileID: -1091316173366726592}
   - component: {fileID: 3604149716630831060}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: LoadPair_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
