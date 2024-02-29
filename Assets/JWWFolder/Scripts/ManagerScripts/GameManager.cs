@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameManager : SingletoneBase<GameManager>
 {
     public Transform player; //플레이어 transform
+    public int gameSocre = 0;
     protected override void Awake()
     {
         base.Awake();
