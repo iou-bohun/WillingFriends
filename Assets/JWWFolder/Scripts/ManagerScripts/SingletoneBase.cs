@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SingletoneBase<T> : MonoBehaviour where T : MonoBehaviour
@@ -13,8 +14,11 @@ public class SingletoneBase<T> : MonoBehaviour where T : MonoBehaviour
             if (_instance == null)//객체가 없을 때만 생성
             {
                 string typeName = typeof(T).FullName;
-                GameObject go = new GameObject(typeName);
-                _instance = go.AddComponent<T>();
+
+                GameObject go = GameObject.Find(typeName);
+                if(go == null)
+                    go = new GameObject(typeName);
+                _instance = go.GetOrAddComponent<T>();
 
                 DontDestroyOnLoad(go);
             }

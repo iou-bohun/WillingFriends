@@ -22,7 +22,7 @@ public class FallingZone : MonoBehaviour
     private IEnumerator Co_ReturnParticle(GameObject effect)
     {
         yield return new WaitForSeconds(2f);
-
-        ObjectPoolManager.ReturnObject(effect.name, effect);
+        
+        GameManager.Instance.GameOver();
     }
 }

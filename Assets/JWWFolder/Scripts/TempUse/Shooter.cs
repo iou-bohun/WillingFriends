@@ -20,7 +20,7 @@ public class Shooter : MonoBehaviour
             if (Physics.Raycast(mainCam.ScreenPointToRay(Input.mousePosition), out hitResult))
             {
                 Vector3 direction = new Vector3(hitResult.point.x, transform.position.y, hitResult.point.z) - transform.position;
-                TempMonster tempmonster = ObjectPoolManager.GetObject("TempMonster").GetComponent<TempMonster>();
+                TempMonster tempmonster = ObjectPoolManager.Instance.GetObject("TempMonster").GetComponent<TempMonster>();
                 tempmonster.transform.position = transform.position + direction.normalized;
                 tempmonster.MoveForward(direction.normalized);
             }

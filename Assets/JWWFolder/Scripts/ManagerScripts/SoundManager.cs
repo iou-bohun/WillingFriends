@@ -11,10 +11,8 @@ public struct SoundInfo
     public AudioClip clip;
     [Range(0,100)]public float volumePercent;
 }
-public class SoundManager : MonoBehaviour
+public class SoundManager : SingletoneBase<SoundManager>
 {
-    private static SoundManager _instance;
-
     [Header("Background")]
     [SerializeField]
     private AudioClip backgroundClip;//배경 음악
@@ -37,15 +35,11 @@ public class SoundManager : MonoBehaviour
     private GameObject AudioSoundPrefab;
     [SerializeField]
     private float maxQueueCount = 10f;
+
     
-
-    public static SoundManager Instance {  get { return _instance; } }
     // Start is called before the first frame update
-    private void Awake()
+    protected override void Awake()
     {
-        if(_instance == null)
-            _instance = this;
-
         backgroundAudioSource = GetComponent<AudioSource>();
         Debug.Log("사운드 매니저 awake");
     }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
+    [SerializeField] string _soundTag;
+
     private Rigidbody _rigid;
     private LoadPlatform _loadPlatform;
     private Vector3 _dir;
@@ -36,6 +38,8 @@ public class Car : MonoBehaviour
     {
         if (other.CompareTag("EndPoint"))
             _loadPlatform.DisableCar();
+        if (other.CompareTag("Player"))
+            SoundManager.Instance.PlayAudioClip(_soundTag);
     }
 
     private void OnCollisionEnter(Collision collision)
