@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,9 +14,11 @@ public class UIManager : SingletoneBase<GameManager>
     [SerializeField] Transform _root;
     private TextMeshProUGUI[] hudTexts;
     private GameObject hudUI;
+    private Vector3 playerPosition;
 
     private void Start()
     {
+        playerPosition = GameManager.Instance.player.position;
         Init_StartUI();  
         Init_Hud();
 
@@ -32,7 +35,7 @@ public class UIManager : SingletoneBase<GameManager>
     private void Init_StartUI()
     {
         GameObject go = ObjectPoolManager.Instance.GetObject("StartUI", _root);
-        go.transform.position = GameManager.Instance.player.position + Vector3.up * 3.2f;
+        go.transform.position = playerPosition + Vector3.up * 3.2f;
     }
 
     private void Init_Hud()
