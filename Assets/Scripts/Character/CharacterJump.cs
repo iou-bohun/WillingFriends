@@ -22,8 +22,17 @@ public class CharacterJump : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.transform.tag == "Ground")
+        {
+            JumpUp();
+        }
+    }
+
     public void JumpUp()
     {
+        _rigidbody.velocity = Vector3.zero;
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         _anim.SetBool("Jump", false);
     }
