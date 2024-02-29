@@ -62,7 +62,7 @@ public class AttackManager : MonoBehaviour
     }
     public void BombAttack()
     {
-        GameObject weapon = ObjectPoolManager.GetObject("Bomb", weaponRoot);
+        GameObject weapon = ObjectPoolManager.Instance.GetObject("Bomb", weaponRoot);
         weapon.transform.position = transform.position + new Vector3(0, 0.5f, 0.5f);
         Rigidbody rb = weapon.GetComponent<Rigidbody>();
         rb.AddForce(new Vector3(0f, 1f, 1f) * 5f, ForceMode.Impulse);

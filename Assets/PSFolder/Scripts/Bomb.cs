@@ -18,10 +18,10 @@ public class Bomb : MonoBehaviour
             for (int i = 0; i < cols.Length; i++)
             {
                 if (cols[i].gameObject.tag == "Enemy" || cols[i].gameObject.tag == "Tree")
-                    ObjectPoolManager.ReturnObject(cols[i].gameObject.tag, cols[i].gameObject);
+                    ObjectPoolManager.Instance.ReturnObject(cols[i].gameObject.tag, cols[i].gameObject);
             }
 
-            ObjectPoolManager.ReturnObject("Bomb", gameObject);
+            ObjectPoolManager.Instance.ReturnObject("Bomb", gameObject);
         }
     }
 }
