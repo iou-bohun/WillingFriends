@@ -11,7 +11,7 @@ public class Car : MonoBehaviour
     private Vector3 _dir;
     private float _speed;
 
-    private bool _isSetup = false;    
+    private bool _isSetup = false;
 
     private void Awake()
     {
@@ -46,6 +46,8 @@ public class Car : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Enemy enemy) == true)
             enemy.Die();
+        if (collision.gameObject.TryGetComponent(out Player player) == true)
+            player.Die();
     }
 
     private void OnDisable()
