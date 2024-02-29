@@ -23,11 +23,16 @@ public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
     {
         Debug.Log("ObjectPoolmanager awake");
         //Initialize(); 
-        Managers.ClearEvent += ClearDictionary;
+        Managers.ClearEvent += Clear;
     }
     private void Start()
     {
         //Managers.ClearEvent += ClearDictionary;
+    }
+    public override void Clear()
+    {
+        base.Clear();
+        _instance = null;
     }
     private void ClearDictionary()
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class SingletoneBase<T> : MonoBehaviour where T : MonoBehaviour
 {
     // 프로퍼티
-    private static T _instance;
+    protected static T _instance;
 
     public static T Instance
     {
@@ -20,7 +20,7 @@ public class SingletoneBase<T> : MonoBehaviour where T : MonoBehaviour
                     go = new GameObject(typeName);
                 _instance = go.GetOrAddComponent<T>();
 
-                DontDestroyOnLoad(go);
+                //DontDestroyOnLoad(go);
             }
 
             return _instance;
@@ -31,7 +31,10 @@ public class SingletoneBase<T> : MonoBehaviour where T : MonoBehaviour
     {
         Init();
     }
-
+    public virtual void Clear()
+    {
+        
+    }
     public virtual void Init()
     {
         Debug.Log(transform.name + " is Init");
