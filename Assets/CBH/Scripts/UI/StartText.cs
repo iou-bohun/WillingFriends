@@ -2,22 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
-public class StartText : MonoBehaviour
+public class StartText : UIAnimations
 {
     public void OnMove()
     {
-
-        StartCoroutine(Move());
+        StartCoroutine(SlideRightC());
     }
 
-    IEnumerator Move()
-    {
-        yield return new WaitForSecondsRealtime(0.5f);
-        while (true)
-        {
-            transform.position += Vector3.right*0.5f;
-            yield return null;
-        }
-    }
 }
