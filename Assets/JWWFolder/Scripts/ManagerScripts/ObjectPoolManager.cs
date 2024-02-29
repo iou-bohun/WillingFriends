@@ -12,29 +12,22 @@ public struct Pooling
     public GameObject prefab;
     public int size;
 }
-public class ObjectPoolManager : MonoBehaviour
+public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
 {
-    private static ObjectPoolManager _instance;
-    
-    public static ObjectPoolManager Instance { get { return _instance; } }
-
     public List<Pooling> pools;//인스펙터 창에서 설정할 풀 정보
     private Pooling poolingRef = new Pooling();//현재 참조하는 풀링
 
     private Dictionary<string, Queue<GameObject>> poolDictionary; 
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-        }
         Debug.Log("ObjectPoolmanager awake");
         //Initialize(); 
+        Managers.ClearEvent += ClearDictionary;
     }
     private void Start()
     {
-        Managers.ClearEvent += ClearDictionary;
+        //Managers.ClearEvent += ClearDictionary;
     }
     private void ClearDictionary()
     {
@@ -88,7 +81,7 @@ public class ObjectPoolManager : MonoBehaviour
 
         return obj;
     }
-    public static GameObject GetObject(string tag, Transform parent = null) //태그에 해당하는 객체를 반환한다.
+    public GameObject GetObject(string tag, Transform parent = null) //태그에 해당하는 객체를 반환한다.
     {
         if (!Instance.poolDictionary.ContainsKey(tag))//태그가 존재하는지 비교
             return null;
@@ -109,7 +102,7 @@ public class ObjectPoolManager : MonoBehaviour
         }
     }
 
-    public static void ReturnObject(string tag ,GameObject gameObject)//태그에 해당하는 게임 오브젝트를 사전에 넣는다.
+    public void ReturnObject(string tag ,GameObject gameObject)//태그에 해당하는 게임 오브젝트를 사전에 넣는다.
     {
         gameObject.gameObject.SetActive(false); //비활성화
         gameObject.transform.SetParent(Instance.transform); //오브젝트 매니저 하위로 넣는다.
@@ -117,7 +110,7 @@ public class ObjectPoolManager : MonoBehaviour
     }
 
     // 잠시 꺼내서 쓰는 용도
-    public static GameObject PeekObject(string tag)
+    public GameObject PeekObject(string tag)
     {
         if (!Instance.poolDictionary.ContainsKey(tag))//태그 비교
             return null;

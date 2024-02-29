@@ -23,16 +23,16 @@ public class Knife : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Enemy")
         {
-            ObjectPoolManager.ReturnObject("Knife", gameObject);
+            ObjectPoolManager.Instance.ReturnObject("Knife", gameObject);
         }
         else if (collision.gameObject.tag == "Weapon")
         {
-            ObjectPoolManager.ReturnObject("Knife", gameObject);
+            ObjectPoolManager.Instance.ReturnObject("Knife", gameObject);
         }
     }
 
     public void DestroyWP()
     {
-        ObjectPoolManager.ReturnObject("Knife", gameObject);
+        ObjectPoolManager.Instance.ReturnObject("Knife", gameObject);
     }
 }

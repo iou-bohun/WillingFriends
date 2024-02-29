@@ -54,7 +54,7 @@ public class AttackManager : MonoBehaviour
         {
             attackData.attackSO = null;
         }
-        GameObject weapon = ObjectPoolManager.GetObject("Knife", weaponRoot);
+        GameObject weapon = ObjectPoolManager.Instance.GetObject("Knife", weaponRoot);
         weapon.transform.position = transform.position + new Vector3(0, 0, 0.5f);
         Rigidbody rb = weapon.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * 5f, ForceMode.Impulse);

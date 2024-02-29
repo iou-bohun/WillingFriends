@@ -446,7 +446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4394994648332785242, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4394994648332785242, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -494,7 +494,7 @@ PrefabInstance:
       objectReference: {fileID: 1151622978}
     - target: {fileID: 7212919663145095976, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7829390348724692705, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
       propertyPath: m_RootOrder
@@ -583,7 +583,7 @@ PrefabInstance:
       objectReference: {fileID: 331382958441757979, guid: aa2b1cea7415ace48bf00cce629d547e, type: 3}
     - target: {fileID: 5175335165274956590, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
       propertyPath: m_Name
-      value: '@ObjectPool'
+      value: ObjectPoolManager
       objectReference: {fileID: 0}
     - target: {fileID: 8377903905477263134, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
       propertyPath: m_RootOrder
@@ -644,7 +644,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4106969860149984137, guid: f65b16bdcf6a77b4f8a0c1b6a57606c1, type: 3}
       propertyPath: m_Name
-      value: '@SoundManager'
+      value: SoundManager
       objectReference: {fileID: 0}
     - target: {fileID: 6820216953115143050, guid: f65b16bdcf6a77b4f8a0c1b6a57606c1, type: 3}
       propertyPath: m_RootOrder

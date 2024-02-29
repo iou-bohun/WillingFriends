@@ -23,7 +23,8 @@ public class CharacterJump : MonoBehaviour
     }
 
     public void JumpUp()
-    {
+    {        
+        SoundManager.Instance.PlayAudioClip("player_jump");
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         _anim.SetBool("Jump", false);
     }

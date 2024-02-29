@@ -206,9 +206,9 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
-        GameObject broken = ObjectPoolManager.GetObject(_broken.name);
+        GameObject broken = ObjectPoolManager.Instance.GetObject(_broken.name);
         broken.transform.position = transform.position;        
 
-        ObjectPoolManager.ReturnObject(gameObject.name, gameObject);
+        ObjectPoolManager.Instance.ReturnObject(gameObject.name, gameObject);
     }
 }
