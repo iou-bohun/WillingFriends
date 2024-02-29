@@ -13,7 +13,6 @@ public class UIManager : SingletoneBase<GameManager>
 
     [SerializeField] Transform _root;
     private TextMeshProUGUI[] hudTexts;
-    private GameObject hudUI;
     private Vector3 playerPosition;
 
     [SerializeField] private GameObject[] UIPrefabs;
@@ -42,7 +41,7 @@ public class UIManager : SingletoneBase<GameManager>
 
     private void Init_Hud()
     {
-        hudUI = Instantiate(UIPrefabs[1], _root);
+        GameObject hudUI = Instantiate(UIPrefabs[1], _root);
         hudUI.transform.position = Vector3.zero;
         hudTexts = hudUI.GetComponentsInChildren<TextMeshProUGUI>();
         hudTexts[0].text = GameManager.Instance.Score.ToString();

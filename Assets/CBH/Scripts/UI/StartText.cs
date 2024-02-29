@@ -9,6 +9,7 @@ public class StartText : UIAnimations
     public void OnMove()
     {
         StartCoroutine(SlideRightC());
+        Destroy(gameObject, 3f);
     }
 
 }
