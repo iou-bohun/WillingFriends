@@ -94,7 +94,12 @@ public class Enemy : MonoBehaviour
                 StartCoroutine(PushEnemy());
                 Debug.Log("EnemyPush");
             }
-        }        
+        }
+        if (collision.gameObject.CompareTag("Tree"))
+        {
+            //적 죽음
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionExit(Collision collision)

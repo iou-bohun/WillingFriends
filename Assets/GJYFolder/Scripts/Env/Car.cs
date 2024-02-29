@@ -42,13 +42,13 @@ public class Car : MonoBehaviour
             SoundManager.Instance.PlayAudioClip(_soundTag);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.TryGetComponent(out Enemy enemy) == true)
-            enemy.Die();
-        if (collision.gameObject.TryGetComponent(out Player player) == true)
-            player.CarCrash();
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.TryGetComponent(out Enemy enemy) == true)
+    //        enemy.Die();
+    //    if (collision.gameObject.TryGetComponent(out Player player) == true)
+    //        player.Die();
+    //}
 
     private void OnDisable()
     {
