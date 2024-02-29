@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6973624362871186131
 MonoBehaviour:
@@ -50,38 +50,41 @@ MonoBehaviour:
   maxBgmVolume: 0.5
   isPlayingBgm: 1
   soundEffectList:
+  - tag: player_jump
+    clip: {fileID: 8300000, guid: 85269f574a3e89443ad740df4310f2ff, type: 3}
+    volumePercent: 50
+  - tag: player_attack
+    clip: {fileID: 8300000, guid: 6b4e94799a161fe4cb1cace15535b6b7, type: 3}
+    volumePercent: 50
   - tag: player_die
     clip: {fileID: 8300000, guid: 932b3973f99dbcb428baff5de7f51225, type: 3}
-    volumePercent: 52.1
+    volumePercent: 50
+  - tag: player_diving
+    clip: {fileID: 8300000, guid: 862d8d5d4b3841f4fab4edea31ba45f2, type: 3}
+    volumePercent: 50
+  - tag: enemy_jump
+    clip: {fileID: 8300000, guid: b1304a254867bd24783695f23b3fe32f, type: 3}
+    volumePercent: 50
   - tag: car_run
     clip: {fileID: 8300000, guid: c7080a034b9f3e3439bfa786012fc356, type: 3}
-    volumePercent: 22
-  - tag: 
-    clip: {fileID: 0}
-    volumePercent: 0
-  - tag: 
-    clip: {fileID: 0}
-    volumePercent: 0
-  - tag: 
-    clip: {fileID: 0}
-    volumePercent: 0
-  - tag: 
-    clip: {fileID: 0}
-    volumePercent: 0
-  - tag: 
-    clip: {fileID: 0}
-    volumePercent: 0
-  - tag: 
-    clip: {fileID: 0}
-    volumePercent: 0
-  - tag: 
-    clip: {fileID: 0}
-    volumePercent: 0
-  - tag: 
-    clip: {fileID: 0}
-    volumePercent: 0
+    volumePercent: 50
+  - tag: bus_run
+    clip: {fileID: 8300000, guid: ab3dc81ee4e5e7146a551907f1df9656, type: 3}
+    volumePercent: 50
+  - tag: train_run
+    clip: {fileID: 8300000, guid: 8f9c72fcd1bd26f45a05e41ccf42b8fa, type: 3}
+    volumePercent: 50
+  - tag: item_gain1
+    clip: {fileID: 8300000, guid: f1bf95e6a509bd64f98a92f58554419a, type: 3}
+    volumePercent: 50
+  - tag: item_gain2
+    clip: {fileID: 8300000, guid: ea9d082a2ae70604c996795400bd4536, type: 3}
+    volumePercent: 50
+  - tag: store_compensation
+    clip: {fileID: 8300000, guid: f72ef343a3506e64cb987da5d0ab9aca, type: 3}
+    volumePercent: 50
   AudioSoundPrefab: {fileID: 3498700834078232135, guid: 57a7704cacdf3f84692d7880c836746d, type: 3}
-  maxQueueCount: 10
+  maxQueueCount: 15
 --- !u!82 &5266559534425415945
 AudioSource:
   m_ObjectHideFlags: 0
