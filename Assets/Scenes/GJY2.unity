@@ -372,7 +372,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.4406374, y: -0.09208122, z: 0.04562288, w: 0.8917838}
-  m_LocalPosition: {x: 2.6, y: 16.847477, z: -8.54}
+  m_LocalPosition: {x: 1.5, y: 16.847477, z: -8.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e0611a7f4c7704cb61977d79540557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 1067293090}
+  _target: {fileID: 1442308017}
   _moveSpeed: 0.25
   _offsetX: 2
   _shakeMagnitude: 0.5
@@ -436,17 +436,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2086253242578294105, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
-      propertyPath: m_UseGravity
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4394994648332785242, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4394994648332785242, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4394994648332785242, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -492,28 +488,11 @@ PrefabInstance:
       propertyPath: weaponRoot
       value: 
       objectReference: {fileID: 1151622978}
-    - target: {fileID: 7212919663145095976, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7829390348724692705, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8844335077586650479, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
---- !u!4 &1067293090 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4394994648332785242, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
-  m_PrefabInstance: {fileID: 1067293089}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1151622977
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,34 +532,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
-      propertyPath: pools.Array.size
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
-      propertyPath: pools.Array.data[17].tag
-      value: Knife
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
-      propertyPath: pools.Array.data[18].tag
-      value: Bomb
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
-      propertyPath: pools.Array.data[17].size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
-      propertyPath: pools.Array.data[18].size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
-      propertyPath: pools.Array.data[17].prefab
-      value: 
-      objectReference: {fileID: 5238175989627932576, guid: d3d191b2dbb3f504e8ba50165a6c6469, type: 3}
-    - target: {fileID: 3478724484940564058, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
-      propertyPath: pools.Array.data[18].prefab
-      value: 
-      objectReference: {fileID: 331382958441757979, guid: aa2b1cea7415ace48bf00cce629d547e, type: 3}
     - target: {fileID: 5175335165274956590, guid: 55370d2cf52c4fd4bbb582861ada90e3, type: 3}
       propertyPath: m_Name
       value: ObjectPoolManager
@@ -695,6 +646,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f65b16bdcf6a77b4f8a0c1b6a57606c1, type: 3}
+--- !u!4 &1442308017 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7212919663145095976, guid: 3af780dc99e04764e86b1d21c50c742c, type: 3}
+  m_PrefabInstance: {fileID: 1067293089}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1661355683
 GameObject:
   m_ObjectHideFlags: 0

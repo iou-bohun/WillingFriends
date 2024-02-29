@@ -78,7 +78,7 @@ public class LandPlatform : Platform
             // 생성X, 생성좌표 한 칸 옮기기
             if (randPercentage > PERCENTAGE || stack == LIMIT_STACK)
             {
-                //SpawnMonster(treeSpawnPos);
+                SpawnMonster(treeSpawnPos);
 
                 treeSpawnPos += Vector3.right;
                 stack = 0;
