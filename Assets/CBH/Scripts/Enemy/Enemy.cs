@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         //StartCoroutine(Move());
-        player = GameManager.Instance.player;
+        player = GameManager.Instance.player.transform;
         movedPosition = transform.position; 
     }
 

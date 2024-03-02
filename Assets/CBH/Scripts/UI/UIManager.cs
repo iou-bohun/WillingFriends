@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : SingletoneBase<GameManager>
+public class UIManager : SingletoneBase<UIManager>
 {
     //UI 업데이트용 Action
     public Action uiUpdateEvent;
@@ -19,7 +19,7 @@ public class UIManager : SingletoneBase<GameManager>
 
     private void Start()
     {
-        playerPosition = GameManager.Instance.player.position;
+        playerPosition = GameManager.Instance.player.transform.position;
         Init_StartUI();  
         Init_Hud();
 

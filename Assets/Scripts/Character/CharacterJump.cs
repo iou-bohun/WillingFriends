@@ -19,15 +19,16 @@ public class CharacterJump : MonoBehaviour
         if (collision.transform.tag == "Ground")
         {
             _anim.SetBool("Jump", true);
+            JumpUp();
         }
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.transform.tag == "Ground")
-        {
-            JumpUp();
-        }
+        //if (collision.transform.tag == "Ground")
+        //{
+        //    JumpUp();
+        //}
     }
 
     public void JumpUp()
