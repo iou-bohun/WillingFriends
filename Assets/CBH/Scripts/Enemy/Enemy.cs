@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         //StartCoroutine(Move());
-        player = GameManager.Instance.player;
+        //player = GameManager.Instance.player;
         movedPosition = transform.position; 
     }
 
@@ -136,8 +136,9 @@ public class Enemy : MonoBehaviour
     {
         float elaspedTime = 0f;
         float duration = 0.5f;
-        Vector3 movedirection = transform.position + GetDirection();
-
+        Vector3 moveDir = GetDirection();
+        Vector3 movedirection = transform.position + moveDir;
+        transform.rotation = Quaternion.LookRotation(-moveDir);
         while (elaspedTime < duration)
         {
             elaspedTime += Time.deltaTime;
@@ -203,6 +204,7 @@ public class Enemy : MonoBehaviour
     public void BigJump()
     {
         _rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        transform.rotation = Quaternion.LookRotation(Vector3.forward);
     }
 
     public void SmallJump()
