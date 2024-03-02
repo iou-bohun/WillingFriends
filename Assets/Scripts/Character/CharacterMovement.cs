@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CharacterMovement : MonoBehaviour
 {
     private TDCharacterController _controller;
+    private Player _player;
 
     private Vector2 _movementDirection = Vector2.zero;
 
@@ -17,6 +19,7 @@ public class CharacterMovement : MonoBehaviour
     private void Awake()
     {
         _controller = GetComponent<TDCharacterController>();
+        _player = GetComponent<Player>();
     }
 
     private void Start()
@@ -43,6 +46,9 @@ public class CharacterMovement : MonoBehaviour
 
     IEnumerator MoveCoroutine(Vector2 direction)
     {
+        if (_player.IsDead)
+            yield break;
+
         GameManager.Instance.OnPlayerMove((int)direction.y);
 
         Vector3 startPosition = transform.position;
@@ -57,7 +63,7 @@ public class CharacterMovement : MonoBehaviour
         }
 
         transform.position = endPosition;
-        Invoke("MovingStateChange", 0.3f);
+        Invoke("MovingStateChange", 0.1f);
     }
 
     public void MovingStateChange()

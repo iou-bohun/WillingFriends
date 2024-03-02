@@ -6,12 +6,17 @@ public class Player : MonoBehaviour
 {
     [SerializeField] string _soundTag;
     [SerializeField] GameObject _broken;
+    [SerializeField] Transform _parent;
+
+    private Collider _collider;
 
     public bool IsDead { get; private set; } = false;
 
     private void Awake()
     {
-        GameManager.Instance.OnPlayerDie += () => IsDead = true;
+        _collider = GetComponent<Collider>();
+
+        GameManager.Instance.OnPlayerDie += () => { IsDead = true; _collider.isTrigger = true; };
     }
 
     public void CarCrash()
@@ -24,5 +29,15 @@ public class Player : MonoBehaviour
         gameObject.SetActive(false);
 
         GameManager.Instance.GameOver();
+    }
+
+    public void EnterLog(Transform logTransform)
+    {
+        transform.SetParent(logTransform);
+    }
+
+    public void ExitLog()
+    {
+        transform.SetParent(_parent);
     }
 }

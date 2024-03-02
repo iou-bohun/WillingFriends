@@ -54,16 +54,16 @@ public class Log : MonoBehaviour
         if (other.CompareTag("EndPoint"))
             _riverPlatform.DisableLog();
 
-        if (other.CompareTag("Player"))
-            other.transform.SetParent(transform);
+        if (other.TryGetComponent(out Player player) == true)
+            player.EnterLog(transform);
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Torrent"))
             StartCoroutine(Co_SpeedControl(_speedModifier, 1));
 
-        if (other.CompareTag("Player"))
-            other.transform.SetParent(null);
+        if (other.TryGetComponent(out Player player) == true)
+            player.ExitLog();
     }
 
     private IEnumerator Co_SpeedControl(float start, float end)

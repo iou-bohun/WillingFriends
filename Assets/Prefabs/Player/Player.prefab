@@ -7641,6 +7641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _soundTag: player_die
   _broken: {fileID: 8844335077586650479}
+  _parent: {fileID: 4394994648332785242}
 --- !u!1 &3409312777006680769
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,14 +16,7 @@ public class FallingZone : MonoBehaviour
             GameObject effect = Instantiate(_waterEffect.gameObject);
             effect.transform.position = other.transform.position;
 
-            StartCoroutine(Co_ReturnParticle());
+            GameManager.Instance.GameOver();
         }            
-    }
-
-    private IEnumerator Co_ReturnParticle()
-    {
-        yield return new WaitForSeconds(3f);
-        
-        GameManager.Instance.GameOver();
     }
 }

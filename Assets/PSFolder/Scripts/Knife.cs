@@ -8,7 +8,7 @@ public class Knife : MonoBehaviour
 
     private void Update()
     {
-        distanse = transform.position - GameManager.Instance.player.position;
+        distanse = transform.position - GameManager.Instance.player.transform.position;
         if (distanse.sqrMagnitude > 50f)
         {
             Destroy(gameObject);
