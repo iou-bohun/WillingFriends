@@ -69,6 +69,11 @@ public class AttackManager : MonoBehaviour
     }
     public void BoomerangAttack()
     {
-
+        GameObject weapon = ObjectPoolManager.Instance.GetObject("Boomerang", weaponRoot);
+        Boomerang b = weapon.GetComponent<Boomerang>();
+        b.time = 0;
+        weapon.transform.position = transform.position + new Vector3(0, 0, 0.5f);
+        Rigidbody rb = weapon.GetComponent<Rigidbody>();
+        rb.AddForce(transform.forward * 5f, ForceMode.Impulse);
     }
 }
