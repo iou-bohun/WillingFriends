@@ -18,6 +18,7 @@ public class CharacterJump : MonoBehaviour
     {
         if (collision.transform.tag == "Ground")
         {
+            SoundManager.Instance.PlayAudioClip("player_jump", transform);
             _anim.SetBool("Jump", true);
         }
     }
@@ -32,8 +33,7 @@ public class CharacterJump : MonoBehaviour
 
     public void JumpUp()
     {
-        _rigidbody.velocity = Vector3.zero;    
-        SoundManager.Instance.PlayAudioClip("player_jump", transform);
+        _rigidbody.velocity = Vector3.zero;
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         _anim.SetBool("Jump", false);
     }
