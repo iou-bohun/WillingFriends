@@ -22,6 +22,11 @@ public class CharacterJump : MonoBehaviour
             _anim.SetBool("Jump", true);
             JumpUp();
         }
+        if(collision.transform.tag == "Coin")
+        {
+            GameManager.Instance.Score++;
+            UIManager.Instance.uiUpdateEvent();
+        }
     }
 
     private void OnCollisionStay(Collision collision)

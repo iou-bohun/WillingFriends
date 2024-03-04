@@ -19,6 +19,7 @@ public class CharacterMovement : MonoBehaviour
 
     private bool _isMoving = false;
 
+    private int curScore = 0;
     private void Awake()
     {
         _rigid = GetComponent<Rigidbody>();
@@ -76,9 +77,20 @@ public class CharacterMovement : MonoBehaviour
         }
 
         transform.localPosition = endPosition;
-
+        AddScore(endPosition.z);
         CheckOnLog();
         Invoke("MovingStateChange", 0.1f);
+    }
+
+    private void AddScore(float distance)
+    {
+        if(distance > curScore)
+        {
+            curScore++;
+        }
+        Debug.Log(curScore);
+        GameManager.Instance.Score = curScore;
+        UIManager.Instance.uiUpdateEvent();
     }
 
     private Vector3 CalcEndPosition(ref Vector3 startPosition, Vector3 movePosition)
