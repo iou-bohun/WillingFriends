@@ -22,14 +22,11 @@ public class CharacterJump : MonoBehaviour
             _anim.SetBool("Jump", true);
             JumpUp();
         }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        //if (collision.transform.tag == "Ground")
-        //{
-        //    JumpUp();
-        //}
+        if(collision.transform.tag == "Coin")
+        {
+            GameManager.Instance.Score++;
+            UIManager.Instance.uiUpdateEvent();
+        }
     }
 
     public void JumpUp()
