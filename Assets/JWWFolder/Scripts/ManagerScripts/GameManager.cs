@@ -8,8 +8,8 @@ public class GameManager : SingletoneBase<GameManager>
     [SerializeField] GameObject _reBtn;
     public Player player; //플레이어 transform
 
-    public Action OnPlayerDie;
-    public Action<int> OnPlayerMove;
+    public event Action OnPlayerDie;
+    public event Action<int> OnPlayerMove;
 
     private int coin = 0;
     private int score = 0;

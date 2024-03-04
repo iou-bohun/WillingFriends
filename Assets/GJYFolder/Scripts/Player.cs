@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject _broken;
     [SerializeField] Transform _parent;
 
-    private Collider _collider;
+    private Collider _collider;    
 
     public bool IsDead { get; private set; } = false;
 

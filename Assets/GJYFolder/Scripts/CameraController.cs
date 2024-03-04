@@ -75,8 +75,8 @@ public class CameraController : MonoBehaviour
     public void StartShake()
     {
         _camera.DOComplete();
-        _camera.DOShakePosition(0.2f, _positionShakePower);
-        _camera.DOShakeRotation(0.2f, _rotationShakePower);
+        _camera.DOShakePosition(0.2f, _positionShakePower, 15);
+        _camera.DOShakeRotation(0.2f, _rotationShakePower, 15);
 
         //StartCoroutine(Co_ShakeCamera(duration));
     }

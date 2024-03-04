@@ -87,6 +87,7 @@ public class Enemy : MonoBehaviour
             if(playerNormal == Vector3.up)
             {
                 //플레이어 킬
+                GameManager.Instance.GameOver();
                 Debug.Log("PlayerKill");
             }
             else if(playerNormal == Vector3.forward)
@@ -99,7 +100,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Tree"))
         {
             //적 죽음
-            Destroy(gameObject);
+            Die();
         }
     }
 

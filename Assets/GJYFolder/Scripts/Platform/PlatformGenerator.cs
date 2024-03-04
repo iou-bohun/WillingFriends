@@ -7,9 +7,7 @@ using Random = UnityEngine.Random;
 
 public class PlatformGenerator : MonoBehaviour
 {
-    public static PlatformGenerator Instance;
-
-    public Action<int> OnPlayerMove; // Player와 연동 시 사용.
+    public static PlatformGenerator Instance;    
 
     private Queue<PlatformBase> _platformsQueue = new Queue<PlatformBase>();
     private PlatformBase _latestPlatform;

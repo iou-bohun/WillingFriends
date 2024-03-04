@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class CharacterMovement : MonoBehaviour
 {
+    [SerializeField] LayerMask _logLayer;
+    [SerializeField] Transform _parent;
+
     private TDCharacterController _controller;
     private Player _player;
+    private Rigidbody _rigid;
 
     private Vector2 _movementDirection = Vector2.zero;
 
@@ -18,6 +21,7 @@ public class CharacterMovement : MonoBehaviour
 
     private void Awake()
     {
+        _rigid = GetComponent<Rigidbody>();
         _controller = GetComponent<TDCharacterController>();
         _player = GetComponent<Player>();
     }
@@ -47,23 +51,60 @@ public class CharacterMovement : MonoBehaviour
     IEnumerator MoveCoroutine(Vector2 direction)
     {
         if (_player.IsDead)
-            yield break;
+            yield break;        
 
-        GameManager.Instance.OnPlayerMove((int)direction.y);
+        if (transform.parent != _parent)
+        {
+            transform.SetParent(_parent);
+            _rigid.velocity = Vector3.zero;
+        }            
 
-        Vector3 startPosition = transform.position;
-        Vector3 endPosition = startPosition + new Vector3(direction.x, 0.01f, direction.y) * moveDistance;
+        GameManager.Instance.CallPlayerMove((int)direction.y);
+
+        Vector3 startPosition = transform.localPosition;
+        Vector3 movePosition = new Vector3(direction.x, 0.01f, direction.y);
+        Vector3 endPosition = CalcEndPosition(ref startPosition, movePosition);
 
         float t = 0f;
         while (t < 1f)
         {
             t += Time.deltaTime * moveSpeed;
-            transform.position = Vector3.Lerp(startPosition, endPosition, t);
+            transform.localPosition = Vector3.Lerp(startPosition, endPosition, t);
+            if (Vector3.Distance(transform.localPosition, endPosition) < 0.05f)
+                break;
             yield return null;
         }
 
-        transform.position = endPosition;
+        transform.localPosition = endPosition;
+
+        CheckOnLog();
         Invoke("MovingStateChange", 0.1f);
+    }
+
+    private Vector3 CalcEndPosition(ref Vector3 startPosition, Vector3 movePosition)
+    {
+        Vector3 endPosition = startPosition + movePosition * moveDistance;
+
+        // 로컬 포지션 X 를 정수로 강제로 맞추기
+        if (endPosition.x % 1 != 0)
+        {
+            int endPosX = Mathf.RoundToInt(endPosition.x);
+            endPosition = new Vector3(endPosX, endPosition.y, endPosition.z);
+        }
+
+        return endPosition;
+    }
+
+    private void CheckOnLog()
+    {
+        Debug.DrawRay(transform.localPosition, Vector3.down, Color.red, 2);
+        Ray ray = new Ray(transform.localPosition, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 2f, _logLayer))
+        {
+            Debug.Log("log 맞음");
+            transform.SetParent(hit.transform);
+        }
+            
     }
 
     public void MovingStateChange()

@@ -13,6 +13,8 @@ public class RiverFlatform : Platform
     private readonly int SPAWN_COUNT = 8;
     private readonly int LIMIT_STACK = 2;
 
+    private static int CrossCounter;
+
     private void OnEnable()
     {
         if (!isInit)
@@ -23,7 +25,6 @@ public class RiverFlatform : Platform
         }
 
         Clear();
-
         
         if (!_platform.IsCyclable)
             SpawnLotus();
@@ -65,10 +66,12 @@ public class RiverFlatform : Platform
 
     private IEnumerator Co_SpawnLogs()
     {
+        CrossCounter++;
+
         int randLog = Random.Range(0, _riverSO.spawnDefaultPrefabs.Length);
         float randSpeed = Random.Range(_riverSO.minSpeed, _riverSO.maxSpeed);
 
-        int flowDir = Random.Range(0, 2) == 0 ? -1 : 1;
+        int flowDir = CrossCounter % 2 == 0 ? -1 : 1;
 
         while (true)
         {

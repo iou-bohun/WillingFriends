@@ -61,9 +61,6 @@ public class Log : MonoBehaviour
     {
         if (other.CompareTag("Torrent"))
             StartCoroutine(Co_SpeedControl(_speedModifier, 1));
-
-        if (other.TryGetComponent(out Player player) == true)
-            player.ExitLog();
     }
 
     private IEnumerator Co_SpeedControl(float start, float end)
