@@ -6,6 +6,7 @@ using UnityEngine.TextCore.Text;
 using TMPro;
 using System.Security.Cryptography;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class Enemy : MonoBehaviour
 {
@@ -25,6 +26,9 @@ public class Enemy : MonoBehaviour
 
     private Animator _animator;
     private Rigidbody _rigid;
+
+    private LandPlatform _land;
+    private int _myIndex = -1;
 
     [SerializeField] private Transform player;
 
@@ -111,6 +115,12 @@ public class Enemy : MonoBehaviour
             isGrounded = false;
             _animator.SetBool(AnimationData.GroundParameterName, isGrounded);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Border"))
+            Die();
     }
 
     IEnumerator PushEnemy()
@@ -224,11 +234,20 @@ public class Enemy : MonoBehaviour
         _rigid.AddForce(Vector3.up * (jumpForce / 2), ForceMode.Impulse);
     }
 
+    public void Setup(LandPlatform land, int index)
+    {
+        _land = land;
+        _myIndex = index;
+    }
+
     public void Die()
     {
         GameObject broken = ObjectPoolManager.Instance.GetObject(_broken.name);
-        broken.transform.position = transform.position;        
+        broken.transform.position = transform.position;
 
+        _land.SelfRemove(_myIndex);
+        _land = null;
+        _myIndex = -1;
         ObjectPoolManager.Instance.ReturnObject(gameObject.name, gameObject);
     }
 }

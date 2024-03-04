@@ -28,7 +28,13 @@ public class Player : MonoBehaviour
         _broken.transform.position = transform.position;
         gameObject.SetActive(false);
 
-        GameManager.Instance.GameOver();
+        Dead();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Border"))
+            Dead();
     }
 
     public void EnterLog(Transform logTransform)
@@ -39,5 +45,10 @@ public class Player : MonoBehaviour
     public void ExitLog()
     {
         transform.SetParent(_parent);
+    }
+
+    public void Dead()
+    {
+        GameManager.Instance.GameOver();
     }
 }

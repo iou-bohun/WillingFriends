@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: -7684669123787329211}
   m_Layer: 14
   m_Name: Log_02coll
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
