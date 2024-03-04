@@ -106,7 +106,7 @@ MonoBehaviour:
   movedPosition: {x: 0, y: 0, z: 0}
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 131328
   groundMask:
     serializedVersion: 2
     m_Bits: 128

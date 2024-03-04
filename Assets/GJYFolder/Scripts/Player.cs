@@ -22,13 +22,19 @@ public class Player : MonoBehaviour
     public void CarCrash()
     {
         Debug.Log("크래쉬!");
-        SoundManager.Instance.PlayAudioClip(_soundTag, transform);
+        SoundManager.Instance.PlayAudioClip(_soundTag, _parent);
         _broken.SetActive(true);
 
         _broken.transform.position = transform.position;
         gameObject.SetActive(false);
 
-        GameManager.Instance.GameOver();
+        Dead();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Border"))
+            Dead();
     }
 
     public void EnterLog(Transform logTransform)
@@ -39,5 +45,10 @@ public class Player : MonoBehaviour
     public void ExitLog()
     {
         transform.SetParent(_parent);
+    }
+
+    public void Dead()
+    {
+        GameManager.Instance.GameOver();
     }
 }

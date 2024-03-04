@@ -16,6 +16,8 @@ public class GameManager : SingletoneBase<GameManager>
     public int Coin { get { return coin; } set { coin = value; } }
     public int Score { get { return score; } set { score = value; } }
 
+    public bool isGameOver = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -24,6 +26,7 @@ public class GameManager : SingletoneBase<GameManager>
 
     public override void Init()
     {
+        isGameOver = false;
         player = GameObject.FindWithTag("Player").GetComponent<Player>(); // 태그로 플레이어 위치 가져옴.                
     }
 
@@ -34,7 +37,10 @@ public class GameManager : SingletoneBase<GameManager>
 
     public void GameOver()
     {
-        // To Do - GameOver UI 띄우기
+        if (isGameOver)
+            return;
+
+        isGameOver = true;
         OnPlayerDie?.Invoke();
         Instantiate(_reBtn.gameObject);
 
@@ -42,7 +48,7 @@ public class GameManager : SingletoneBase<GameManager>
     }
 
     public override void Clear()
-    {
+    {        
         OnPlayerMove = null;
         OnPlayerDie = null;
     }

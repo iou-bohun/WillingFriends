@@ -57,6 +57,7 @@ public class SoundManager : SingletoneBase<SoundManager>
         //GameObject obj = new GameObject("AudioSourceObject");
         obj.name = "AudioSourceObject";
         obj.transform.SetParent(transform);
+        obj.transform.localPosition = Vector3.zero;
         //obj.AddComponent<AudioSourceObject>();
         obj.SetActive(false);
         audioQueue.Enqueue(obj);
@@ -107,7 +108,11 @@ public class SoundManager : SingletoneBase<SoundManager>
             AudioSourceObject objAudioSource = obj.GetComponent<AudioSourceObject>();
             objAudioSource.clip = audioDictionary[tag].clip;
             objAudioSource.voulme = PercentToDegree(audioDictionary[tag].volumePercent);
-            obj.transform.SetParent(parent);//부모한테서 소리가 나게 지정.
+            obj.transform.SetParent(parent);//부모의 자식으로 들어감.
+            if (parent != null)
+            {
+                obj.transform.position = parent.position;//부모의 위치에서 소리가 들리게 부착함.
+            }
             obj.gameObject.SetActive(true);//
         }
         else
@@ -116,14 +121,19 @@ public class SoundManager : SingletoneBase<SoundManager>
             AudioSourceObject objAudioSource = newObj.GetComponent<AudioSourceObject>();
             objAudioSource.clip = audioDictionary[tag].clip;
             objAudioSource.voulme = PercentToDegree(audioDictionary[tag].volumePercent);
-            newObj.transform.SetParent(parent); //부모 지정.
+            newObj.transform.SetParent(parent); //부모의 자식으로 들어감.
+            if (parent != null)
+            {
+                newObj.transform.position = parent.position;//부모의 위치에서 소리가 들리게 부착함.
+            }
             newObj.gameObject.SetActive(true);//활성화
         }
     }
     public void ReturnAudioSource(GameObject AudioObject)//떠났던 사운드 오브젝트를 반환 받는다.
     {
-        AudioObject.SetActive(false);
         AudioObject.transform.SetParent(Instance.transform);
+        AudioObject.transform.position = Instance.transform.position;
+        AudioObject.SetActive(false);
         audioQueue.Enqueue(AudioObject);
     }
     // Update is called once per frame

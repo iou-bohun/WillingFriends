@@ -9,11 +9,13 @@ public class AudioSourceObject : MonoBehaviour
     public AudioClip clip;
     public float voulme;
 
+    [SerializeField]
     private bool isActiveTrigger = false;
     // Start is called before the first frame update
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+
     }
     private void OnEnable()
     {
@@ -21,12 +23,14 @@ public class AudioSourceObject : MonoBehaviour
     }
     public void Return()
     {
+        audioSource.Stop();
         ClearSetting();
         SoundManager.Instance.ReturnAudioSource(gameObject);
     }
     private void ClearSetting()
     {
         //audioSource = null;
+        audioSource.clip = null;
         clip = null;
         isActiveTrigger = false;
         voulme = 0;
@@ -42,10 +46,16 @@ public class AudioSourceObject : MonoBehaviour
             isActiveTrigger = false;
             
         }
-        if (gameObject.activeSelf)
-        {
-            if (!audioSource.isPlaying)
-                Return();
-        }
+        if (!audioSource.isPlaying)
+            Return();
+        //if (gameObject.activeSelf)
+        //{
+        //    if (!audioSource.isPlaying)
+        //        Return();
+        //}
+        //else
+        //{
+        //    Return();
+        //}
     }
 }

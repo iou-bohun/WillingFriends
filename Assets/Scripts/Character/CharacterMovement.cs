@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] LayerMask _logLayer;
+    [SerializeField] LayerMask _borderLayer;
     [SerializeField] Transform _parent;
 
     private TDCharacterController _controller;
@@ -19,6 +20,7 @@ public class CharacterMovement : MonoBehaviour
 
     private bool _isMoving = false;
 
+    private int curScore = 0;
     private void Awake()
     {
         _rigid = GetComponent<Rigidbody>();
@@ -53,17 +55,12 @@ public class CharacterMovement : MonoBehaviour
         if (_player.IsDead)
             yield break;        
 
-        if (transform.parent != _parent)
-        {
-            transform.SetParent(_parent);
-            _rigid.velocity = Vector3.zero;
-        }            
-
         GameManager.Instance.CallPlayerMove((int)direction.y);
 
         Vector3 startPosition = transform.localPosition;
         Vector3 movePosition = new Vector3(direction.x, 0.01f, direction.y);
         Vector3 endPosition = CalcEndPosition(ref startPosition, movePosition);
+        transform.rotation = Quaternion.LookRotation(movePosition);
 
         float t = 0f;
         while (t < 1f)
@@ -76,9 +73,19 @@ public class CharacterMovement : MonoBehaviour
         }
 
         transform.localPosition = endPosition;
-
-        CheckOnLog();
+        //AddScore(endPosition.z);
         Invoke("MovingStateChange", 0.1f);
+    }
+
+    private void AddScore(float distance)
+    {
+        if(distance > curScore)
+        {
+            curScore++;
+        }
+        Debug.Log(curScore);
+        GameManager.Instance.Score = curScore;
+        UIManager.Instance.uiUpdateEvent();
     }
 
     private Vector3 CalcEndPosition(ref Vector3 startPosition, Vector3 movePosition)
@@ -95,18 +102,6 @@ public class CharacterMovement : MonoBehaviour
         return endPosition;
     }
 
-    private void CheckOnLog()
-    {
-        Debug.DrawRay(transform.localPosition, Vector3.down, Color.red, 2);
-        Ray ray = new Ray(transform.localPosition, Vector3.down);
-        if (Physics.Raycast(ray, out RaycastHit hit, 2f, _logLayer))
-        {
-            Debug.Log("log 맞음");
-            transform.SetParent(hit.transform);
-        }
-            
-    }
-
     public void MovingStateChange()
     {
         _isMoving = false;
@@ -121,7 +116,7 @@ public class CharacterMovement : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 dir = new Vector3(_movementDirection.x, 0f, _movementDirection.y);
-        if (Physics.Raycast(transform.position, dir, out hit, raycastDistance, 1 << LayerMask.NameToLayer("Tree")))
+        if (Physics.Raycast(transform.position, dir, out hit, raycastDistance, _borderLayer))
         {
             _isMoving = false;
             return true;

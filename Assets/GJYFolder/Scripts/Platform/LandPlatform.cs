@@ -117,8 +117,15 @@ public class LandPlatform : Platform
             GameObject monster = ObjectPoolManager.Instance.GetObject(_landSO.monsterPrefabs.name, transform);
             monster.transform.position = _monsterSpawnPos;
             _monsters[i] = monster.GetComponent<Enemy>();
+            _monsters[i].Setup(this, i);
             break;
         }
+    }
+
+    // 몬스터가 죽을 때 현재 자신의 플랫폼 Monsters 배열 정보 삭제.
+    public void SelfRemove(int index)
+    {
+        _monsters[index] = null; 
     }
 
     public override void Clear()
