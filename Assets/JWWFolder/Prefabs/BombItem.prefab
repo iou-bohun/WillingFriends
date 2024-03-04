@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 1126282914953315468}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &3638303460779603142
 BoxCollider:
@@ -129,7 +129,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 19438698fd504f54794ae58dafe500ed, type: 2}
+  - {fileID: 2100000, guid: de7c684c8b079644989f24563e1b47a3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

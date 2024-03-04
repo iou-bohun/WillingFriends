@@ -30,9 +30,8 @@ public class Knife : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Enemy")
         {
-            //ObjectPoolManager.Instance.ReturnObject("Enemy", collision.gameObject);
-            GameObject enemyDie = ObjectPoolManager.Instance.GetObject("Goblin_01Broken");
-            enemyDie.transform.position = collision.gameObject.transform.position;
+            if (collision.gameObject.TryGetComponent(out Enemy enemy) == true)
+                enemy.Die();
             ObjectPoolManager.Instance.ReturnObject("Knife", gameObject);
         }
         else if (collision.gameObject.tag == "Weapon")

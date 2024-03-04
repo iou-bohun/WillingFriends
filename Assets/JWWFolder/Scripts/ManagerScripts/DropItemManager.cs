@@ -5,7 +5,7 @@ using UnityEngine;
 public enum ItemType
 {
     KnifeItem,
-    BoomItem,
+    BombItem,
     BoomerangItem
 }
 public class DropItemManager : SingletoneBase<DropItemManager>
