@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dcd59004f139694a81bb9d2b6d20bea, type: 3}
   m_Name: Boomerang
   m_EditorClassIdentifier: 
-  weaponType: 0
-  weaponPrefab: {fileID: 0}
-  maxCount: 0
+  weaponType: 2
+  weaponPrefab: {fileID: 945855725774800191, guid: e971ace7269a5df47a89865ad433b29f, type: 3}
+  maxCount: 3

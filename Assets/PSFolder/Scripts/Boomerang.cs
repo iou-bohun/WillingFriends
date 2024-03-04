@@ -13,6 +13,7 @@ public class Boomerang : MonoBehaviour
     {
         time = 0f;
         rb = GetComponent<Rigidbody>();
+        rb.AddTorque(transform.up * 150f);
     }
 
     private void Update()
@@ -25,7 +26,7 @@ public class Boomerang : MonoBehaviour
                 time = 0;
                 returned = true;
                 rb.velocity = Vector3.zero;
-                rb.AddForce(-transform.forward * 5f, ForceMode.Impulse);
+                rb.AddForce(new Vector3(0f, 0f, -1f) * 5f, ForceMode.Impulse);
             }
         }
         else
@@ -47,6 +48,9 @@ public class Boomerang : MonoBehaviour
         }
         else if (other.tag == "Enemy")
         {
+            ObjectPoolManager.Instance.ReturnObject("Enemy", other.gameObject);
+            GameObject enemyDie = ObjectPoolManager.Instance.GetObject("Goblin_01Broken");
+            enemyDie.transform.position = other.transform.position;
             ObjectPoolManager.Instance.ReturnObject(other.tag, other.gameObject);
         }
     }

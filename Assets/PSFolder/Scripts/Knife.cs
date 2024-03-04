@@ -17,17 +17,24 @@ public class Knife : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer.Equals(LayerMask.NameToLayer("Tree")))
+        if (collision.gameObject.tag == "Tree")
         {
             Invoke("DestroyKnife", 1f);
         }
         else if (collision.gameObject.tag == "Enemy")
         {
+            ObjectPoolManager.Instance.ReturnObject("Enemy", collision.gameObject);
+            GameObject enemyDie = ObjectPoolManager.Instance.GetObject("Goblin_01Broken");
+            enemyDie.transform.position = collision.gameObject.transform.position;
             ObjectPoolManager.Instance.ReturnObject("Knife", gameObject);
         }
         else if (collision.gameObject.tag == "Weapon")
         {
             ObjectPoolManager.Instance.ReturnObject("Knife", gameObject);
+        }
+        else
+        {
+            Invoke("DestroyKnife", 2f);
         }
     }
 

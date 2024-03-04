@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Bomb
   m_EditorClassIdentifier: 
   weaponType: 1
-  weaponPrefab: {fileID: 331382958441757979, guid: aa2b1cea7415ace48bf00cce629d547e, type: 3}
+  weaponPrefab: {fileID: 5123273336805174336, guid: 8ff0bd30a24cad643a25b4896ba52798, type: 3}
   maxCount: 2
