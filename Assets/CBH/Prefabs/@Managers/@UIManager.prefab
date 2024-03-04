@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6742789103378570101
 MonoBehaviour:
@@ -44,4 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944a50fabc0e4bc4aaf558444b63920b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _root: {fileID: 0}
+  _root: {fileID: 7754804019707039358}
+  UIPrefabs:
+  - {fileID: 6599596201722227254, guid: a31311e608d81244db6787f3e55b31af, type: 3}
+  - {fileID: 7743096831623058805, guid: 0bf9dc65af0ac154280c8eb8959b71ed, type: 3}
