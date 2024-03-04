@@ -205,8 +205,7 @@ public class Enemy : MonoBehaviour
 
     private Vector3 FallingSearch(Vector3 direction)
     {
-        Ray ray = new Ray(transform.position + direction, Vector3.down);
-        Debug.DrawRay(transform.position + direction, Vector3.down * 3, Color.red, 1);
+        Ray ray = new Ray(transform.position + direction, Vector3.down);        
         if (!Physics.Raycast(ray, 3f, groundMask))
             return Vector3.zero;
 
