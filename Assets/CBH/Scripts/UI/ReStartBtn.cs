@@ -17,7 +17,7 @@ public class ReStartBtn : UIAnimations
     void Restart()
     {
         Debug.Log("restart");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
     }
 
     public void SelectAnim()
