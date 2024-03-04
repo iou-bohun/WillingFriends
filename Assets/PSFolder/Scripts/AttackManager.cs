@@ -56,7 +56,8 @@ public class AttackManager : MonoBehaviour
     public void KnifeAttack()
     {
         GameObject weapon = ObjectPoolManager.Instance.GetObject("Knife", weaponRoot);
-        weapon.transform.position = transform.position + new Vector3(0, 0, 1f);
+        weapon.transform.position = transform.position + transform.forward;
+        weapon.transform.rotation = Quaternion.LookRotation(transform.forward);
         Rigidbody rb = weapon.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         rb.AddForce(transform.forward * 5f, ForceMode.Impulse);
@@ -64,17 +65,17 @@ public class AttackManager : MonoBehaviour
     public void BombAttack()
     {
         GameObject weapon = ObjectPoolManager.Instance.GetObject("Bomb", weaponRoot);
-        weapon.transform.position = transform.position + new Vector3(0, 0.5f, 0.5f);
+        weapon.transform.position = transform.position + new Vector3(0, 0.5f, 0) + transform.forward;
         Rigidbody rb = weapon.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
-        rb.AddForce(new Vector3(0f, 1f, 1f) * 5f, ForceMode.Impulse);
+        rb.AddForce((new Vector3(0f, 1f, 0f) + transform.forward) * 5f, ForceMode.Impulse);
     }
     public void BoomerangAttack()
     {
         GameObject weapon = ObjectPoolManager.Instance.GetObject("Boomerang", weaponRoot);
         Boomerang b = weapon.GetComponent<Boomerang>();
         b.time = 0;
-        weapon.transform.position = transform.position + new Vector3(0, 0, 1f);
+        weapon.transform.position = transform.position + transform.forward;
         Rigidbody rb = weapon.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         rb.AddForce(transform.forward * 5f, ForceMode.Impulse);
