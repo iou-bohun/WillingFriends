@@ -96,7 +96,9 @@ public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
             Debug.Log("오디오 소스 반납");
             audioSourceObject.Return();
         }
-            
+        Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+        if(rb != null)//리지드바디가 있다면 속도 초기화
+            rb.velocity = Vector3.zero;
         gameObject.gameObject.SetActive(false); //비활성화
         gameObject.transform.SetParent(Instance.transform); //오브젝트 매니저 하위로 넣는다.
         Instance.poolDictionary[tag].Enqueue(gameObject); //큐에 집어 넣는다.

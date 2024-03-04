@@ -17,8 +17,7 @@ public class Bomb : MonoBehaviour
             Collider[] cols = Physics.OverlapSphere(exp.transform.position, exp.transform.localScale.z / 2);
             for (int i = 0; i < cols.Length; i++)
             {
-                if (cols[i].gameObject.tag == "Enemy" || cols[i].gameObject.tag == "Tree")
-                {
+                if (cols[i].gameObject.tag == "Enemy" || cols[i].gameObject.tag == "Tree_01coll" || cols[i].gameObject.tag == "Tree_02coll")
                     ObjectPoolManager.Instance.ReturnObject(cols[i].gameObject.tag, cols[i].gameObject);
                     if (cols[i].gameObject.tag == "Enemy")
                     {

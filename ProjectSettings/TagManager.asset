@@ -11,6 +11,9 @@ TagManager:
   - Falling
   - Enemy
   - Tree
+  - Border
+  - Tree_01coll
+  - Tree_02coll
   layers:
   - Default
   - TransparentFX
