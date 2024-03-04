@@ -5,13 +5,15 @@ using UnityEngine;
 public class Knife : MonoBehaviour
 {
     private Vector3 distanse;
+    public AttackSO _attackSO;
 
     private void Update()
     {
         distanse = transform.position - GameManager.Instance.player.transform.position;
         if (distanse.sqrMagnitude > 50f)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            DestroyKnife();
         }
     }
 
@@ -30,8 +32,18 @@ public class Knife : MonoBehaviour
             ObjectPoolManager.Instance.ReturnObject("Knife", gameObject);
         }
     }
-
-    public void DestroyKnife()
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            AttackManager playerAttackManager = other.GetComponent<AttackManager>();
+            playerAttackManager.AttackSOChange(_attackSO);
+            Collider goCollider = gameObject.GetComponent<Collider>();
+            goCollider.isTrigger = false;
+            ObjectPoolManager.Instance.ReturnObject("Bomb", gameObject);
+        }
+    }
+        public void DestroyKnife()
     {
         ObjectPoolManager.Instance.ReturnObject("Knife", gameObject);
     }

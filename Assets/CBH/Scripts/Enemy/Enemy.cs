@@ -243,6 +243,7 @@ public class Enemy : MonoBehaviour
     {
         GameObject broken = ObjectPoolManager.Instance.GetObject(_broken.name);
         broken.transform.position = transform.position;
+        DropItemManager.Instance.InstantiateRandomWeaponPrefab(transform);//드롭 아이템
 
         _land.SelfRemove(_myIndex);
         _land = null;

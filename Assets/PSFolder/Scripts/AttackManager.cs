@@ -33,7 +33,7 @@ public class AttackManager : MonoBehaviour
         }
         else
         {
-            attackData.count = attackData.attackSO.maxCount;
+            attackData.count += attackData.attackSO.maxCount;
         }
     }
 
@@ -44,6 +44,7 @@ public class AttackManager : MonoBehaviour
             if (attackData.count == 0)
             {
                 attackData.attackSO = null;
+                return;
             }
             attackData.count--;
 
@@ -58,6 +59,7 @@ public class AttackManager : MonoBehaviour
         GameObject weapon = ObjectPoolManager.Instance.GetObject("Knife", weaponRoot);
         weapon.transform.position = transform.position + new Vector3(0, 0, 0.5f);
         Rigidbody rb = weapon.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
         rb.AddForce(transform.forward * 5f, ForceMode.Impulse);
     }
     public void BombAttack()
@@ -65,6 +67,7 @@ public class AttackManager : MonoBehaviour
         GameObject weapon = ObjectPoolManager.Instance.GetObject("Bomb", weaponRoot);
         weapon.transform.position = transform.position + new Vector3(0, 0.5f, 0.5f);
         Rigidbody rb = weapon.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
         rb.AddForce(new Vector3(0f, 1f, 1f) * 5f, ForceMode.Impulse);
     }
     public void BoomerangAttack()
@@ -74,6 +77,7 @@ public class AttackManager : MonoBehaviour
         b.time = 0;
         weapon.transform.position = transform.position + new Vector3(0, 0, 0.5f);
         Rigidbody rb = weapon.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
         rb.AddForce(transform.forward * 5f, ForceMode.Impulse);
     }
 }
