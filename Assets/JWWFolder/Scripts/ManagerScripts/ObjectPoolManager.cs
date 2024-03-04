@@ -90,6 +90,13 @@ public class ObjectPoolManager : SingletoneBase<ObjectPoolManager>
 
     public void ReturnObject(string tag ,GameObject gameObject)//태그에 해당하는 게임 오브젝트를 사전에 넣는다.
     {
+        AudioSourceObject audioSourceObject = gameObject.GetComponentInChildren<AudioSourceObject>();
+        if (audioSourceObject != null)
+        {
+            Debug.Log("오디오 소스 반납");
+            audioSourceObject.Return();
+        }
+            
         gameObject.gameObject.SetActive(false); //비활성화
         gameObject.transform.SetParent(Instance.transform); //오브젝트 매니저 하위로 넣는다.
         Instance.poolDictionary[tag].Enqueue(gameObject); //큐에 집어 넣는다.
