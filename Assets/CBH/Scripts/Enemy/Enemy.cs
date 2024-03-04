@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Vector3 currentPosition;
     [SerializeField] private Vector3 movedPosition;
     [SerializeField] private LayerMask obstacleMask;
+    [SerializeField] private LayerMask groundMask;
     [SerializeField] private float detectRange;
 
     private Animator _animator;
@@ -38,7 +39,7 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         //StartCoroutine(Move());
-        //player = GameManager.Instance.player;
+        player = GameManager.Instance.player.transform;
         movedPosition = transform.position; 
     }
 
@@ -86,6 +87,7 @@ public class Enemy : MonoBehaviour
             if(playerNormal == Vector3.up)
             {
                 //플레이어 킬
+                GameManager.Instance.GameOver();
                 Debug.Log("PlayerKill");
             }
             else if(playerNormal == Vector3.forward)
@@ -98,7 +100,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Tree"))
         {
             //적 죽음
-            Destroy(gameObject);
+            Die();
         }
     }
 
@@ -152,7 +154,7 @@ public class Enemy : MonoBehaviour
         Vector3[] directions = ObstacleSearch();
         int dirLength = directions.Length;
         int randomIndex = Random.Range(0, dirLength);
-        Vector3 direction = directions[randomIndex];
+        Vector3 direction = FallingSearch(directions[randomIndex]);
 
         return direction;
     }
@@ -189,6 +191,16 @@ public class Enemy : MonoBehaviour
             }
         }
         return safeDirections.ToArray();
+    }
+
+    private Vector3 FallingSearch(Vector3 direction)
+    {
+        Ray ray = new Ray(transform.position + direction, Vector3.down);
+        Debug.DrawRay(transform.position + direction, Vector3.down * 3, Color.red, 1);
+        if (!Physics.Raycast(ray, 3f, groundMask))
+            return Vector3.zero;
+
+        return direction;
     }
 
     private void OnDrawGizmos()

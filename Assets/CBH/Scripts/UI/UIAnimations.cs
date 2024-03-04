@@ -15,13 +15,20 @@ public class UIAnimations : MonoBehaviour
     }
 
 
-    protected IEnumerator SlideUpC(float duration, float speed)
+    protected IEnumerator SlideUpC(float duration, Vector2 endPos)
     {
         float elapsedTime = 0f;
-        while (elapsedTime < duration)
+        float percent = 0;
+        RectTransform rectTransform = GetComponent<RectTransform>();
+        Vector2 startPos = transform.localPosition;
+
+        while (percent < 1)
         {
             elapsedTime += Time.deltaTime;
-            transform.position += Vector3.up * speed;
+            percent = elapsedTime/ duration;
+
+            rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, percent);
+
             yield return null;
         }
     }

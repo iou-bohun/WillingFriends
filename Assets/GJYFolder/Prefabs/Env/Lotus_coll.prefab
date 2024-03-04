@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 581251941934170839}
   - component: {fileID: 2894265782194374488}
   - component: {fileID: 8570768833702816294}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mesh
   m_TagString: Ground
   m_Icon: {fileID: 0}

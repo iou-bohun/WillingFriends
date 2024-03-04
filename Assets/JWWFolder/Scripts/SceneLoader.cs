@@ -10,5 +10,7 @@ public class SceneLoader : MonoBehaviour
     {
         for (int i = 0; i < _initCreatePrefabs.Length; i++)
             Instantiate(_initCreatePrefabs[i]);
+        
+        GameManager.Instance.Init();
     }
 }

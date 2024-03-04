@@ -2,33 +2,40 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CameraController : MonoBehaviour
 {
     [SerializeField] Transform _target; // 플레이어의 Transform
+    [SerializeField] Transform _camera;
+
+    [Header("Follow Option")]
     [SerializeField] float _moveSpeed;
     [SerializeField] float _offsetX;
     [SerializeField] float _limitX;
-    [SerializeField] float _shakeMagnitude;
+
+    [Header("Shake Option")]
+    [SerializeField] float _shakeDuration;
+    [SerializeField] float _positionShakePower;
+    [SerializeField] float _rotationShakePower;
 
     private float _followDistance;
     private float _followSpeed;
-    [SerializeField] private float _currentDistance;
-
-    private bool _playerDie = false;
+    private float _currentDistance;    
 
     private readonly float CORRECTION_OFFSET = 1f;
+    private readonly float FOLLOW_OFFSET = 1f;
 
     private void Start()
     {
-        GameManager.Instance.OnPlayerDie += () => _playerDie = true;
-        _followDistance = _target.position.z - transform.position.z;
+        _camera = Camera.main.transform;
+        _followDistance = _target.position.z - transform.position.z + FOLLOW_OFFSET;
     }
 
     private void FixedUpdate()
     {
         // 게임오버 시 정지
-        if (_playerDie)
+        if (GameManager.Instance.player.IsDead)
             return;
 
         _currentDistance = _target.position.z - transform.position.z;
@@ -50,44 +57,27 @@ public class CameraController : MonoBehaviour
         if (transform.position.x != _target.position.x)
         {
             // To Do - X 좌표도 제한걸기
-            Vector3 destPos = new Vector3(_target.position.x + _offsetX, transform.position.y, transform.position.z);
+            float minX = -_limitX + _offsetX;
+            float maxX = _limitX + _offsetX;
+
+            Vector3 destPos = new Vector3(Mathf.Clamp(_target.position.x + _offsetX, minX, maxX) , transform.position.y, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, destPos, Time.fixedDeltaTime);
         }
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) // 실제 폭발 이벤트에 맞게 수정
-        {
-            StartShake(0.5f);
-        }
+        if (Input.GetKeyDown(KeyCode.S)) // 실제 폭발 이벤트에 맞게 수정
+            StartShake();
     }
 
     // 쉐이크 시작
-    public void StartShake(float duration)
+    public void StartShake()
     {
-        StartCoroutine(Co_ShakeCamera(duration));
-    }
+        _camera.DOComplete();
+        _camera.DOShakePosition(0.2f, _positionShakePower, 15);
+        _camera.DOShakeRotation(0.2f, _rotationShakePower, 15);
 
-    // 너무 투박하니 나중에 두트윈을 넣자!
-    private IEnumerator Co_ShakeCamera(float duration)
-    {
-        Vector3 originPos = new Vector3(transform.position.x, transform.position.y, 0);
-
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            float x = Random.Range(-1f, 1f) * _shakeMagnitude;
-            float y = Random.Range(-1f, 1f) * _shakeMagnitude;
-
-            transform.localPosition += new Vector3(x, y, 0);
-
-            elapsed += Time.deltaTime;
-
-            yield return null;
-        }
-
-        transform.position = originPos + Vector3.forward * transform.position.z;
+        //StartCoroutine(Co_ShakeCamera(duration));
     }
 }

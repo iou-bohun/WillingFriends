@@ -45,11 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445d16fe4ebc8404fa360690cec64117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startPositionZ: -5
-  _initRandPlatformsCount: 13
-  _initLandPlatformsCount: 7
+  _startPositionZ: -7
+  _initRandPlatformsCount: 15
+  _initLandPlatformsCount: 9
   _autoDisableIndex: 2
-  testPlayer: {fileID: 0}
 --- !u!114 &7610838355680714162
 MonoBehaviour:
   m_ObjectHideFlags: 0

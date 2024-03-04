@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class GameManager : SingletoneBase<GameManager>
 {
-    public Transform player; //플레이어 transform
+    [SerializeField] GameObject _reBtn;
+    public Player player; //플레이어 transform
 
-    public Action OnPlayerDie;
+    public event Action OnPlayerDie;
+    public event Action<int> OnPlayerMove;
 
     private int coin = 0;
     private int score = 0;
@@ -18,16 +20,30 @@ public class GameManager : SingletoneBase<GameManager>
     {
         base.Awake();
         DontDestroyOnLoad(gameObject);
+    }
 
-        player = GameObject.FindWithTag("Player").transform; // 태그로 플레이어 위치 가져옴.                
+    public override void Init()
+    {
+        player = GameObject.FindWithTag("Player").GetComponent<Player>(); // 태그로 플레이어 위치 가져옴.                
+    }
+
+    public void CallPlayerMove(int value)
+    {
+        OnPlayerMove?.Invoke(value);
     }
 
     public void GameOver()
     {
         // To Do - GameOver UI 띄우기
         OnPlayerDie?.Invoke();
+        Instantiate(_reBtn.gameObject);
 
-        // Temp - SceneLoad 즉발        
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        Clear();
+    }
+
+    public override void Clear()
+    {
+        OnPlayerMove = null;
+        OnPlayerDie = null;
     }
 }
