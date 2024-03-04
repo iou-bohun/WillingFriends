@@ -7,6 +7,11 @@ public class Knife : MonoBehaviour
     private Vector3 distanse;
     public AttackSO _attackSO;
 
+    private void OnEnable()
+    {
+        SoundManager.Instance.PlayAudioClip("player_attack", transform);
+    }
+
     private void Update()
     {
         distanse = transform.position - GameManager.Instance.player.transform.position;

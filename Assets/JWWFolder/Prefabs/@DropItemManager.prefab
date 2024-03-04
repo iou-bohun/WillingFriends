@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1957324611640274420
 MonoBehaviour:
@@ -47,3 +47,4 @@ MonoBehaviour:
   attackSOArray:
   - {fileID: 11400000, guid: 04d69a5ff30e40742ad900178115a1a2, type: 2}
   - {fileID: 11400000, guid: 87215bb2e5ec8b24088ed5e20b643219, type: 2}
+  - {fileID: 11400000, guid: 65baa2b771c05ee44a0173924b1109e1, type: 2}
