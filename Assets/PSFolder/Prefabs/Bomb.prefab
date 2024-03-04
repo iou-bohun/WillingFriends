@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 8045403325890639730}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &3803880879868117473
 Rigidbody:
@@ -96,6 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 148807748144092118, guid: 5abbe5a4fa123e640904a4137c32f1a4, type: 3}
+  _shakeDuration: 0.3
+  _positionShakePower: 0.2
+  _rotationShakePower: 0.2
 --- !u!1 &5962768330854261386
 GameObject:
   m_ObjectHideFlags: 0

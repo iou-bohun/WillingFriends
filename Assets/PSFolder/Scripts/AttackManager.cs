@@ -33,7 +33,7 @@ public class AttackManager : MonoBehaviour
         }
         else
         {
-            attackData.count = attackData.attackSO.maxCount;
+            attackData.count += attackData.attackSO.maxCount;
         }
     }
 
@@ -44,6 +44,7 @@ public class AttackManager : MonoBehaviour
             if (attackData.count == 0)
             {
                 attackData.attackSO = null;
+                return;
             }
             attackData.count--;
 

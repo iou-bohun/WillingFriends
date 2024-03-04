@@ -42,7 +42,6 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        //StartCoroutine(Move());
         player = GameManager.Instance.player.transform;
         movedPosition = transform.position; 
     }
@@ -58,20 +57,7 @@ public class Enemy : MonoBehaviour
         {
             _animator.SetBool(AnimationData.JumParameterName,false);
         }
-
-        ///Test
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(PushEnemy());
-        }
     }
-
-
-    private void JumpAnimationStart()
-    {
-        _animator.SetTrigger(AnimationData.JumParameterName);
-    }
-
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -243,6 +229,7 @@ public class Enemy : MonoBehaviour
     {
         GameObject broken = ObjectPoolManager.Instance.GetObject(_broken.name);
         broken.transform.position = transform.position;
+        DropItemManager.Instance.InstantiateRandomWeaponPrefab(transform);//드롭 아이템
 
         _land.SelfRemove(_myIndex);
         _land = null;
