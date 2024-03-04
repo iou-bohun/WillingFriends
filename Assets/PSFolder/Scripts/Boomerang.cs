@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boomerang : MonoBehaviour
 {
-    //public AttackManager attackManager;
+    private AttackManager attackManager;
     private Rigidbody rb;
     public float time;
     private bool returned;
@@ -14,6 +14,7 @@ public class Boomerang : MonoBehaviour
         time = 0f;
         rb = GetComponent<Rigidbody>();
         rb.AddTorque(transform.up * 150f);
+        attackManager = GameObject.FindWithTag("Player").GetComponent<AttackManager>();
     }
 
     private void Update()
@@ -44,7 +45,7 @@ public class Boomerang : MonoBehaviour
         {
             Debug.Log(other.tag);
             ObjectPoolManager.Instance.ReturnObject("Boomerang", gameObject);
-            //attackManager.attackData.count++;
+            attackManager.attackData.count++;
         }
         else if (other.tag == "Enemy")
         {

@@ -56,7 +56,7 @@ public class AttackManager : MonoBehaviour
     public void KnifeAttack()
     {
         GameObject weapon = ObjectPoolManager.Instance.GetObject("Knife", weaponRoot);
-        weapon.transform.position = transform.position + new Vector3(0, 0, 0.5f);
+        weapon.transform.position = transform.position + new Vector3(0, 0, 1f);
         Rigidbody rb = weapon.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         rb.AddForce(transform.forward * 5f, ForceMode.Impulse);
