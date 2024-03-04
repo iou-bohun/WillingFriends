@@ -19,7 +19,7 @@ public class DropItemManager : SingletoneBase<DropItemManager>
         position.y = 0.5f;
         position.z = targetPostion.z;
         arrNum = Random.Range(0, attackSOArray.Length);
-        Debug.Log($"{attackSOArray[arrNum].itemType.ToString()}");
+        //Debug.Log($"{attackSOArray[arrNum].itemType.ToString()}");
         GameObject go = ObjectPoolManager.Instance.GetObject(attackSOArray[arrNum].itemType.ToString());
         go.transform.position = position;
         //go.transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
