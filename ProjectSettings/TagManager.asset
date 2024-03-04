@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
+  - EndPoint
+  - Torrent
+  - Weapon
+  - Falling
+  - Enemy
+  - Tree
+  - Border
+  - Tree_01coll
+  - Tree_02coll
   layers:
   - Default
   - TransparentFX
@@ -12,17 +22,17 @@ TagManager:
   - Water
   - UI
   - 
+  - Ground
+  - Tree
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Tree_Temp
+  - Car
+  - Log
+  - Monster
+  - Player
+  - Border
   - 
   - 
   - 
