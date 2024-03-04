@@ -109,7 +109,10 @@ public class SoundManager : SingletoneBase<SoundManager>
             objAudioSource.clip = audioDictionary[tag].clip;
             objAudioSource.voulme = PercentToDegree(audioDictionary[tag].volumePercent);
             obj.transform.SetParent(parent);//부모의 자식으로 들어감.
-            obj.transform.position = parent.position;//부모의 위치에서 소리가 들리게 부착함.
+            if (parent != null)
+            {
+                obj.transform.position = parent.position;//부모의 위치에서 소리가 들리게 부착함.
+            }
             obj.gameObject.SetActive(true);//
         }
         else
@@ -119,7 +122,10 @@ public class SoundManager : SingletoneBase<SoundManager>
             objAudioSource.clip = audioDictionary[tag].clip;
             objAudioSource.voulme = PercentToDegree(audioDictionary[tag].volumePercent);
             newObj.transform.SetParent(parent); //부모의 자식으로 들어감.
-            newObj.transform.position = parent.position;//부모의 위치에서 소리가 들리게 부착함.
+            if (parent != null)
+            {
+                newObj.transform.position = parent.position;//부모의 위치에서 소리가 들리게 부착함.
+            }
             newObj.gameObject.SetActive(true);//활성화
         }
     }

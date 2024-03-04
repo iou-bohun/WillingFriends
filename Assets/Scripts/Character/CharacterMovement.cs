@@ -72,7 +72,7 @@ public class CharacterMovement : MonoBehaviour
         }
 
         transform.localPosition = endPosition;
-        AddScore(endPosition.z);
+        //AddScore(endPosition.z);
         Invoke("MovingStateChange", 0.1f);
     }
 
