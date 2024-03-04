@@ -42,7 +42,6 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        //StartCoroutine(Move());
         player = GameManager.Instance.player.transform;
         movedPosition = transform.position; 
     }
@@ -58,20 +57,7 @@ public class Enemy : MonoBehaviour
         {
             _animator.SetBool(AnimationData.JumParameterName,false);
         }
-
-        ///Test
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(PushEnemy());
-        }
     }
-
-
-    private void JumpAnimationStart()
-    {
-        _animator.SetTrigger(AnimationData.JumParameterName);
-    }
-
 
     private void OnCollisionEnter(Collision collision)
     {
