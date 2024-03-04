@@ -60,6 +60,7 @@ public class CharacterMovement : MonoBehaviour
         Vector3 startPosition = transform.localPosition;
         Vector3 movePosition = new Vector3(direction.x, 0.01f, direction.y);
         Vector3 endPosition = CalcEndPosition(ref startPosition, movePosition);
+        transform.rotation = Quaternion.LookRotation(movePosition);
 
         float t = 0f;
         while (t < 1f)
