@@ -100,7 +100,7 @@ MonoBehaviour:
     prefab: {fileID: 5238175989627932576, guid: d3d191b2dbb3f504e8ba50165a6c6469, type: 3}
     size: 5
   - tag: Bomb
-    prefab: {fileID: 331382958441757979, guid: aa2b1cea7415ace48bf00cce629d547e, type: 3}
+    prefab: {fileID: 5123273336805174336, guid: 8ff0bd30a24cad643a25b4896ba52798, type: 3}
     size: 5
   - tag: Goblin_01Broken
     prefab: {fileID: 7915593836312143886, guid: 41bc437cba6eec54d9a4cdc62058a4a6, type: 3}
