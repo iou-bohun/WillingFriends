@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2013946595339998040
 MonoBehaviour:
@@ -105,3 +105,15 @@ MonoBehaviour:
   - tag: Goblin_01Broken
     prefab: {fileID: 7915593836312143886, guid: 41bc437cba6eec54d9a4cdc62058a4a6, type: 3}
     size: 5
+  - tag: BombItem
+    prefab: {fileID: 8282224679155164193, guid: 55f8b2664ec0d7a4c82da463d2b22b16, type: 3}
+    size: 3
+  - tag: BoomerangItem
+    prefab: {fileID: 4033108425454925004, guid: d780b1eec5d83104c8225caae9fa070f, type: 3}
+    size: 3
+  - tag: KnifeItem
+    prefab: {fileID: 413525626309174813, guid: 0e865a1bb01fd2142b9b02a31b13e64e, type: 3}
+    size: 3
+  - tag: Boomerang
+    prefab: {fileID: 945855725774800191, guid: e971ace7269a5df47a89865ad433b29f, type: 3}
+    size: 3

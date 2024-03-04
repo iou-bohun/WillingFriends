@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Boomerang
   m_EditorClassIdentifier: 
   weaponType: 2
+  itemType: 2
   weaponPrefab: {fileID: 945855725774800191, guid: e971ace7269a5df47a89865ad433b29f, type: 3}
   maxCount: 3

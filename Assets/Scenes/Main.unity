@@ -681,6 +681,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1957324611640274420, guid: cc39b1a9c12f6a44a8e01f4f8658a97a, type: 3}
+      propertyPath: attackSOArray.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1957324611640274420, guid: cc39b1a9c12f6a44a8e01f4f8658a97a, type: 3}
+      propertyPath: attackSOArray.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 65baa2b771c05ee44a0173924b1109e1, type: 2}
     - target: {fileID: 3722418623732589567, guid: cc39b1a9c12f6a44a8e01f4f8658a97a, type: 3}
       propertyPath: m_Name
       value: '@DropItemManager'

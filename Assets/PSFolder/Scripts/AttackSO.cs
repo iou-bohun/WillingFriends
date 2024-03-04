@@ -13,6 +13,7 @@ public enum WeaponType
 public class AttackSO : ScriptableObject
 {
     public WeaponType weaponType;
+    public ItemType itemType;
     public GameObject weaponPrefab;
     public int maxCount;
 }

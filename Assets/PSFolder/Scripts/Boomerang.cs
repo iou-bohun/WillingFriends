@@ -49,7 +49,7 @@ public class Boomerang : MonoBehaviour
         }
         else if (other.tag == "Enemy")
         {
-            ObjectPoolManager.Instance.ReturnObject("Enemy", other.gameObject);
+            //ObjectPoolManager.Instance.ReturnObject("Enemy", other.gameObject);
             GameObject enemyDie = ObjectPoolManager.Instance.GetObject("Goblin_01Broken");
             enemyDie.transform.position = other.transform.position;
             ObjectPoolManager.Instance.ReturnObject(other.tag, other.gameObject);
