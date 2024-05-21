@@ -24,8 +24,7 @@ public class LandPlatform : Platform
     private readonly int PERCENTAGE = 1;
 
     private void OnEnable()
-    {
-        // 풀에서 생성된 첫 1회는 발동 X
+    {        
         if (!isInit)
         {
             isInit = true;
@@ -37,10 +36,10 @@ public class LandPlatform : Platform
         if (PlatformGenerator.Instance.IsInit)
             Spawn();
         else
-            InitSpawn();
+            Setup();
     }
 
-    private void InitSpawn()
+    protected override void Setup()
     {
         Vector3 treeSpawnPos = _treeSpawnPoint.position;
 

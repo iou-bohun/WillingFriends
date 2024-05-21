@@ -27,12 +27,12 @@ public class RiverFlatform : Platform
         Clear();
         
         if (!_platform.IsCyclable)
-            SpawnLotus();
+            Setup();
         else
             StartCoroutine(Co_SpawnLogs());
     }
 
-    private void SpawnLotus()
+    protected override void Setup()
     {
         Vector3 spawnPos = _startTransform.position;
         int stack = 0;

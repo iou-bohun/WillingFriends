@@ -88,7 +88,10 @@ public class PlatformGenerator : MonoBehaviour
         }
 
         if (_latestPlatform.TryGetComponent(out ContinuousPlatform continuous) == false)
+        {
             Debug.Log($"ContinuousPlatform 이 없습니다. 잘못 설정한듯? : {platformType}");
+            return;
+        }            
 
         DeployPlatform(continuous.NextPair);
     }
@@ -96,6 +99,7 @@ public class PlatformGenerator : MonoBehaviour
     #region 플랫폼 생성 Generate Platform
     private void GeneratePlatform()
     {
+        // 마지막 플랫폼이 반드시 연속(짝)이어야 하는지 검사
         if (!IsEssentialPlatform())
             GenerateRandomPlatform();
     }
@@ -107,6 +111,7 @@ public class PlatformGenerator : MonoBehaviour
 
     public void GenerateRandomPlatform()
     {
+        // 다음으로 올 수 있는 랜덤 플랫폼을 선별
         string platformType = GetRandomTypeName();
 
         DeployPlatform(platformType);
@@ -145,7 +150,7 @@ public class PlatformGenerator : MonoBehaviour
                 return randType;
         }
 
-        // 순환이 안 되거나, 같은 종류의 플랫폼이면 다시 뽑는다.
+        // 순환이 안 되거나, 같은 종류의 플랫폼이면 다시 뽑는다.(재귀)
         if (_latestPlatform.platformType == CheckNextPlatformType(randType))
             return GetRandomTypeName();
 

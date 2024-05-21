@@ -10,19 +10,17 @@ public class LoadPlatform : Platform
 
     private void OnEnable()
     {
-        SpawnCars();
+        Setup();
     }
 
-    private void SpawnCars()
+    protected override void Setup()
     {
         if (!isInit)
         {
             isInit = true;
             return;
         }
-
         Clear();
-
         StartCoroutine(Co_SpawnCars());
     }
 
